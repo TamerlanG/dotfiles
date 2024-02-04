@@ -1,0 +1,12 @@
+screen-padding-left: 3
+
+screen-padding-right: 3
+
+screen-padding-top: 3
+
+screen-padding-bottom: 3
+
+focus-follows-mouse: false
+
+floating:
+  - com.apple.systempreferences
