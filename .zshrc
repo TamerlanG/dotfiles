@@ -34,5 +34,8 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # Dotnet 
 export PATH="$PATH:$HOME/.dotnet/tools"
 
+# Homebrew
+export PATH="/opt/homebrew/bin:$PATH"
+
 # Starship (Should be at the end of the file)
 eval "$(starship init zsh)"
