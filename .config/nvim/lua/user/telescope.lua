@@ -93,6 +93,11 @@ telescope.setup({
 				height = 0.70,
 			},
 		},
+		live_grep = {
+			additional_args = function(opts)
+				return { "--hidden" }
+			end,
+		},
 		-- Default configuration for builtin pickers goes here:
 		-- picker_name = {
 		--   picker_config_key = value,

@@ -23,9 +23,6 @@ export PATH="$HOME/.poetry/bin:$PATH"
 # Go
 export PATH="$HOME/go/bin:$PATH"
 
-# ASDF 
-source $HOME/.asdf/asdf.sh
-
 # Bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
@@ -39,3 +36,7 @@ export PATH="/opt/homebrew/bin:$PATH"
 
 # Starship (Should be at the end of the file)
 eval "$(starship init zsh)"
+
+# ASDF 
+source $HOME/.asdf/asdf.sh
+export PATH=$HOME/.asdf/asdf.sh:$PATH
