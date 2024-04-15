@@ -40,3 +40,5 @@ eval "$(starship init zsh)"
 # ASDF 
 source $HOME/.asdf/asdf.sh
 export PATH=$HOME/.asdf/asdf.sh:$PATH
+
+source <(kubectl-argo-rollouts completion bash)

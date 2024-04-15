@@ -25,7 +25,7 @@ local plugins = {
 	{ "akinsho/toggleterm.nvim", commit = "aaeed9e02167c5e8f00f25156895a6fd95403af8" },
 	{ "ahmedkhalf/project.nvim", commit = "541115e762764bc44d7d3bf501b6e367842d3d4f" },
 	{ "lewis6991/impatient.nvim", commit = "969f2c5c90457612c09cf2a13fee1adaa986d350" },
-	{ "lukas-reineke/indent-blankline.nvim", commit = "6177a59552e35dfb69e1493fd68194e673dc3ee2" },
+	{ "lukas-reineke/indent-blankline.nvim" },
 	{ "goolord/alpha-nvim", commit = "ef27a59e5b4d7b1c2fe1950da3fe5b1c5f3b4c94" },
 	"folke/which-key.nvim",
 	"christoomey/vim-tmux-navigator",
@@ -39,6 +39,7 @@ local plugins = {
 			vim.fn["mkdp#util#install"]()
 		end,
 	},
+
 	-- Colorschemes
 	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 
@@ -119,36 +120,11 @@ local plugins = {
 
 	-- Git
 	{ "lewis6991/gitsigns.nvim", commit = "fef5d90953f0a730483b44745fae5938ba8227f8" },
-
-	{
-		"m4xshen/hardtime.nvim",
-		dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-		opts = {},
-	},
 	{
 		"ThePrimeagen/harpoon",
 		branch = "harpoon2",
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
-
-	-- "MunifTanjim/nui.nvim",
-	--
-	-- "rcarriga/nvim-notify",
-	--
-	-- {
-	-- 	"folke/noice.nvim",
-	-- 	event = "VeryLazy",
-	-- 	opts = {},
-	--
-	-- 	dependencies = {
-	-- 		-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-	-- 		"MunifTanjim/nui.nvim",
-	-- 		-- OPTIONAL:
-	-- 		--   `nvim-notify` is only needed, if you want to use the notification view.
-	-- 		--   If not available, we use `mini` as the fallback
-	-- 		"rcarriga/nvim-notify",
-	-- 	},
-	-- },
 }
 
 require("lazy").setup(plugins, {})

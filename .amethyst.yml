@@ -6,7 +6,7 @@ screen-padding-top: 3
 
 screen-padding-bottom: 3
 
-focus-follows-mouse: false
+focus-follows-mouse: true
 
 floating:
   - com.apple.systempreferences
