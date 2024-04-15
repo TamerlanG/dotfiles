@@ -42,3 +42,5 @@ source $HOME/.asdf/asdf.sh
 export PATH=$HOME/.asdf/asdf.sh:$PATH
 
 source <(kubectl-argo-rollouts completion bash)
+
+export PATH="$PATH:/Users/tamerlan/Library/Application Support/hatch/pythons/3.11/python/bin"
