@@ -27,7 +27,11 @@ local plugins = {
 	{ "lewis6991/impatient.nvim", commit = "969f2c5c90457612c09cf2a13fee1adaa986d350" },
 	{ "lukas-reineke/indent-blankline.nvim" },
 	{ "goolord/alpha-nvim", commit = "ef27a59e5b4d7b1c2fe1950da3fe5b1c5f3b4c94" },
-	"folke/which-key.nvim",
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		opts = {},
+	},
 	"christoomey/vim-tmux-navigator",
 
 	-- Icons
