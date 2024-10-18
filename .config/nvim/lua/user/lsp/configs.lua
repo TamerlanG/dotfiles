@@ -9,7 +9,7 @@ local servers = {
 	"jsonls",
 	"lua_ls",
 	"gopls",
-	"tsserver",
+	"ts_ls",
 	"pyright",
 	"html",
 	"tailwindcss",

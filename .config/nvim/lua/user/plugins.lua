@@ -30,6 +30,10 @@ local plugins = {
 	"folke/which-key.nvim",
 	"christoomey/vim-tmux-navigator",
 
+	-- Icons
+	{ "echasnovski/mini.icons", version = "*" },
+	{ "nvim-tree/nvim-web-devicons" },
+
 	-- Markdown Preview
 	{
 		"iamcco/markdown-preview.nvim",
@@ -59,7 +63,7 @@ local plugins = {
 	},
 
 	-- Snippets
-	{ "L3MON4D3/LuaSnip", commit = "79b2019c68a2ff5ae4d732d50746c901dd45603a" }, --snippet engine
+	{ "L3MON4D3/LuaSnip", version = "v2.*" }, --snippet engine
 	{ "rafamadriz/friendly-snippets", commit = "d27a83a363e61009278b6598703a763ce9c8e617" }, -- a bunch of snippets to use
 
 	-- LSP
