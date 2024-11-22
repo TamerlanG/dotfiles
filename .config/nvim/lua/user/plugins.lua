@@ -1,5 +1,6 @@
--- Automaticalyl install lazypl
+-- Automatically install lazy.nvim if not already installed
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
 		"git",
@@ -13,6 +14,7 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
+-- Define plugins
 local plugins = {
 	{ "nvim-lua/plenary.nvim" },
 	{ "nvim-treesitter/nvim-treesitter" },
@@ -21,8 +23,6 @@ local plugins = {
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		config = true,
-		-- use opts = {} for passing setup options
-		-- this is equivalent to setup({}) function
 	},
 	{ "numToStr/Comment.nvim", tag = "v0.8.0" },
 	{ "JoosepAlviste/nvim-ts-context-commentstring", commit = "88343753dbe81c227a1c1fd2c8d764afb8d36269" },
@@ -30,9 +30,7 @@ local plugins = {
 		"nvim-tree/nvim-tree.lua",
 		version = "*",
 		lazy = false,
-		dependencies = {
-			"nvim-tree/nvim-web-devicons",
-		},
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
 	{ "nvim-lualine/lualine.nvim" },
 	{
@@ -51,7 +49,6 @@ local plugins = {
 	-- cmp plugins
 	{ "hrsh7th/nvim-cmp" },
 	{ "saadparwaiz1/cmp_luasnip" }, -- snippet completions
-
 	{ "hrsh7th/cmp-nvim-lsp" },
 	{ "hrsh7th/cmp-buffer" },
 	{ "hrsh7th/cmp-path" },
@@ -65,7 +62,7 @@ local plugins = {
 	},
 
 	-- Snippets
-	{ "L3MON4D3/LuaSnip", version = "v2.*" }, --snippet engine
+	{ "L3MON4D3/LuaSnip", version = "v2.*" }, -- snippet engine
 
 	-- LSP
 	"williamboman/mason.nvim",
@@ -78,23 +75,26 @@ local plugins = {
 		event = "InsertEnter",
 	},
 	{
+		"CopilotC-Nvim/CopilotChat.nvim",
+		branch = "canary",
+		dependencies = {
+			{ "zbirenbaum/copilot.lua" },
+			{ "nvim-lua/plenary.nvim" },
+		},
+		build = "make tiktoken", -- Only on MacOS or Linux
+		event = "VeryLazy",
+	},
+	{
 		"folke/trouble.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		opts = {
-			-- your configuration comes here
-			-- or leave it empty to use the default settings
-			-- refer to the configuration section below
-		},
+		opts = {},
 	},
 	{ "elentok/format-on-save.nvim" },
 	{
 		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
 		config = function()
 			require("lsp_lines").setup()
-			-- Disable virtual_text since it's redundant due to lsp_lines.
-			vim.diagnostic.config({
-				virtual_text = false,
-			})
+			vim.diagnostic.config({ virtual_text = false })
 		end,
 	},
 	{
@@ -105,7 +105,6 @@ local plugins = {
 			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-telescope/telescope.nvim" },
 		},
-
 		config = function(_, opts)
 			local cfg = require("yaml-companion").setup(opts)
 			require("lspconfig")["yamlls"].setup(cfg)
@@ -131,4 +130,5 @@ local plugins = {
 	},
 }
 
+-- Setup plugins using lazy.nvim
 require("lazy").setup(plugins, {})
