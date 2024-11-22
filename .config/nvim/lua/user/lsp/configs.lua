@@ -16,7 +16,6 @@ local servers = {
 	"emmet_ls",
 	"dockerls",
 	"bashls",
-	"yamlls",
 	"terraformls",
 	"tflint",
 	"golangci_lint_ls",

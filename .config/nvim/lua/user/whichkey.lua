@@ -55,25 +55,20 @@ local spec = {
 		remap = false,
 	},
 	{
-		"<leader>P",
-		"<cmd>lua require('telescope').extensions.projects.projects()<cr>",
-		desc = "Projects",
-		nowait = true,
-		remap = false,
-	},
-	{
 		"<leader>b",
-		"<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-		desc = "Buffers",
+		group = "Buffers",
 		nowait = true,
 		remap = false,
 	},
 	{
-		"<leader>c",
-		"<cmd>Bdelete!<CR>",
-		desc = "Close Buffer",
-		nowait = true,
-		remap = false,
+		"<leader>bb",
+		"<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+		desc = "List Buffers",
+	},
+	{
+		"<leader>bo",
+		"<cmd>%bd|e#<cr>",
+		desc = "Close all buffers except current", -- https://stackoverflow.com/a/42071865/516188
 	},
 	{
 		"<leader>e",
@@ -304,34 +299,7 @@ local spec = {
 		remap = false,
 	},
 	{
-		"<leader>mm",
-		"<cmd>MarkdownPreview<CR>",
-		desc = "Preview Markdown",
-		nowait = true,
-		remap = false,
-	},
-	{
-		"<leader>mq",
-		"<cmd>MarkdownPreviewStop<CR>",
-		desc = "Stop Preview",
-		nowait = true,
-		remap = false,
-	},
-	{
-		"<leader>mt",
-		"<cmd>MarkdownPreviewToggle<CR>",
-		desc = "Toggle Preview",
-		nowait = true,
-		remap = false,
-	},
-	{
 		"<leader>p",
-		group = "Lazy",
-		nowait = true,
-		remap = false,
-	},
-	{
-		"<leader>pi",
 		"<cmd>Lazy<cr>",
 		desc = "Lazy",
 		nowait = true,
@@ -412,6 +380,55 @@ local spec = {
 		desc = "Save",
 		nowait = true,
 		remap = false,
+	},
+	{
+		"<leader>t",
+		group = "Telescope",
+		nowait = true,
+		remap = false,
+	},
+	{
+		"<leader>ty",
+		"<cmd>Telescope yaml_schema<cr>",
+		desc = "Yaml Schema",
+		nowait = true,
+		remap = false,
+	},
+	{
+		"<leader>x",
+		group = "Trouble",
+		nowait = true,
+		remap = false,
+	},
+	{
+		"<leader>xx",
+		"<cmd>Trouble diagnostics toggle<cr>",
+		desc = "Diagnostics (Trouble)",
+	},
+	{
+		"<leader>xX",
+		"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+		desc = "Buffer Diagnostics (Trouble)",
+	},
+	{
+		"<leader>cs",
+		"<cmd>Trouble symbols toggle focus=false<cr>",
+		desc = "Symbols (Trouble)",
+	},
+	{
+		"<leader>cl",
+		"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+		desc = "LSP Definitions / references / ... (Trouble)",
+	},
+	{
+		"<leader>xL",
+		"<cmd>Trouble loclist toggle<cr>",
+		desc = "Location List (Trouble)",
+	},
+	{
+		"<leader>xQ",
+		"<cmd>Trouble qflist toggle<cr>",
+		desc = "Quickfix List (Trouble)",
 	},
 }
 
