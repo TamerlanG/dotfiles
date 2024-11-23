@@ -128,6 +128,10 @@ local plugins = {
 		branch = "harpoon2",
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
+	{
+		"rmagatti/auto-session",
+		lazy = false,
+	},
 }
 
 -- Setup plugins using lazy.nvim
