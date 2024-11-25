@@ -509,6 +509,19 @@ local spec = {
 		"<cmd>Trouble qflist toggle<cr>",
 		desc = "Quickfix List (Trouble)",
 	},
+	{
+		"<leader>d",
+		group = "Databases",
+		nowait = true,
+		remap = false,
+	},
+	{
+		"<leader>dm",
+		"<cmd>lua _VI_MONGO_TOGGLE()<CR>",
+		desc = "Vi Mongo",
+		nowait = true,
+		remap = false,
+	},
 }
 
 which_key.setup(setup)
