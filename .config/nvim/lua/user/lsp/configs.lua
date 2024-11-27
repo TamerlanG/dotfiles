@@ -13,6 +13,7 @@ local servers = {
 	"pyright",
 	"html",
 	"tailwindcss",
+	"eslint",
 	"emmet_ls",
 	"dockerls",
 	"bashls",

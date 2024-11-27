@@ -119,7 +119,7 @@ local spec = {
 	-- Debug
 	{ "<leader>ad", "<cmd>CopilotChatDebugInfo<cr>", desc = "CopilotChat - Debug Info" },
 	-- Fix the issue with diagnostic
-	{ "<leader>af", "<cmd>CopilotChatFixDiagnostic<cr>", desc = "CopilotChat - Fix Diagnostic" },
+	{ "<leader>af", "<cmd>CopilotChatFix<cr>", desc = "CopilotChat - Fix Diagnostic" },
 	-- Clear buffer and chat history
 	{ "<leader>al", "<cmd>CopilotChatReset<cr>", desc = "CopilotChat - Clear buffer and chat history" },
 	-- Toggle Copilot Chat Vsplit
@@ -158,7 +158,7 @@ local spec = {
 	},
 	{
 		"<leader>f",
-		"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes', {hidden = true}).get_dropdown{previewer = false})<cr>",
+		"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false}, { hidden = true })<cr>",
 		desc = "Find files",
 		nowait = true,
 		remap = false,
@@ -257,13 +257,6 @@ local spec = {
 		"<leader>gu",
 		"<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
 		desc = "Undo Stage Hunk",
-		nowait = true,
-		remap = false,
-	},
-	{
-		"<leader>h",
-		"<cmd>nohlsearch<CR>",
-		desc = "No Highlight",
 		nowait = true,
 		remap = false,
 	},
@@ -521,6 +514,14 @@ local spec = {
 		desc = "Vi Mongo",
 		nowait = true,
 		remap = false,
+	},
+	{
+		"<leader>h",
+		function()
+			local harpoon = require("harpoon")
+			harpoon.ui:toggle_quick_menu(harpoon:list())
+		end,
+		desc = "Harpoon",
 	},
 }
 
