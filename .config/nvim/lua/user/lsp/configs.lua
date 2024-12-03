@@ -12,6 +12,7 @@ local servers = {
 	"ts_ls",
 	"html",
 	"basedpyright",
+	"clangd",
 	"tailwindcss",
 	"eslint",
 	"emmet_ls",

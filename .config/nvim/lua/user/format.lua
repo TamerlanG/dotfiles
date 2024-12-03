@@ -27,5 +27,6 @@ format_on_save.setup({
 		typescript = formatters.prettierd,
 		typescriptreact = formatters.prettierd,
 		yaml = formatters.lsp,
+		c = formatters.lsp,
 	},
 })

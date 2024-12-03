@@ -44,7 +44,28 @@ local plugins = {
 	{ "nvim-tree/nvim-web-devicons" },
 
 	-- Colorschemes
-	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		priority = 1000,
+		opts = {
+			flavour = "mocha",
+			custom_highlights = function(colors)
+				return {
+					WinSeparator = { fg = colors.surface0 },
+				}
+			end,
+			color_overrides = {
+				mocha = {
+					base = "#11111b",
+					mantle = "#11111b",
+				},
+			},
+			integrations = {
+				notify = true,
+			},
+		},
+	},
 
 	-- cmp plugins
 	{ "hrsh7th/nvim-cmp" },
@@ -126,6 +147,19 @@ local plugins = {
 	{
 		"rmagatti/auto-session",
 		lazy = false,
+	},
+
+	-- Vim Habits
+	{
+		"m4xshen/hardtime.nvim",
+		dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+		opts = {},
+	},
+	{
+		"tris203/precognition.nvim",
+		config = function()
+			require("precognition").setup()
+		end,
 	},
 }
 
