@@ -21,6 +21,7 @@ local servers = {
 	"terraformls",
 	"tflint",
 	"golangci_lint_ls",
+	"omnisharp",
 }
 
 lsp_installer.setup({
