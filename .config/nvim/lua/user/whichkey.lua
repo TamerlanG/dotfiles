@@ -4,49 +4,50 @@ if not status_ok then
 	return
 end
 
+-- Setup configuration for which-key
 local setup = {
 	preset = "modern",
 	plugins = {
-		marks = true, -- shows a list of your marks on ' and `
-		registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+		marks = true,
+		registers = true,
 		spelling = {
-			enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
-			suggestions = 20, -- how many suggestions should be shown in the list?
+			enabled = true,
+			suggestions = 20,
 		},
-		-- the presets plugin, adds help for a bunch of default keybindings in Neovim
-		-- No actual key bindings are created
 		presets = {
-			operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
-			motions = true, -- adds help for motions
-			text_objects = true, -- help for text objects triggered after entering an operator
-			windows = true, -- default bindings on <c-w>
-			nav = true, -- misc bindings to work with windows
-			z = true, -- bindings for folds, spelling and others prefixed with z
-			g = true, -- bindings for prefixed with g
+			operators = false,
+			motions = true,
+			text_objects = true,
+			windows = true,
+			nav = true,
+			z = true,
+			g = true,
 		},
 	},
 	icons = {
-		breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-		separator = "➜", -- symbol used between a key and it's label
-		group = "+", -- symbol prepended to a group
+		breadcrumb = "»",
+		separator = "➜",
+		group = "+",
 	},
 	win = {
-		border = "rounded", -- none, single, double, shadow
-		position = "bottom", -- bottom, top
-		margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
-		padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
+		border = "rounded",
+		position = "bottom",
+		margin = { 1, 0, 1, 0 },
+		padding = { 2, 2, 2, 2 },
 		winblend = 0,
 	},
 	layout = {
-		height = { min = 4, max = 25 }, -- min and max height of the columns
-		width = { min = 20, max = 50 }, -- min and max width of the columns
-		spacing = 3, -- spacing between columns
-		align = "left", -- align columns left, center or right
+		height = { min = 4, max = 25 },
+		width = { min = 20, max = 50 },
+		spacing = 3,
+		align = "left",
 	},
-	show_help = true, -- show help message on the command line when the popup is visible
+	show_help = true,
 }
 
+-- Key mappings specification
 local spec = {
+	-- AI and Copilot Chat related mappings
 	{ "<leader>a", group = "ai" },
 	{ "gm", group = "+Copilot chat" },
 	{ "gmh", desc = "Show help" },
@@ -54,7 +55,6 @@ local spec = {
 	{ "gmp", desc = "Show system prompt" },
 	{ "gms", desc = "Show selection" },
 	{ "gmy", desc = "Yank diff" },
-
 	{
 		"<leader>ap",
 		function()
@@ -69,13 +69,11 @@ local spec = {
 		mode = "x",
 		desc = "CopilotChat - Prompt actions",
 	},
-	-- Code related commands
 	{ "<leader>ae", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
 	{ "<leader>at", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
 	{ "<leader>ar", "<cmd>CopilotChatReview<cr>", desc = "CopilotChat - Review code" },
 	{ "<leader>aR", "<cmd>CopilotChatRefactor<cr>", desc = "CopilotChat - Refactor code" },
 	{ "<leader>an", "<cmd>CopilotChatBetterNamings<cr>", desc = "CopilotChat - Better Naming" },
-	-- Chat with Copilot in visual mode
 	{
 		"<leader>av",
 		":CopilotChatVisual",
@@ -88,7 +86,6 @@ local spec = {
 		mode = "x",
 		desc = "CopilotChat - Inline chat",
 	},
-	-- Custom input for CopilotChat
 	{
 		"<leader>ai",
 		function()
@@ -99,13 +96,11 @@ local spec = {
 		end,
 		desc = "CopilotChat - Ask input",
 	},
-	-- Generate commit message based on the git diff
 	{
 		"<leader>am",
 		"<cmd>CopilotChatCommit<cr>",
 		desc = "CopilotChat - Generate commit message for all changes",
 	},
-	-- Quick chat with Copilot
 	{
 		"<leader>aq",
 		function()
@@ -116,16 +111,33 @@ local spec = {
 		end,
 		desc = "CopilotChat - Quick chat",
 	},
-	-- Debug
-	{ "<leader>ad", "<cmd>CopilotChatDebugInfo<cr>", desc = "CopilotChat - Debug Info" },
-	-- Fix the issue with diagnostic
-	{ "<leader>af", "<cmd>CopilotChatFix<cr>", desc = "CopilotChat - Fix Diagnostic" },
-	-- Clear buffer and chat history
-	{ "<leader>al", "<cmd>CopilotChatReset<cr>", desc = "CopilotChat - Clear buffer and chat history" },
-	-- Toggle Copilot Chat Vsplit
-	{ "<leader>av", "<cmd>CopilotChatToggle<cr>", desc = "CopilotChat - Toggle" },
-	-- Copilot Chat Models
-	{ "<leader>a?", "<cmd>CopilotChatModels<cr>", desc = "CopilotChat - Select Models" },
+	{
+		"<leader>ad",
+		"<cmd>CopilotChatDebugInfo<cr>",
+		desc = "CopilotChat - Debug Info",
+	},
+	{
+		"<leader>af",
+		"<cmd>CopilotChatFix<cr>",
+		desc = "CopilotChat - Fix Diagnostic",
+	},
+	{
+		"<leader>al",
+		"<cmd>CopilotChatReset<cr>",
+		desc = "CopilotChat - Clear buffer and chat history",
+	},
+	{
+		"<leader>av",
+		"<cmd>CopilotChatToggle<cr>",
+		desc = "CopilotChat - Toggle",
+	},
+	{
+		"<leader>a?",
+		"<cmd>CopilotChatModels<cr>",
+		desc = "CopilotChat - Select Models",
+	},
+
+	-- Telescope related mappings
 	{
 		"<leader>F",
 		"<cmd>Telescope live_grep theme=ivy<cr>",
@@ -133,6 +145,28 @@ local spec = {
 		nowait = true,
 		remap = false,
 	},
+	{
+		"<leader>f",
+		"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false}, { hidden = true })<cr>",
+		desc = "Find files",
+		nowait = true,
+		remap = false,
+	},
+	{
+		"<leader>t",
+		group = "Telescope",
+		nowait = true,
+		remap = false,
+	},
+	{
+		"<leader>ty",
+		"<cmd>Telescope yaml_schema<cr>",
+		desc = "Yaml Schema",
+		nowait = true,
+		remap = false,
+	},
+
+	-- Buffer related mappings
 	{
 		"<leader>b",
 		group = "Buffers",
@@ -147,22 +181,10 @@ local spec = {
 	{
 		"<leader>bo",
 		"<cmd>%bd|e#<cr>",
-		desc = "Close all buffers except current", -- https://stackoverflow.com/a/42071865/516188
+		desc = "Close all buffers except current",
 	},
-	{
-		"<leader>e",
-		"<cmd>NvimTreeToggle<cr>",
-		desc = "Explorer",
-		nowait = true,
-		remap = false,
-	},
-	{
-		"<leader>f",
-		"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false}, { hidden = true })<cr>",
-		desc = "Find files",
-		nowait = true,
-		remap = false,
-	},
+
+	-- Git related mappings
 	{
 		"<leader>g",
 		group = "Git",
@@ -260,11 +282,14 @@ local spec = {
 		nowait = true,
 		remap = false,
 	},
+
+	-- LSP related mappings
 	{
 		"<leader>l",
 		group = "LSP",
 		nowait = true,
 		remap = false,
+		icon = { icon = "🔍" },
 	},
 	{
 		"<leader>lI",
@@ -298,7 +323,6 @@ local spec = {
 		"<leader>lf",
 		"<cmd>lua vim.lsp.buf.format{async=true}<cr>",
 		desc = "Format",
-		nowait = true,
 		remap = false,
 	},
 	{
@@ -351,39 +375,82 @@ local spec = {
 		remap = false,
 	},
 	{
-		"<leader>lt",
-		"<cmd>TroubleToggle<cr>",
-		desc = "Trouble",
-		nowait = true,
-		remap = false,
-	},
-	{
 		"<leader>lw",
 		"<cmd>Telescope lsp_workspace_diagnostics<cr>",
 		desc = "Workspace Diagnostics",
 		nowait = true,
 		remap = false,
 	},
+
+	-- Neotest related mappings
 	{
-		"<leader>m",
-		group = "Markdown",
+		"<leader>n",
+		group = "🧪 Test",
 		nowait = true,
 		remap = false,
 	},
 	{
-		"<leader>p",
-		"<cmd>Lazy<cr>",
-		desc = "Lazy",
+		"<leader>nr",
+		"<cmd>lua require('neotest').run.run()<cr>",
+		desc = "Run nearest test",
+	},
+	{
+		"<leader>nf",
+		"<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>",
+		desc = "Run current file",
+	},
+	{
+		"<leader>na",
+		"<cmd>lua require('neotest').run.run({ suite = true })<cr>",
+		desc = "Run all tests",
+	},
+	{
+		"<leader>nd",
+		"<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>",
+		desc = "Debug nearest test",
+	},
+	{
+		"<leader>ns",
+		"<cmd>lua require('neotest').run.stop()<cr>",
+		desc = "Stop test",
+	},
+	{
+		"<leader>nn",
+		"<cmd>lua require('neotest').run.attach()<cr>",
+		desc = "Attach to nearest test",
+	},
+	{
+		"<leader>no",
+		"<cmd>lua require('neotest').output.open()<cr>",
+		desc = "Show test output",
+	},
+	{
+		"<leader>np",
+		"<cmd>lua require('neotest').output_panel.toggle()<cr>",
+		desc = "Toggle output panel",
+	},
+	{
+		"<leader>nv",
+		"<cmd>lua require('neotest').summary.toggle()<cr>",
+		desc = "Toggle summary",
+	},
+
+	-- Database
+	{
+		"<leader>d",
+		group = "Databases",
 		nowait = true,
 		remap = false,
 	},
 	{
-		"<leader>q",
-		"<cmd>q!<CR>",
-		desc = "Quit",
+		"<leader>dm",
+		"<cmd>lua _VI_MONGO_TOGGLE()<CR>",
+		desc = "Vi Mongo",
 		nowait = true,
 		remap = false,
 	},
+
+	-- Search
 	{
 		"<leader>s",
 		group = "Search",
@@ -446,72 +513,77 @@ local spec = {
 		nowait = true,
 		remap = false,
 	},
-	{
-		"<leader>w",
-		"<cmd>w!<CR>",
-		desc = "Save",
-		nowait = true,
-		remap = false,
-	},
-	{
-		"<leader>t",
-		group = "Telescope",
-		nowait = true,
-		remap = false,
-	},
-	{
-		"<leader>ty",
-		"<cmd>Telescope yaml_schema<cr>",
-		desc = "Yaml Schema",
-		nowait = true,
-		remap = false,
-	},
+
+	-- Trouble
 	{
 		"<leader>x",
 		group = "Trouble",
 		nowait = true,
 		remap = false,
+		icon = { icon = "🚨" },
 	},
 	{
 		"<leader>xx",
 		"<cmd>Trouble diagnostics toggle<cr>",
-		desc = "Diagnostics (Trouble)",
+		desc = "Document Diagnostics",
 	},
 	{
-		"<leader>xX",
+		"<leader>xb",
 		"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-		desc = "Buffer Diagnostics (Trouble)",
+		desc = "Buffer Diagnostics",
 	},
 	{
-		"<leader>cs",
-		"<cmd>Trouble symbols toggle focus=false<cr>",
-		desc = "Symbols (Trouble)",
+		"<leader>xw",
+		"<cmd>Trouble workspace_diagnostics<cr>",
+		desc = "Workspace Diagnostics",
 	},
 	{
-		"<leader>cl",
-		"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-		desc = "LSP Definitions / references / ... (Trouble)",
+		"<leader>xs",
+		"<cmd>Trouble symbols toggle<cr>",
+		desc = "Symbols",
+	},
+	{
+		"<leader>xl",
+		"<cmd>Trouble lsp toggle win.position=right<cr>",
+		desc = "LSP Definitions/References",
+	},
+	{
+		"<leader>xq",
+		"<cmd>Trouble quickfix toggle<cr>",
+		desc = "Quickfix List",
 	},
 	{
 		"<leader>xL",
 		"<cmd>Trouble loclist toggle<cr>",
-		desc = "Location List (Trouble)",
+		desc = "Location List",
+	},
+
+	-- Neovim Configs
+	{
+		"<leader>p",
+		group = "Configs",
 	},
 	{
-		"<leader>xQ",
-		"<cmd>Trouble qflist toggle<cr>",
-		desc = "Quickfix List (Trouble)",
-	},
-	{
-		"<leader>d",
-		group = "Databases",
+		"<leader>pl",
+		"<cmd>Lazy<cr>",
+		desc = "Lazy",
 		nowait = true,
 		remap = false,
+		icon = { icon = "🦥" },
+	},
+
+	-- Other mappings
+	{
+		"<leader>e",
+		"<cmd>NvimTreeToggle<cr>",
+		desc = "Explorer",
+		nowait = true,
+		remap = false,
+		icon = { icon = "🌲" },
 	},
 	{
-		"<leader>dm",
-		"<cmd>lua _VI_MONGO_TOGGLE()<CR>",
-		desc = "Vi Mongo",
+		"<leader>m",
+		group = "Markdown",
 		nowait = true,
 		remap = false,
 	},
@@ -522,8 +594,17 @@ local spec = {
 			harpoon.ui:toggle_quick_menu(harpoon:list())
 		end,
 		desc = "Harpoon",
+		icon = { icon = "🎣" },
+	},
+	{
+		"<leader>w",
+		"<cmd>w!<CR>",
+		desc = "Save",
+		nowait = true,
+		remap = false,
 	},
 }
 
+-- Apply the setup and key mappings
 which_key.setup(setup)
 which_key.add(spec)

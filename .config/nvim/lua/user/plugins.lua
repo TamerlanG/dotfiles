@@ -161,6 +161,18 @@ local plugins = {
 			require("precognition").setup()
 		end,
 	},
+
+	-- Testing
+	{
+		"nvim-neotest/neotest",
+		dependencies = {
+			"nvim-neotest/nvim-nio",
+			"nvim-lua/plenary.nvim",
+			"antoinemadec/FixCursorHold.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-neotest/neotest-jest",
+		},
+	},
 }
 
 -- Setup plugins using lazy.nvim
