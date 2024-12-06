@@ -16,6 +16,14 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Define plugins
 local plugins = {
+	{
+		"vhyrro/luarocks.nvim",
+		priority = 1001, -- this plugin needs to run before anything else
+		opts = {
+			rocks = { "tiktoken_core" },
+		},
+	},
+
 	{ "nvim-lua/plenary.nvim" },
 	{ "nvim-treesitter/nvim-treesitter" },
 	{ "akinsho/toggleterm.nvim", version = "*", config = true },
@@ -97,7 +105,7 @@ local plugins = {
 	},
 	{
 		"CopilotC-Nvim/CopilotChat.nvim",
-		branch = "canary",
+		branch = "main",
 		dependencies = {
 			{ "zbirenbaum/copilot.lua" },
 			{ "nvim-lua/plenary.nvim" },
@@ -126,6 +134,14 @@ local plugins = {
 			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-telescope/telescope.nvim" },
 		},
+	},
+
+	-- Debugging
+	"mfussenegger/nvim-dap",
+	{ "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
+	{
+		"jay-babu/mason-nvim-dap.nvim",
+		dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
 	},
 
 	-- Telescope

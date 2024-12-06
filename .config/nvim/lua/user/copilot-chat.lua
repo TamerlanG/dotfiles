@@ -64,13 +64,12 @@ local opts = {
 		show_diff = {
 			normal = "gmd",
 		},
-		-- Show the prompt
-		show_system_prompt = {
-			normal = "gmp",
-		},
 		-- Show the user selection
-		show_user_selection = {
+		show_context = {
 			normal = "gms",
+		},
+		show_info = {
+			normal = "gmp",
 		},
 		-- Show help
 		show_help = {

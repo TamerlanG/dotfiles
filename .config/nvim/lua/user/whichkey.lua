@@ -435,17 +435,28 @@ local spec = {
 		desc = "Toggle summary",
 	},
 
-	-- Database
+	-- Debugger
 	{
 		"<leader>d",
-		group = "Databases",
+		group = "Debugger",
 		nowait = true,
 		remap = false,
 	},
 	{
-		"<leader>dm",
-		"<cmd>lua _VI_MONGO_TOGGLE()<CR>",
-		desc = "Vi Mongo",
+		"<leader>dt",
+		function()
+			require("dap").toggle_breakpoint()
+		end,
+		desc = "Toggle Breakpoint",
+		nowait = true,
+		remap = false,
+	},
+	{
+		"<leader>dc",
+		function()
+			require("dap").continue()
+		end,
+		desc = "Continue",
 		nowait = true,
 		remap = false,
 	},
