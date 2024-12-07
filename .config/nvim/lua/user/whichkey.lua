@@ -434,6 +434,11 @@ local spec = {
 		"<cmd>lua require('neotest').summary.toggle()<cr>",
 		desc = "Toggle summary",
 	},
+  {
+		"<leader>nc",
+		"<cmd>lua require('neotest').run.run({ suite = true, env = { CI = true } })<cr>",
+		desc = "Run all tests with CI",
+	},
 
 	-- Debugger
 	{
