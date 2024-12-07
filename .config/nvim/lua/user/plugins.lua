@@ -137,13 +137,15 @@ local plugins = {
 	},
 
 	-- Debugging
-	"mfussenegger/nvim-dap",
-	{ "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
 	{
-		"jay-babu/mason-nvim-dap.nvim",
-		dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
+		"mfussenegger/nvim-dap",
+		dependencies = {
+			"rcarriga/nvim-dap-ui",
+			"nvim-neotest/nvim-nio",
+			"jay-babu/mason-nvim-dap.nvim",
+			"theHamsta/nvim-dap-virtual-text",
+		},
 	},
-
 	-- Telescope
 	"nvim-telescope/telescope.nvim",
 	{
