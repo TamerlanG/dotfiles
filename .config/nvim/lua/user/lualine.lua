@@ -7,6 +7,14 @@ local hide_in_width = function()
 	return vim.fn.winwidth(0) > 80
 end
 
+local schema = function()
+	local schema = require("yaml-companion").get_buf_schema(0)
+	if schema.result[1].name == "none" then
+		return ""
+	end
+	return schema.result[1].name
+end
+
 local diagnostics = {
 	"diagnostics",
 	sources = { "nvim_diagnostic" },
@@ -95,9 +103,8 @@ lualine.setup({
 				},
 			},
 		},
-		lualine_x = { "encoding", "fileformat", "filetype" },
-		-- lualine_x = { diff, spaces, "encoding", filetype },
-		lualine_y = { location },
+		lualine_x = { diff, "encoding", "fileformat", "filetype" },
+		lualine_y = { schema },
 		lualine_z = { progress },
 	},
 	inactive_sections = {

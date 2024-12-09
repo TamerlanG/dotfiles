@@ -17,29 +17,47 @@ vim.opt.rtp:prepend(lazypath)
 -- Define plugins
 local plugins = {
 	{ "nvim-lua/plenary.nvim" },
-	{ "nvim-treesitter/nvim-treesitter" },
-	{ "akinsho/toggleterm.nvim", version = "*", config = true },
+	{
+		"nvim-treesitter/nvim-treesitter",
+		event = { "BufReadPost", "BufNewFile" },
+	},
+	{
+		"akinsho/toggleterm.nvim",
+		version = "*",
+		config = true,
+		cmd = { "ToggleTerm" },
+	},
 	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		config = true,
 	},
-	{ "numToStr/Comment.nvim", tag = "v0.8.0" },
-	{ "JoosepAlviste/nvim-ts-context-commentstring", commit = "88343753dbe81c227a1c1fd2c8d764afb8d36269" },
+	{
+		"numToStr/Comment.nvim",
+		tag = "v0.8.0",
+		event = { "BufReadPost", "BufNewFile" },
+	},
+	{
+		"JoosepAlviste/nvim-ts-context-commentstring",
+		commit = "88343753dbe81c227a1c1fd2c8d764afb8d36269",
+		event = { "BufReadPost", "BufNewFile" },
+	},
 	{
 		"nvim-tree/nvim-tree.lua",
 		version = "*",
 		lazy = false,
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
-	{ "nvim-lualine/lualine.nvim" },
+	{ "nvim-lualine/lualine.nvim", event = "VeryLazy" },
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
 		opts = {},
 	},
-	"christoomey/vim-tmux-navigator",
-
+	{
+		"christoomey/vim-tmux-navigator",
+		event = "VeryLazy",
+	},
 	-- Icons
 	{ "nvim-tree/nvim-web-devicons" },
 
@@ -69,7 +87,6 @@ local plugins = {
 
 	-- cmp plugins
 	{ "hrsh7th/nvim-cmp" },
-	{ "saadparwaiz1/cmp_luasnip" }, -- snippet completions
 	{ "hrsh7th/cmp-nvim-lsp" },
 	{ "hrsh7th/cmp-buffer" },
 	{ "hrsh7th/cmp-path" },
@@ -82,14 +99,27 @@ local plugins = {
 		end,
 	},
 
-	-- Snippets
-	{ "L3MON4D3/LuaSnip", version = "v2.*" }, -- snippet engine
+	{
+		"williamboman/mason.nvim",
+		event = { "VeryLazy" },
+	},
 
-	-- LSP
-	"williamboman/mason.nvim",
-	"williamboman/mason-lspconfig.nvim",
-	"neovim/nvim-lspconfig",
-	"nvimtools/none-ls.nvim",
+	{
+		"williamboman/mason-lspconfig.nvim",
+		event = { "VeryLazy" },
+	},
+	{
+		"neovim/nvim-lspconfig",
+		event = { "BufReadPost", "BufNewFile" },
+		dependencies = {
+			"williamboman/mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
+		},
+	},
+	{
+		"nvimtools/none-ls.nvim",
+		event = { "BufReadPost", "BufNewFile" },
+	},
 	{
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
@@ -148,10 +178,15 @@ local plugins = {
 	"xiyaowong/nvim-transparent",
 
 	-- Git
-	{ "lewis6991/gitsigns.nvim", commit = "fef5d90953f0a730483b44745fae5938ba8227f8" },
+	{
+		"lewis6991/gitsigns.nvim",
+		commit = "fef5d90953f0a730483b44745fae5938ba8227f8",
+		event = { "BufReadPost", "BufNewFile" },
+	},
 	{
 		"ThePrimeagen/harpoon",
 		branch = "harpoon2",
+		event = "VeryLazy",
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 	{
@@ -163,6 +198,7 @@ local plugins = {
 	{
 		"m4xshen/hardtime.nvim",
 		dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+		event = "VeryLazy",
 		opts = {},
 	},
 	{
@@ -175,6 +211,7 @@ local plugins = {
 	-- Testing
 	{
 		"nvim-neotest/neotest",
+		event = { "BufReadPost", "BufNewFile" },
 		dependencies = {
 			"nvim-neotest/nvim-nio",
 			"nvim-lua/plenary.nvim",

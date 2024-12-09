@@ -22,6 +22,7 @@ local servers = {
 	"tflint",
 	"golangci_lint_ls",
 	"omnisharp",
+	"jdtls",
 }
 
 lsp_installer.setup({
