@@ -4,15 +4,17 @@ if not status_ok then
 end
 
 local cfg = yaml_companion.setup({
-
 	lspconfig = {
 		-- Enable the built-in schema store
 		schemaStore = {
 			enable = true,
 		},
-		-- Override the schema association for deploy.yaml
-		schemas = {
-			["https://json.schemastore.org/github-workflow.json"] = "deploy.yaml",
+		settings = {
+			yaml = {
+				schemas = {
+					["https://json.schemastore.org/github-workflow.json"] = ".github/workflows/*.{yml,yaml}",
+				},
+			},
 		},
 	},
 })
