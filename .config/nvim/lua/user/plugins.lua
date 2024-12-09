@@ -16,14 +16,6 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Define plugins
 local plugins = {
-	{
-		"vhyrro/luarocks.nvim",
-		priority = 1001, -- this plugin needs to run before anything else
-		opts = {
-			rocks = { "tiktoken_core" },
-		},
-	},
-
 	{ "nvim-lua/plenary.nvim" },
 	{ "nvim-treesitter/nvim-treesitter" },
 	{ "akinsho/toggleterm.nvim", version = "*", config = true },
