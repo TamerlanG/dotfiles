@@ -180,7 +180,7 @@ local plugins = {
 	-- Git
 	{
 		"lewis6991/gitsigns.nvim",
-		commit = "fef5d90953f0a730483b44745fae5938ba8227f8",
+		branch = "main",
 		event = { "BufReadPost", "BufNewFile" },
 	},
 	{
