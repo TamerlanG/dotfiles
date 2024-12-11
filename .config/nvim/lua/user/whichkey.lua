@@ -511,7 +511,7 @@ local spec = {
 		remap = false,
 	},
 	{
-		"<leader>dx",
+		"<leader>dq",
 		function()
 			require("dap").terminate()
 			require("dapui").close()
