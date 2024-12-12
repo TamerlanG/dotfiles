@@ -26,6 +26,7 @@ local plugins = {
 		version = "*",
 		config = true,
 		cmd = { "ToggleTerm" },
+		event = "VeryLazy",
 	},
 	{
 		"windwp/nvim-autopairs",
@@ -59,44 +60,33 @@ local plugins = {
 		event = "VeryLazy",
 	},
 	-- Icons
-	{ "nvim-tree/nvim-web-devicons" },
+	{ "nvim-tree/nvim-web-devicons", event = "VeryLazy" },
 
 	-- Colorschemes
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
 		priority = 1000,
-		opts = {
-			flavour = "mocha",
-			custom_highlights = function(colors)
-				return {
-					WinSeparator = { fg = colors.surface0 },
-				}
-			end,
-			color_overrides = {
-				mocha = {
-					base = "#11111b",
-					mantle = "#11111b",
-				},
-			},
-			integrations = {
-				notify = true,
-			},
-		},
+		event = "VeryLazy",
 	},
 
 	-- cmp plugins
-	{ "hrsh7th/nvim-cmp" },
-	{ "hrsh7th/cmp-nvim-lsp" },
-	{ "hrsh7th/cmp-buffer" },
-	{ "hrsh7th/cmp-path" },
-	{ "hrsh7th/cmp-cmdline" },
-	{ "hrsh7th/cmp-nvim-lua" },
 	{
-		"zbirenbaum/copilot-cmp",
-		config = function()
-			require("copilot_cmp").setup()
-		end,
+		"hrsh7th/nvim-cmp",
+		event = "VeryLazy",
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-cmdline",
+			"hrsh7th/cmp-nvim-lua",
+			{
+				"zbirenbaum/copilot-cmp",
+				config = function()
+					require("copilot_cmp").setup()
+				end,
+			},
+		},
 	},
 
 	{
@@ -137,12 +127,14 @@ local plugins = {
 	},
 	{
 		"folke/trouble.nvim",
+		event = "VeryLazy",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {},
 	},
 	{ "elentok/format-on-save.nvim" },
 	{
 		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+		event = "VeryLazy",
 		config = function()
 			require("lsp_lines").setup()
 			vim.diagnostic.config({ virtual_text = false })
@@ -161,6 +153,7 @@ local plugins = {
 	-- Debugging
 	{
 		"mfussenegger/nvim-dap",
+		event = "VeryLazy",
 		dependencies = {
 			"rcarriga/nvim-dap-ui",
 			"nvim-neotest/nvim-nio",
@@ -200,12 +193,6 @@ local plugins = {
 		dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
 		event = "VeryLazy",
 		opts = {},
-	},
-	{
-		"tris203/precognition.nvim",
-		config = function()
-			require("precognition").setup()
-		end,
 	},
 
 	-- Testing
