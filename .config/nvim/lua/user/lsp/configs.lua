@@ -1,9 +1,9 @@
 require("mason").setup()
 require("mason-lspconfig").setup()
 
-lspconfig = require("lspconfig")
+local lspconfig = require("lspconfig")
 
-lsp_installer = require("mason-lspconfig")
+local lsp_installer = require("mason-lspconfig")
 
 local servers = {
 	"jsonls",
