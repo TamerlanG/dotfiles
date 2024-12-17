@@ -23,6 +23,7 @@ local servers = {
 	"golangci_lint_ls",
 	"omnisharp",
 	"jdtls",
+	"svelte",
 }
 
 lsp_installer.setup({

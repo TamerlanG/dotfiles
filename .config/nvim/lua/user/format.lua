@@ -29,5 +29,6 @@ format_on_save.setup({
 		yaml = formatters.prettierd,
 		c = formatters.lsp,
 		cs = formatters.lsp,
+    svelete = formatters.lsp,
 	},
 })
