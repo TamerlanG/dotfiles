@@ -307,7 +307,6 @@ local spec = {
 	},
 	{
 		"<leader>la",
-		"<cmd>lua vim.lsp.buf.code_action()<cr>",
 		desc = "Code Action",
 		nowait = true,
 		remap = false,
@@ -321,7 +320,13 @@ local spec = {
 	},
 	{
 		"<leader>lf",
-		"<cmd>lua vim.lsp.buf.format{async=true}<cr>",
+		function()
+			require("conform").format({
+				lsp_fallback = true,
+				async = false,
+				timeout_ms = 500,
+			})
+		end,
 		desc = "Format",
 		remap = false,
 	},
@@ -348,8 +353,10 @@ local spec = {
 	},
 	{
 		"<leader>ll",
-		"<cmd>lua vim.lsp.codelens.run()<cr>",
-		desc = "CodeLens Action",
+		function()
+			require("lint").try_lint()
+		end,
+		desc = "Lint File",
 		nowait = true,
 		remap = false,
 	},

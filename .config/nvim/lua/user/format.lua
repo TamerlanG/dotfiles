@@ -1,34 +1,44 @@
-local format_on_save = require("format-on-save")
-local formatters = require("format-on-save.formatters")
+local conform = require("conform")
+local lint = require("lint")
 
-format_on_save.setup({
-	experiments = {
-		partial_update = "diff", -- or 'line-by-line'
+conform.setup({
+	formatters_by_ft = {
+		javascript = { "prettierd" },
+		typescript = { "prettierd" },
+		javascriptreact = { "prettierd" },
+		typescriptreact = { "prettierd" },
+		svelte = { "prettierd" },
+		css = { "prettierd" },
+		html = { "prettierd" },
+		json = { "prettierd" },
+		yaml = { "prettierd" },
+		markdown = { "prettierd" },
+		graphql = { "prettierd" },
+		lua = { "stylua" },
+		python = { "isort", "black" },
 	},
-	exclude_path_patterns = {
-		"/node_modules/",
-		".local/share/nvim/lazy",
+	format_on_save = {
+		lsp_fallback = true,
+		async = false,
+		timeout_ms = 500,
 	},
-	formatter_by_ft = {
-		css = formatters.lsp,
-		html = formatters.lsp,
-		java = formatters.lsp,
-		javascript = formatters.prettierd,
-		json = formatters.lsp,
-		lua = formatters.lsp,
-		markdown = formatters.prettierd,
-		openscad = formatters.lsp,
-		python = formatters.black,
-		rust = formatters.lsp,
-		scad = formatters.lsp,
-		scss = formatters.lsp,
-		sh = formatters.shfmt,
-		terraform = formatters.lsp,
-		typescript = formatters.prettierd,
-		typescriptreact = formatters.prettierd,
-		yaml = formatters.prettierd,
-		c = formatters.lsp,
-		cs = formatters.lsp,
-    svelete = formatters.lsp,
-	},
+})
+
+lint.linters_by_ft = {
+	javascript = { "eslint_d" },
+	typescript = { "eslint_d" },
+	javascriptreact = { "eslint_d" },
+	typescriptreact = { "eslint_d" },
+	svelte = { "eslint_d" },
+	python = { "pylint" },
+}
+
+-- Auto Commands for Linting
+local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+	group = lint_augroup,
+	callback = function()
+		lint.try_lint()
+	end,
 })
