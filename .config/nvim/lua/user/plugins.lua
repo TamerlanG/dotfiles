@@ -97,6 +97,17 @@ local plugins = {
 		},
 	},
 	{
+		"nvimdev/lspsaga.nvim",
+		config = function()
+			require("lspsaga").setup({})
+		end,
+		event = "LspAttach",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter", -- optional
+			"nvim-tree/nvim-web-devicons", -- optional
+		},
+	},
+	{
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
 		event = "InsertEnter",
@@ -143,7 +154,14 @@ local plugins = {
 			{ "nvim-telescope/telescope.nvim" },
 		},
 	},
-
+	{
+		"zeioth/garbage-day.nvim",
+		dependencies = "neovim/nvim-lspconfig",
+		event = "VeryLazy",
+		opts = {
+			-- your options here
+		},
+	},
 	-- Debugging
 	{
 		"mfussenegger/nvim-dap",

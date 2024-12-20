@@ -14,7 +14,6 @@ local servers = {
 	"basedpyright",
 	"clangd",
 	"tailwindcss",
-	"eslint",
 	"emmet_ls",
 	"dockerls",
 	"bashls",
