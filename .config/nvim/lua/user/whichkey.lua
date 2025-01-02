@@ -298,26 +298,26 @@ local spec = {
 		nowait = true,
 		remap = false,
 	},
-	{
-		"<leader>lS",
-		"<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
-		desc = "Workspace Symbols",
-		nowait = true,
-		remap = false,
-	},
-	{
-		"<leader>la",
-		desc = "Code Action",
-		nowait = true,
-		remap = false,
-	},
-	{
-		"<leader>ld",
-		"<cmd>Telescope lsp_document_diagnostics<cr>",
-		desc = "Document Diagnostics",
-		nowait = true,
-		remap = false,
-	},
+	-- {
+	-- 	"<leader>lS",
+	-- 	"<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+	-- 	desc = "Workspace Symbols",
+	-- 	nowait = true,
+	-- 	remap = false,
+	-- },
+	-- {
+	-- 	"<leader>la",
+	-- 	desc = "Code Action",
+	-- 	nowait = true,
+	-- 	remap = false,
+	-- },
+	-- {
+	-- 	"<leader>ld",
+	-- 	"<cmd>Telescope lsp_document_diagnostics<cr>",
+	-- 	desc = "Document Diagnostics",
+	-- 	nowait = true,
+	-- 	remap = false,
+	-- },
 	{
 		"<leader>lf",
 		function()
@@ -697,6 +697,37 @@ local spec = {
 		"<leader>w",
 		"<cmd>w!<CR>",
 		desc = "Save",
+		nowait = true,
+		remap = false,
+	},
+
+	-- Obsidian
+	{
+		"<leader>o",
+		group = "Obsidian",
+		nowait = true,
+		remap = true,
+		icon = { icon = "📝" },
+	},
+
+	{
+		"<leader>ol",
+		"<cmd>ObsidianFollowLink<CR>",
+		desc = "Follow backlink",
+		nowait = true,
+		remap = false,
+	},
+	{
+		"<leader>of",
+		"<cmd>ObsidianQuickSwitch<CR>",
+		desc = "Quick Switch",
+		nowait = true,
+		remap = false,
+	},
+	{
+		"<leader>on",
+		"<cmd>ObsidianNew<CR>",
+		desc = "New Note",
 		nowait = true,
 		remap = false,
 	},
