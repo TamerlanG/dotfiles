@@ -234,6 +234,9 @@ local plugins = {
 			"nvim-treesitter/nvim-treesitter",
 		},
 		opts = {
+			ui = {
+				enable = false,
+			},
 			workspaces = {
 				{
 					name = "home",
