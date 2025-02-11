@@ -64,10 +64,9 @@ local plugins = {
 
 	-- Colorschemes
 	{
-		"catppuccin/nvim",
-		name = "catppuccin",
+		"dgox16/oldworld.nvim",
+		lazy = false,
 		priority = 1000,
-		event = "VeryLazy",
 	},
 	{
 		"saghen/blink.cmp",
