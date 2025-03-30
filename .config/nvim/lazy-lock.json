@@ -9,7 +9,6 @@
   "copilot.lua": { "branch": "master", "commit": "d661d65b4cab20a5c164f6d9081d91ed324fe4d8" },
   "garbage-day.nvim": { "branch": "main", "commit": "750ef08ae6031ee3683014c5349144340c08ead6" },
   "gitsigns.nvim": { "branch": "main", "commit": "3c76f7fabac723aa682365ef782f88a83ccdb4ac" },
-  "harpoon": { "branch": "harpoon2", "commit": "ed1f853847ffd04b2b61c314865665e1dadf22c7" },
   "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
   "lspsaga.nvim": { "branch": "main", "commit": "778d56ff9b387dacd14ae648ed5604394b486f51" },
   "lualine.nvim": { "branch": "master", "commit": "1517caa8fff05e4b4999857319d3b0609a7f57fa" },

@@ -189,12 +189,6 @@ local plugins = {
 		event = { "BufReadPost", "BufNewFile" },
 	},
 	{
-		"ThePrimeagen/harpoon",
-		branch = "harpoon2",
-		event = "VeryLazy",
-		dependencies = { "nvim-lua/plenary.nvim" },
-	},
-	{
 		"rmagatti/auto-session",
 		lazy = false,
 
