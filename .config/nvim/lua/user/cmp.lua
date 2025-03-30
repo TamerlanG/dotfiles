@@ -4,18 +4,6 @@ blink.setup({
 	keymap = { preset = "super-tab" },
 	sources = {
 		providers = {
-			obsidian = {
-				name = "obsidian",
-				module = "blink.compat.source",
-			},
-			obsidian_new = {
-				name = "obsidian_new",
-				module = "blink.compat.source",
-			},
-			obsidian_tags = {
-				name = "obsidian_tags",
-				module = "blink.compat.source",
-			},
 			copilot = {
 				name = "copilot",
 				module = "blink-cmp-copilot",
@@ -32,16 +20,11 @@ blink.setup({
 				end,
 			},
 		},
-		completion = {
-			enabled_providers = {
-				"copilot",
-				"lsp",
-				"path",
-				"buffer",
-				"obsidian",
-				"obsidian_new",
-				"obsidian_tags",
-			},
+		default = {
+			"copilot",
+			"lsp",
+			"path",
+			"buffer",
 		},
 	},
 	appearance = {

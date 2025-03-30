@@ -6,14 +6,3 @@ catch /^Vim\%((\a\+)\)\=:E185/
   set background=dark
 endtry
 ]])
-
-require("transparent").setup({
-	extra_groups = {
-		"StatusLineNC",
-		"StatusLine",
-		"NvimTreeStatusLine",
-		"NvimTreeNormal",
-		"NvimTreeRootFolder",
-		"NvimTreeNormalNC",
-	},
-})

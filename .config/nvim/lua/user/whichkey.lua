@@ -700,37 +700,6 @@ local spec = {
 		nowait = true,
 		remap = false,
 	},
-
-	-- Obsidian
-	{
-		"<leader>o",
-		group = "Obsidian",
-		nowait = true,
-		remap = true,
-		icon = { icon = "📝" },
-	},
-
-	{
-		"<leader>ol",
-		"<cmd>ObsidianFollowLink<CR>",
-		desc = "Follow backlink",
-		nowait = true,
-		remap = false,
-	},
-	{
-		"<leader>of",
-		"<cmd>ObsidianQuickSwitch<CR>",
-		desc = "Quick Switch",
-		nowait = true,
-		remap = false,
-	},
-	{
-		"<leader>on",
-		"<cmd>ObsidianNew<CR>",
-		desc = "New Note",
-		nowait = true,
-		remap = false,
-	},
 }
 
 -- Apply the setup and key mappings

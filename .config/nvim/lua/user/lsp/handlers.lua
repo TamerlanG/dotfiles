@@ -11,8 +11,8 @@ M.setup = function()
 		vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
 	end
 	local config = {
-		-- disable virtual text
-		virtual_text = true,
+		virtual_lines = true,
+
 		-- show signs
 		signs = {
 			active = signs,
@@ -72,5 +72,7 @@ local capabilities = vim.tbl_deep_extend(
 )
 
 M.capabilities = capabilities
+
+M.setup()
 
 return M

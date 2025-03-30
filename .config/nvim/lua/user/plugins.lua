@@ -1,17 +1,18 @@
--- Automatically install lazy.nvim if not already installed
+-- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-
-if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable", -- latest stable release
-		lazypath,
-	})
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+	if vim.v.shell_error ~= 0 then
+		vim.api.nvim_echo({
+			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+			{ out, "WarningMsg" },
+			{ "\nPress any key to exit..." },
+		}, true, {})
+		vim.fn.getchar()
+		os.exit(1)
+	end
 end
-
 vim.opt.rtp:prepend(lazypath)
 
 -- Define plugins
@@ -32,11 +33,6 @@ local plugins = {
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		config = true,
-	},
-	{
-		"numToStr/Comment.nvim",
-		tag = "v0.8.0",
-		event = { "BufReadPost", "BufNewFile" },
 	},
 	{
 		"JoosepAlviste/nvim-ts-context-commentstring",
@@ -74,9 +70,7 @@ local plugins = {
 			"giuxtaposition/blink-cmp-copilot",
 			{ "saghen/blink.compat", lazy = true, version = false },
 		},
-		lazy = false, -- lazy loading handled internally
-		event = "InsertEnter",
-		version = "v0.*",
+		version = "1.*",
 	},
 
 	{
@@ -138,14 +132,6 @@ local plugins = {
 		event = { "BufReadPre", "BufNewFile" },
 	},
 	{
-		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("lsp_lines").setup()
-			vim.diagnostic.config({ virtual_text = false })
-		end,
-	},
-	{
 		"someone-stole-my-name/yaml-companion.nvim",
 		ft = { "yaml" },
 		requires = {
@@ -180,12 +166,26 @@ local plugins = {
 		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
 	},
 
-	"xiyaowong/nvim-transparent",
-
+	{
+		"xiyaowong/nvim-transparent",
+		opts = {
+			extra_groups = {
+				"StatusLineNC",
+				"StatusLine",
+				"NvimTreeStatusLine",
+				"NvimTreeNormal",
+				"NvimTreeRootFolder",
+				"NvimTreeNormalNC",
+			},
+		},
+	},
 	-- Git
 	{
 		"lewis6991/gitsigns.nvim",
 		branch = "main",
+		opts = {
+			current_line_blame = true,
+		},
 		event = { "BufReadPost", "BufNewFile" },
 	},
 	{
@@ -197,8 +197,12 @@ local plugins = {
 	{
 		"rmagatti/auto-session",
 		lazy = false,
-	},
 
+		opts = {
+			suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+			auto_restore_last_session = true,
+		},
+	},
 	-- Testing
 	{
 		"nvim-neotest/neotest",
