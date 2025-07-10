@@ -79,28 +79,11 @@ local plugins = {
   },
 
   {
-    "williamboman/mason-lspconfig.nvim",
-    event = { "VeryLazy" },
-  },
-  {
-    "neovim/nvim-lspconfig",
-    event = { "BufReadPost", "BufNewFile" },
-    dependencies = {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
-    },
-  },
-  {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     event = "InsertEnter",
   },
-  {
-    "folke/trouble.nvim",
-    event = "VeryLazy",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {},
-  },
+
   {
     "stevearc/conform.nvim",
     event = { "BufReadPre", "BufNewFile" },
@@ -109,23 +92,7 @@ local plugins = {
     "mfussenegger/nvim-lint",
     event = { "BufReadPre", "BufNewFile" },
   },
-  {
-    "someone-stole-my-name/yaml-companion.nvim",
-    ft = { "yaml" },
-    requires = {
-      { "neovim/nvim-lspconfig" },
-      { "nvim-lua/plenary.nvim" },
-      { "nvim-telescope/telescope.nvim" },
-    },
-  },
-  {
-    "zeioth/garbage-day.nvim",
-    dependencies = "neovim/nvim-lspconfig",
-    event = "VeryLazy",
-    opts = {
-      -- your options here
-    },
-  },
+
   -- Telescope
   "nvim-telescope/telescope.nvim",
   {
