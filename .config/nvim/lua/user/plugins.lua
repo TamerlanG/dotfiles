@@ -27,6 +27,19 @@ local plugins = {
     opts = {}
   },
   {
+    "folke/snacks.nvim",
+    opts = {
+      dashboard = {
+        enabled = true, -- Enable the dashboard
+      },
+      picker = {
+      },
+      explorer = {
+        replace_netrw = true, -- Replace netrw with the snacks explorer
+      }
+    }
+  },
+  {
     "akinsho/toggleterm.nvim",
     version = "*",
     config = true,
@@ -42,12 +55,6 @@ local plugins = {
     "JoosepAlviste/nvim-ts-context-commentstring",
     commit = "88343753dbe81c227a1c1fd2c8d764afb8d36269",
     event = { "BufReadPost", "BufNewFile" },
-  },
-  {
-    "nvim-tree/nvim-tree.lua",
-    version = "*",
-    lazy = false,
-    dependencies = { "nvim-tree/nvim-web-devicons" },
   },
   { "nvim-lualine/lualine.nvim", event = "VeryLazy" },
   {
@@ -95,14 +102,6 @@ local plugins = {
   {
     "mfussenegger/nvim-lint",
     event = { "BufReadPre", "BufNewFile" },
-  },
-
-  -- Telescope
-  "nvim-telescope/telescope.nvim",
-  {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    build =
-    "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
   },
   {
     "xiyaowong/nvim-transparent",
