@@ -23,6 +23,10 @@ local plugins = {
     event = { "BufReadPost", "BufNewFile" },
   },
   {
+    "mason-org/mason.nvim",
+    opts = {}
+  },
+  {
     "akinsho/toggleterm.nvim",
     version = "*",
     config = true,

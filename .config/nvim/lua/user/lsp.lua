@@ -81,4 +81,4 @@ vim.lsp.config("*", {
 -- }}}
 
 
-vim.lsp.enable({ "typescript" })
+vim.lsp.enable({ "typescript", "lua_ls" })
