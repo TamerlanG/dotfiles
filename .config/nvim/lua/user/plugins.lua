@@ -35,7 +35,6 @@ local plugins = {
       picker = {
       },
       explorer = {
-        replace_netrw = true, -- Replace netrw with the snacks explorer
       }
     }
   },
@@ -109,10 +108,9 @@ local plugins = {
       extra_groups = {
         "StatusLineNC",
         "StatusLine",
-        "NvimTreeStatusLine",
-        "NvimTreeNormal",
-        "NvimTreeRootFolder",
-        "NvimTreeNormalNC",
+        "SnacksPickerFile",
+        "SnacksPicker",
+        "SnacksPickerBorder"
       },
     },
   },
