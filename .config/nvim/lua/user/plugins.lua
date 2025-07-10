@@ -96,22 +96,11 @@ local plugins = {
     event = "InsertEnter",
   },
   {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    branch = "main",
-    dependencies = {
-      { "zbirenbaum/copilot.lua" },
-      { "nvim-lua/plenary.nvim" },
-    },
-    build = "make tiktoken", -- Only on MacOS or Linux
-    event = "VeryLazy",
-  },
-  {
     "folke/trouble.nvim",
     event = "VeryLazy",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {},
   },
-
   {
     "stevearc/conform.nvim",
     event = { "BufReadPre", "BufNewFile" },
