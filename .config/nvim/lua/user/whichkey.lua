@@ -47,96 +47,6 @@ local setup = {
 
 -- Key mappings specification
 local spec = {
-  -- AI and Copilot Chat related mappings
-  { "<leader>a", group = "ai" },
-  { "gm",        group = "+Copilot chat" },
-  { "gmh",       desc = "Show help" },
-  { "gmd",       desc = "Show diff" },
-  { "gmp",       desc = "Show system prompt" },
-  { "gms",       desc = "Show selection" },
-  { "gmy",       desc = "Yank diff" },
-  {
-    "<leader>ap",
-    function()
-      local actions = require("CopilotChat.actions")
-      require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
-    end,
-    desc = "CopilotChat - Prompt actions",
-  },
-  {
-    "<leader>ap",
-    ":lua require('CopilotChat.integrations.telescope').pick(require('CopilotChat.actions').prompt_actions({selection = require('CopilotChat.select').visual}))<CR>",
-    mode = "x",
-    desc = "CopilotChat - Prompt actions",
-  },
-  { "<leader>ae", "<cmd>CopilotChatExplain<cr>",       desc = "CopilotChat - Explain code" },
-  { "<leader>at", "<cmd>CopilotChatTests<cr>",         desc = "CopilotChat - Generate tests" },
-  { "<leader>ar", "<cmd>CopilotChatReview<cr>",        desc = "CopilotChat - Review code" },
-  { "<leader>aR", "<cmd>CopilotChatRefactor<cr>",      desc = "CopilotChat - Refactor code" },
-  { "<leader>an", "<cmd>CopilotChatBetterNamings<cr>", desc = "CopilotChat - Better Naming" },
-  {
-    "<leader>av",
-    ":CopilotChatVisual",
-    mode = "x",
-    desc = "CopilotChat - Open in vertical split",
-  },
-  {
-    "<leader>ax",
-    ":CopilotChatInline<cr>",
-    mode = "x",
-    desc = "CopilotChat - Inline chat",
-  },
-  {
-    "<leader>ai",
-    function()
-      local input = vim.fn.input("Ask Copilot: ")
-      if input ~= "" then
-        vim.cmd("CopilotChat " .. input)
-      end
-    end,
-    desc = "CopilotChat - Ask input",
-  },
-  {
-    "<leader>am",
-    "<cmd>CopilotChatCommit<cr>",
-    desc = "CopilotChat - Generate commit message for all changes",
-  },
-  {
-    "<leader>aq",
-    function()
-      local input = vim.fn.input("Quick Chat: ")
-      if input ~= "" then
-        vim.cmd("CopilotChatBuffer " .. input)
-      end
-    end,
-    desc = "CopilotChat - Quick chat",
-  },
-  {
-    "<leader>ad",
-    "<cmd>CopilotChatDebugInfo<cr>",
-    desc = "CopilotChat - Debug Info",
-  },
-  {
-    "<leader>af",
-    "<cmd>CopilotChatFix<cr>",
-    desc = "CopilotChat - Fix Diagnostic",
-  },
-  {
-    "<leader>al",
-    "<cmd>CopilotChatReset<cr>",
-    desc = "CopilotChat - Clear buffer and chat history",
-  },
-  {
-    "<leader>av",
-    "<cmd>CopilotChatToggle<cr>",
-    desc = "CopilotChat - Toggle",
-  },
-  {
-    "<leader>a?",
-    "<cmd>CopilotChatModels<cr>",
-    desc = "CopilotChat - Select Models",
-  },
-
   -- Telescope related mappings
   {
     "<leader>F",
@@ -298,26 +208,6 @@ local spec = {
     nowait = true,
     remap = false,
   },
-  -- {
-  -- 	"<leader>lS",
-  -- 	"<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
-  -- 	desc = "Workspace Symbols",
-  -- 	nowait = true,
-  -- 	remap = false,
-  -- },
-  -- {
-  -- 	"<leader>la",
-  -- 	desc = "Code Action",
-  -- 	nowait = true,
-  -- 	remap = false,
-  -- },
-  -- {
-  -- 	"<leader>ld",
-  -- 	"<cmd>Telescope lsp_document_diagnostics<cr>",
-  -- 	desc = "Document Diagnostics",
-  -- 	nowait = true,
-  -- 	remap = false,
-  -- },
   {
     "<leader>lf",
     function()
@@ -453,49 +343,6 @@ local spec = {
     remap = false,
   },
 
-  -- Trouble
-  {
-    "<leader>x",
-    group = "Trouble",
-    nowait = true,
-    remap = false,
-    icon = { icon = "🚨" },
-  },
-  {
-    "<leader>xx",
-    "<cmd>Trouble diagnostics toggle<cr>",
-    desc = "Document Diagnostics",
-  },
-  {
-    "<leader>xb",
-    "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-    desc = "Buffer Diagnostics",
-  },
-  {
-    "<leader>xw",
-    "<cmd>Trouble workspace_diagnostics<cr>",
-    desc = "Workspace Diagnostics",
-  },
-  {
-    "<leader>xs",
-    "<cmd>Trouble symbols toggle<cr>",
-    desc = "Symbols",
-  },
-  {
-    "<leader>xl",
-    "<cmd>Trouble lsp toggle win.position=right<cr>",
-    desc = "LSP Definitions/References",
-  },
-  {
-    "<leader>xq",
-    "<cmd>Trouble quickfix toggle<cr>",
-    desc = "Quickfix List",
-  },
-  {
-    "<leader>xL",
-    "<cmd>Trouble loclist toggle<cr>",
-    desc = "Location List",
-  },
 
   -- Neovim Configs
   {
@@ -519,21 +366,6 @@ local spec = {
     nowait = true,
     remap = false,
     icon = { icon = "🌲" },
-  },
-  {
-    "<leader>m",
-    group = "Markdown",
-    nowait = true,
-    remap = false,
-  },
-  {
-    "<leader>h",
-    function()
-      local harpoon = require("harpoon")
-      harpoon.ui:toggle_quick_menu(harpoon:list())
-    end,
-    desc = "Harpoon",
-    icon = { icon = "🎣" },
   },
   {
     "<leader>w",
