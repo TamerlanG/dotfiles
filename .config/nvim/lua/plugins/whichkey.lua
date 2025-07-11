@@ -41,6 +41,14 @@ return {
   },
   event = "VeryLazy",
   keys = {
+    -- General Stuff
+    {
+      "<leader>w",
+      "<cmd>w!<CR>",
+      desc = "Save",
+      nowait = true,
+      remap = false
+    },
     -- Top Pickers & Explorer
     { "<leader><space>", function() Snacks.picker.smart() end,                                   desc = "Smart Find Files" },
     { "<leader>,",       function() Snacks.picker.buffers() end,                                 desc = "Buffers" },

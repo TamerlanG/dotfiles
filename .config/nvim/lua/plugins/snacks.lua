@@ -6,6 +6,7 @@ return {
   opts = {
     bigfile = { enabled = true },
     lazygit = {},
+    git = {},
     dashboard = { enabled = true },
     explorer = { enabled = true },
     indent = { enabled = true },
@@ -20,7 +21,6 @@ return {
     },
     quickfile = { enabled = true },
     scope = { enabled = true },
-    scroll = { enabled = true },
     statuscolumn = { enabled = true },
     words = { enabled = true },
   },
