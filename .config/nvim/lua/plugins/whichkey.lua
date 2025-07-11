@@ -49,6 +49,12 @@ return {
       nowait = true,
       remap = false
     },
+    -- Session Management
+    { "<leader>qs",      function() require("persistence").load() end,                           desc = "Restore Session" },
+    { "<leader>qS",      function() require("persistence").select() end,                         desc = "Select Session" },
+    { "<leader>ql",      function() require("persistence").load({ last = true }) end,            desc = "Load Last Session" },
+    { "<leader>qd",      function() require("persistence").stop() end,                           desc = "Stop Persistence" },
+
     -- Top Pickers & Explorer
     { "<leader><space>", function() Snacks.picker.smart() end,                                   desc = "Smart Find Files" },
     { "<leader>,",       function() Snacks.picker.buffers() end,                                 desc = "Buffers" },
