@@ -4,11 +4,6 @@ return {
     event = "InsertEnter",
     config = true,
   },
-  {
-    "JoosepAlviste/nvim-ts-context-commentstring",
-    commit = "88343753dbe81c227a1c1fd2c8d764afb8d36269",
-    event = { "BufReadPost", "BufNewFile" },
-  },
   { "nvim-lualine/lualine.nvim",   event = "VeryLazy" },
   {
     "christoomey/vim-tmux-navigator",
@@ -63,14 +58,4 @@ return {
       },
     },
   },
-  -- Git
-  {
-    "lewis6991/gitsigns.nvim",
-    branch = "main",
-    opts = {
-      current_line_blame = true,
-    },
-    event = { "BufReadPost", "BufNewFile" },
-  },
-
 };
