@@ -26,12 +26,6 @@ return {
     },
     version = "1.*",
   },
-
-  {
-    "williamboman/mason.nvim",
-    event = { "VeryLazy" },
-  },
-
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
@@ -54,7 +48,7 @@ return {
         "StatusLine",
         "SnacksPickerFile",
         "SnacksPicker",
-        "SnacksPickerBorder"
+        "SnacksPickerBorder",
       },
     },
   },
