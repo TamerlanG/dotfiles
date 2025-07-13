@@ -12,12 +12,12 @@ return {
 			border = "rounded",
 			padding = { 1, 2 }, -- extra window padding [top/bottom, right/left]
 			title = true,
-			title_pos = "center",
+			title_pos = "left",
 			zindex = 1000,
 			-- Additional vim.wo and vim.bo options
 			bo = {},
 			wo = {
-				-- winblend = 10, -- value between 0-100 0 for fully opaque and 100 for fully transparent
+				winblend = 2, -- value between 0-100 0 for fully opaque and 100 for fully transparent
 			},
 		},
 		layout = {
@@ -86,7 +86,7 @@ return {
 		{
 			"<leader>/",
 			function()
-				Snacks.picker.grep()
+				Snacks.picker.grep({ hidden = true })
 			end,
 			desc = "Grep",
 		},
