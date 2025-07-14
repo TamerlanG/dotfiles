@@ -16,3 +16,6 @@ window-decoration = false
 
 # Theme 
 theme = Github Dark
+
+# Keymaps
+macos-option-as-alt = left
