@@ -89,4 +89,4 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
-vim.lsp.enable({ "typescript", "lua_ls", "go" })
+vim.lsp.enable({ "typescript", "lua_ls", "yaml" })
