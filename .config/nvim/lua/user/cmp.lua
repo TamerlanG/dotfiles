@@ -3,12 +3,22 @@ local blink = require("blink.cmp")
 blink.setup({
 	keymap = { preset = "default" },
 	sources = {
+		providers = {
+			copilot = {
+				name = "copilot",
+				module = "blink-copilot",
+				score_offset = 100,
+				async = true,
+			},
+		},
 		default = {
+			-- "copilot",
 			"lsp",
 			"path",
 			"buffer",
 		},
 	},
+	completion = { documentation = { auto_show = true }, ghost_text = { enabled = true } },
 	appearance = {
 		nerd_font_variant = "mono",
 		-- Sets the fallback highlight groups to nvim-cmp's highlight groups

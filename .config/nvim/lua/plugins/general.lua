@@ -19,17 +19,16 @@ return {
 		priority = 1000,
 	},
 	{
-		"saghen/blink.cmp",
-	},
-	{
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
 		event = "InsertEnter",
-		config = function()
-			require("copilot").setup({})
-		end,
 	},
-
+	{
+		"saghen/blink.cmp",
+		dependencies = {
+			"fang2hou/blink-copilot",
+		},
+	},
 	{
 		"stevearc/conform.nvim",
 		event = { "BufReadPre", "BufNewFile" },
