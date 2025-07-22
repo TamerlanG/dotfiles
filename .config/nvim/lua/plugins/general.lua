@@ -27,6 +27,7 @@ return {
 		"saghen/blink.cmp",
 		dependencies = {
 			"fang2hou/blink-copilot",
+			"Kaiser-Yang/blink-cmp-avante",
 		},
 	},
 	{
