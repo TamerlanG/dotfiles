@@ -5,10 +5,10 @@ return {
   settings = {
     yaml = {
       hover = true,
-      validate = false,
+      validate = true,
       completion = true,
       keyOrdering = false,
-      format = { enabled = false },
+      format = { enabled = true },
       redhat = {
         telemetry = { enabled = false },
       },
@@ -17,7 +17,8 @@ return {
         url = "https://www.schemastore.org/api/json/catalog.json",
       },
       schemas = {
-        kubernetes = "*.yaml",
+        -- kubernetes = "*.yaml",
+        ["/Users/TGUDABAY/.dotfiles/.config/nvim/lsp/yaml/service-info.json"] = "service-info.{yml,yaml}",
         ["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
         ["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
         ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json"] =
