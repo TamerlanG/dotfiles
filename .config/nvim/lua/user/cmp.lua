@@ -13,17 +13,14 @@ blink.setup({
       avante = {
         module = "blink-cmp-avante",
         name = "Avante",
-        opts = {
-          -- options for blink-cmp-avante
-        },
       },
-      default = function()
-        if vim.bo.filetype == "AvanteInput" then
-          return { "avante" }
-        end
-        return { "copilot", "lsp", "path", "buffer" }
-      end,
     },
+    default = function()
+      if vim.bo.filetype == "AvanteInput" then
+        return { "avante" }
+      end
+      return { "copilot", "lsp", "path", "buffer" }
+    end,
   },
   completion = { documentation = { auto_show = true }, ghost_text = { enabled = true } },
   appearance = {
