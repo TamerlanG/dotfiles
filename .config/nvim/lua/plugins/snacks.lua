@@ -11,6 +11,7 @@ return {
     explorer = { enabled = true },
     indent = { enabled = true },
     input = { enabled = true },
+    bufdelete = { enabled = true },
     picker = {
       enabled = true,
       sources = {

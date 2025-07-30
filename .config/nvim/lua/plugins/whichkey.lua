@@ -477,6 +477,13 @@ return {
       desc = "Delete Buffer",
     },
     {
+      "<leader>ba",
+      function()
+        Snacks.bufdelete.other()
+      end,
+      desc = "Delete all buffers except current",
+    },
+    {
       "<leader>cR",
       function()
         Snacks.rename.rename_file()
