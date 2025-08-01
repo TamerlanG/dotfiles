@@ -3,17 +3,17 @@ local lint = require("lint")
 
 conform.setup({
   formatters_by_ft = {
-    javascript = { "prettierd" },
-    typescript = { "prettierd" },
-    javascriptreact = { "prettierd" },
-    typescriptreact = { "prettierd" },
-    svelte = { "prettierd" },
-    css = { "prettierd" },
-    html = { "prettierd" },
-    json = { "prettierd" },
-    yaml = { "prettierd" },
-    markdown = { "prettierd" },
-    graphql = { "prettierd" },
+    javascript = { "prettier" },
+    typescript = { "prettier" },
+    javascriptreact = { "prettier" },
+    typescriptreact = { "prettier" },
+    svelte = { "prettier" },
+    css = { "prettier" },
+    html = { "prettier" },
+    json = { "prettier" },
+    yaml = { "prettier" },
+    markdown = { "prettier" },
+    graphql = { "prettier" },
     lua = {
       args = {
         "--search-parent-directories",
