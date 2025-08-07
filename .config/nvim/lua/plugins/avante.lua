@@ -17,13 +17,22 @@ return {
       },
     },
     windows = {
+      -- Increase sidebar width for better visibility
+      width = 40,  -- default is 30, increased to 40%
+      height = 35, -- default is 30, increased to 35%
       input = {
         provider = "snacks",
+        height = 15, -- default is 8, increased to 15 for bigger input area
         provider_opts = {
           -- Additional snacks.input options
           title = "Avante Input",
           icon = " ",
         },
+      },
+      sidebar_header = {
+        enabled = true,
+        align = "center",
+        rounded = true,
       },
     },
   },
