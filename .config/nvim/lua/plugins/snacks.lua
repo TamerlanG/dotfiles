@@ -14,7 +14,16 @@ return {
     bufdelete = { enabled = true },
     picker = {
       enabled = true,
+      layout = {
+        preset = "default",
+        preview = false,
+      },
       sources = {
+        grep = {
+          layout = {
+            preview = true,
+          }
+        },
         explorer = {
           hidden = true,
           ignored = true,
