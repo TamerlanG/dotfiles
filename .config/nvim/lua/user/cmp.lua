@@ -2,6 +2,7 @@ local blink = require("blink.cmp")
 
 blink.setup({
   keymap = { preset = "default" },
+  fuzzy = { implementation = "rust" },
   sources = {
     providers = {
       copilot = {

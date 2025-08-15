@@ -25,6 +25,8 @@ return {
   },
   {
     "saghen/blink.cmp",
+    version = "1.*",
+    build = "cargo build --release",
     dependencies = {
       "fang2hou/blink-copilot",
       "Kaiser-Yang/blink-cmp-avante",
