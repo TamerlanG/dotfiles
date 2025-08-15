@@ -1,6 +1,8 @@
 local conform = require("conform")
 local lint = require("lint")
 
+vim.env.ESLINT_D_PPID = vim.fn.getpid()
+
 conform.setup({
   formatters_by_ft = {
     javascript = { "prettier" },
