@@ -1,3 +1,7 @@
+[env]
+_.file = '~/.config/mise/.env'
+
+
 [tools]
 bun = "latest"
 dotnet = "9"
@@ -5,8 +9,5 @@ java = "17"
 node = "20"
 python = "3.12"
 rust = "latest"
-
-[env]
-_.file = '.env'
 
 
