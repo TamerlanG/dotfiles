@@ -5,17 +5,17 @@ vim.env.ESLINT_D_PPID = vim.fn.getpid()
 
 conform.setup({
   formatters_by_ft = {
-    javascript = { "prettier" },
-    typescript = { "prettier" },
-    javascriptreact = { "prettier" },
-    typescriptreact = { "prettier" },
-    svelte = { "prettier" },
-    css = { "prettier" },
-    html = { "prettier" },
-    json = { "prettier" },
-    yaml = { "prettier" },
-    markdown = { "prettier" },
-    graphql = { "prettier" },
+    javascript = { "prettierd" },
+    typescript = { "prettierd" },
+    javascriptreact = { "prettierd" },
+    typescriptreact = { "prettierd" },
+    svelte = { "prettierd" },
+    css = { "prettierd" },
+    html = { "prettierd" },
+    json = { "prettierd" },
+    yaml = { "prettierd" },
+    markdown = { "prettierd" },
+    graphql = { "prettierd" },
     lua = {
       args = {
         "--search-parent-directories",
