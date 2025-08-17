@@ -7,7 +7,7 @@ return {
     bigfile = { enabled = true },
     lazygit = {},
     git = {},
-    dashboard = { enabled = false },
+    dashboard = { enabled = true },
     explorer = { enabled = true },
     indent = { enabled = true },
     input = { enabled = true },

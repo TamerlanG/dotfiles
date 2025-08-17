@@ -27,9 +27,9 @@ return {
     "saghen/blink.cmp",
     version = "1.*",
     build = "cargo build --release",
+    event = "InsertEnter",
     dependencies = {
       "fang2hou/blink-copilot",
-      "Kaiser-Yang/blink-cmp-avante",
     },
   },
   {
@@ -42,6 +42,7 @@ return {
   },
   {
     "xiyaowong/nvim-transparent",
+    event = "VimEnter",
     opts = {
       extra_groups = {
         "StatusLineNC",
@@ -51,10 +52,5 @@ return {
         "SnacksPickerBorder",
       },
     },
-  },
-  {
-    "chrisgrieser/nvim-early-retirement",
-    config = true,
-    event = "VeryLazy",
   },
 }
