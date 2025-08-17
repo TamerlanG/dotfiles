@@ -17,6 +17,18 @@ return {
     "dgox16/oldworld.nvim",
     lazy = false,
     priority = 1000,
+    opts = {
+      integrations = {
+        navic = true,
+        alpha = false,
+        rainbow_delimiters = false,
+      },
+      highlight_overrides = {
+        Normal = { bg = 'NONE' },
+        NormalNC = { bg = 'NONE' },
+        CursorLine = { bg = '#222128' },
+      },
+    }
   },
   {
     "zbirenbaum/copilot.lua",
@@ -39,18 +51,5 @@ return {
   {
     "mfussenegger/nvim-lint",
     event = { "BufReadPre", "BufNewFile" },
-  },
-  {
-    "xiyaowong/nvim-transparent",
-    event = "VimEnter",
-    opts = {
-      extra_groups = {
-        "StatusLineNC",
-        "StatusLine",
-        "SnacksPickerFile",
-        "SnacksPicker",
-        "SnacksPickerBorder",
-      },
-    },
   },
 }
