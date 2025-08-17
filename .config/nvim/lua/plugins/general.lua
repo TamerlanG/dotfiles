@@ -14,21 +14,16 @@ return {
 
   -- Colorschemes
   {
-    "dgox16/oldworld.nvim",
+    "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
     opts = {
-      integrations = {
-        navic = true,
-        alpha = false,
-        rainbow_delimiters = false,
+      transparent = true,
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
       },
-      highlight_overrides = {
-        Normal = { bg = 'NONE' },
-        NormalNC = { bg = 'NONE' },
-        CursorLine = { bg = '#222128' },
-      },
-    }
+    },
   },
   {
     "zbirenbaum/copilot.lua",
