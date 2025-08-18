@@ -1,5 +1,7 @@
 Library/Application Support/vi-mongo/config.yaml
 .config/nvim/lsp/yaml/service-info.json
 .config/mise/.env
-.aider*
 .config/fish/config.fish
+.aider.tags.cache.v4
+.aider.chat.history.md
+.aider.input.history

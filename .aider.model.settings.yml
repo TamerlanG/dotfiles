@@ -1,0 +1,49 @@
+- name: github_copilot/o3-mini
+  # edit_format: diff
+  extra_params:
+    max_tokens: 80000
+    extra_headers:
+      User-Agent: GithubCopilot/1.155.0
+      Editor-Plugin-Version: copilot/1.155.0
+      Editor-Version: vscode/1.85.1
+      Copilot-Integration-Id: copilot-chat
+
+- name: github_copilot/o4-mini
+  # edit_format: diff
+  extra_params:
+    max_tokens: 80000
+    extra_headers:
+      User-Agent: GithubCopilot/1.155.0
+      Editor-Plugin-Version: copilot/1.155.0
+      Editor-Version: vscode/1.85.1
+      Copilot-Integration-Id: vscode-chat
+
+- name: github_copilot/gemini-2.5-pro
+  edit_format: diff-fenced
+  extra_params:
+    max_tokens: 80000
+    extra_headers:
+      User-Agent: GithubCopilot/1.155.0
+      Editor-Plugin-Version: copilot/1.155.0
+      Editor-Version: vscode/1.85.1
+      Copilot-Integration-Id: vscode-chat
+
+- name: github_copilot/claude-sonnet-4
+  # edit_format: diff
+  extra_params:
+    max_tokens: 80000
+    extra_headers:
+      User-Agent: GithubCopilot/1.155.0
+      Editor-Plugin-Version: copilot/1.155.0
+      Editor-Version: vscode/1.85.1
+      Copilot-Integration-Id: vscode-chat
+
+- name: github_copilot/gpt-4.1
+  # edit_format: diff
+  extra_params:
+    max_tokens: 80000
+    extra_headers:
+      User-Agent: GithubCopilot/1.155.0
+      Editor-Plugin-Version: copilot/1.155.0
+      Editor-Version: vscode/1.85.1
+      Copilot-Integration-Id: vscode-chat

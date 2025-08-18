@@ -1,0 +1,11 @@
+dark-mode: true
+
+attribute-co-authored-by: false
+attribute-author: false
+attribute-committer: false
+analytics-disable: true
+
+model: github_copilot/gpt-4.1
+weak-model: github_copilot/gpt-4.0
+show-model-warnings: false
+max-chat-history-tokens: 8000
