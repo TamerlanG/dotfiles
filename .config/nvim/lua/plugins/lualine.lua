@@ -1,6 +1,6 @@
 return {
   "nvim-lualine/lualine.nvim",
-  event = "VeryLazy",
+  event = "UIEnter", -- or "VeryLazy"
   opts = {
     icons_enabled = true,
     theme = "tokyonight",

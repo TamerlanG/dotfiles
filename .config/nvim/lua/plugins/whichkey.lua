@@ -1,5 +1,6 @@
 return {
   "folke/which-key.nvim",
+  event = { "BufReadPre", "BufNewFile" },
   opts = {
     preset = "modern",
     win = {
@@ -28,7 +29,6 @@ return {
     },
     show_help = true,
   },
-  event = "VeryLazy",
   keys = {
     -- General Stuff
     {
