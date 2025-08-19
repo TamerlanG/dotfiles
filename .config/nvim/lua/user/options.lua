@@ -1,48 +1,44 @@
-local options = {
-  backup = false,                          -- creates a backup file
-  clipboard = "unnamedplus",               -- allows neovim to access the system clipboard
-  cmdheight = 0,                           -- more space in the neovim command line for displaying messages
-  completeopt = { "menuone", "noselect" }, -- mostly just for cmp
-  conceallevel = 0,                        -- so that `` is visible in markdown files
-  fileencoding = "utf-8",                  -- the encoding written to a file
-  hlsearch = true,                         -- highlight all matches on previous search pattern
-  ignorecase = true,                       -- ignore case in search patterns
-  mouse = "a",                             -- allow the mouse to be used in neovim
-  pumheight = 10,                          -- pop up menu height
-  showmode = false,                        -- we don't need to see things like -- INSERT -- anymore
-  showtabline = 0,                         -- always show tabs
-  smartcase = true,                        -- smart case
-  smartindent = true,                      -- make indenting smarter again
-  splitbelow = true,                       -- force all horizontal splits to go below current window
-  splitright = true,                       -- force all vertical splits to go to the right of current window
-  swapfile = false,                        -- creates a swapfile
-  termguicolors = true,                    -- set term gui colors (most terminals support this)
-  timeoutlen = 100,                        -- time to wait for a mapped sequence to complete (in milliseconds)
-  undofile = true,                         -- enable persistent undo
-  updatetime = 300,                        -- faster completion (4000ms default)
-  writebackup = false,                     -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
-  expandtab = true,                        -- convert tabs to spaces
-  shiftwidth = 2,                          -- the number of spaces inserted for each indentation
-  tabstop = 2,                             -- insert 2 spaces for a tab
-  cursorline = true,                       -- highlight the current line
-  number = true,                           -- set numbered lines
-  relativenumber = true,                   -- set relative numbered lines
-  numberwidth = 4,                         -- set number column width to 2 {default 4}
-  signcolumn = "yes",                      -- always show the sign column, otherwise it would shift the text each time
-  wrap = true,                             -- display lines as one long line
-  scrolloff = 8,                           -- is one of my fav
-  sidescrolloff = 8,
-  guifont = "monospace:h17",               -- the font used in graphical neovim applications
-  spelllang = "en_us",
-  spell = true,
-  textwidth = 80,
-}
+-- Directly set options without a loop for clarity and efficiency
+
+vim.opt.backup = false
+vim.opt.clipboard = "unnamedplus"
+vim.opt.cmdheight = 0
+vim.opt.completeopt = { "menuone", "noselect" }
+vim.opt.conceallevel = 0
+vim.opt.fileencoding = "utf-8"
+vim.opt.hlsearch = true
+vim.opt.ignorecase = true
+vim.opt.mouse = "a"
+vim.opt.pumheight = 10
+vim.opt.showmode = false
+vim.opt.showtabline = 0
+vim.opt.smartcase = true
+vim.opt.smartindent = true
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+vim.opt.swapfile = false
+vim.opt.termguicolors = true
+vim.opt.timeoutlen = 100
+vim.opt.undofile = true
+vim.opt.updatetime = 300
+vim.opt.writebackup = false
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+vim.opt.cursorline = true
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.numberwidth = 4
+vim.opt.signcolumn = "yes"
+vim.opt.wrap = true
+vim.opt.scrolloff = 8
+vim.opt.sidescrolloff = 8
+vim.opt.guifont = "monospace:h17"
+vim.opt.spelllang = "en_us"
+vim.opt.spell = true
+vim.opt.textwidth = 80
 
 vim.opt.shortmess:append("c")
-
-for k, v in pairs(options) do
-  vim.opt[k] = v
-end
 
 vim.cmd("set whichwrap+=<,>,[,],h,l")
 vim.cmd([[set iskeyword+=-]])
