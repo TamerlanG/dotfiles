@@ -1,5 +1,3 @@
--- Directly set options without a loop for clarity and efficiency
-
 vim.opt.backup = false
 vim.opt.clipboard = "unnamedplus"
 vim.opt.cmdheight = 0
@@ -37,15 +35,9 @@ vim.opt.guifont = "monospace:h17"
 vim.opt.spelllang = "en_us"
 vim.opt.spell = true
 vim.opt.textwidth = 80
+vim.opt.laststatus = 3
 
 vim.opt.shortmess:append("c")
 
-vim.cmd("set whichwrap+=<,>,[,],h,l")
-vim.cmd([[set iskeyword+=-]])
-vim.cmd([[set formatoptions-=cro]]) -- TODO: this doesn't seem to work
-
 -- Snacks Disable Animations
 vim.g.snacks_animate = false
-
--- views can only be fully collapsed with the global statusline
-vim.opt.laststatus = 3
