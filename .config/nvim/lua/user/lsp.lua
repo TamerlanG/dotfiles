@@ -1,4 +1,3 @@
--- Diagnostics {{{
 local config = {
   virtual_lines = { current_line = true },
   signs = {
@@ -23,7 +22,6 @@ local config = {
   },
 }
 
--- Improve LSPs UI {{{
 local icons = {
   Class = " ",
   Color = " ",
