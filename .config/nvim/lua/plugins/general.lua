@@ -4,7 +4,6 @@ return {
     event = "InsertEnter",
     config = true,
   },
-  { "nvim-lualine/lualine.nvim",   event = "VeryLazy" },
   {
     "christoomey/vim-tmux-navigator",
     event = "VeryLazy",
@@ -24,13 +23,5 @@ return {
         floats = "transparent",
       },
     },
-  },
-  {
-    "stevearc/conform.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-  },
-  {
-    "mfussenegger/nvim-lint",
-    event = { "BufReadPre", "BufNewFile" },
   },
 }
