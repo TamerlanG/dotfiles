@@ -26,20 +26,6 @@ return {
     },
   },
   {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-  },
-  {
-    "saghen/blink.cmp",
-    version = "1.*",
-    build = "cargo build --release",
-    event = "InsertEnter",
-    dependencies = {
-      "fang2hou/blink-copilot",
-    },
-  },
-  {
     "stevearc/conform.nvim",
     event = { "BufReadPre", "BufNewFile" },
   },
