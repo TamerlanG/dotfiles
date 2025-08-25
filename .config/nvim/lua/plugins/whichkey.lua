@@ -491,6 +491,11 @@ return {
       desc = "Rename File",
     },
     {
+      "<leader>ca",
+      vim.lsp.buf.code_action,
+      desc = "Show code actions",
+    },
+    {
       "<leader>gB",
       function()
         Snacks.gitbrowse()

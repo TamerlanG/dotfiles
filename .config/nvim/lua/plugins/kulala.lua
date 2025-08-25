@@ -7,8 +7,12 @@ return {
   },
   ft = { "http", "rest" },
   opts = {
-    global_keymaps = false,
+    global_keymaps = true,
     global_keymaps_prefix = "<leader>R",
     kulala_keymaps_prefix = "",
+    ui = {
+      max_response_size = 5000000, -- 1MB
+
+    }
   },
 }
