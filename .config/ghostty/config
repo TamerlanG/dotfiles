@@ -7,6 +7,7 @@ shell-integration=fish
 
 # Terminal
 gtk-tabs-location = hidden
+font-family = "JetBrainsMono Nerd Font"
 font-size = 15
 scrollback-limit = 10_000
 window-theme = ghostty

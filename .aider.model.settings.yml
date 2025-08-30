@@ -47,3 +47,13 @@
       Editor-Plugin-Version: copilot/1.155.0
       Editor-Version: vscode/1.85.1
       Copilot-Integration-Id: vscode-chat
+
+- name: github_copilot/claude-sonnet-3.7
+  # edit_format: diff
+  extra_params:
+    max_tokens: 80000
+    extra_headers:
+      User-Agent: GithubCopilot/1.155.0
+      Editor-Plugin-Version: copilot/1.155.0
+      Editor-Version: vscode/1.85.1
+      Copilot-Integration-Id: vscode-chat
