@@ -14,6 +14,8 @@ return {
     bufdelete = { enabled = true },
     picker = {
       enabled = true,
+      hidden = true,
+      exclude = { "node_modules", ".git" },
       layout = {
         preset = "default",
         preview = false,

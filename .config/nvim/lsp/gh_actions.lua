@@ -1,48 +1,102 @@
----@brief
---- https://github.com/lttb/gh-actions-language-server
----
---- Language server for GitHub Actions.
----
---- The projects [forgejo](https://forgejo.org/) and [gitea](https://about.gitea.com/)
---- design their actions to be as compatible to github as possible
---- with only [a few differences](https://docs.gitea.com/usage/actions/comparison#unsupported-workflows-syntax) between the systems.
---- The `gh_actions_ls` is therefore enabled for those `yaml` files as well.
----
---- The `gh-actions-language-server` can be installed via `npm`:
----
---- ```sh
---- npm install -g gh-actions-language-server
---- ```
+local function fetch_github_repo(repo_name, token, org, workspace_path)
+  local cmd = {
+    "curl",
+    "-H",
+    "Authorization: Bearer " .. token,
+    "-H",
+    "User-Agent: Neovim",
+    "https://api.github.com/repos/" .. org .. "/" .. repo_name,
+  }
+
+  local result = vim.system(cmd):wait()
+  if not result or not result.stdout then
+    print("No result from GitHub API")
+    return {}
+  end
+
+  local raw_json = result.stdout
+  if raw_json == "" then
+    print("Empty JSON from GitHub API")
+    return {}
+  end
+
+  local ok, data = pcall(vim.json.decode, raw_json)
+  if not ok or type(data) ~= "table" then
+    print("Failed to decode JSON from GitHub API")
+    return {}
+  end
+
+  local repo_info = {
+    id = data.id,
+    owner = org,
+    name = repo_name,
+    workspaceUri = "file://" .. workspace_path,
+    organizationOwned = true,
+  }
+  return repo_info
+end
+
+local get_gh_actions_init_options = function(org, workspace_path, session_token)
+  org = org or "volvo-cars"
+  workspace_path = workspace_path or vim.fn.getcwd()
+  session_token = session_token or os.getenv("GHCRIO")
+
+  local function get_repo_name()
+    local handle = io.popen("git remote get-url origin 2>/dev/null")
+    if not handle then
+      return nil
+    end
+    local result = handle:read("*a")
+    handle:close()
+    if not result or result == "" then
+      return nil
+    end
+    -- Remove trailing newline
+    result = result:gsub("%s+$", "")
+    -- Extract repo name from URL
+    local repo = result:match("([^/:]+)%.git$")
+    return repo
+  end
+  local repo_name = get_repo_name()
+
+  local repo_info = fetch_github_repo(repo_name, session_token, org, workspace_path)
+  return {
+    sessionToken = session_token,
+    repos = {
+      repo_info,
+    },
+  }
+end
+
 
 return {
   cmd = { 'gh-actions-language-server', '--stdio' },
   filetypes = { 'yaml.github' },
-  init_options = { sessionToken = vim.env.GHCRIO },
+  init_options = get_gh_actions_init_options(),
   single_file_support = true,
   -- `root_dir` ensures that the LSP does not attach to all yaml files
   root_dir = function(bufnr, on_dir)
     local parent = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr))
     if
         vim.endswith(parent, '/.github/workflows')
-        or vim.endswith(parent, '/.forgejo/workflows')
-        or vim.endswith(parent, '/.gitea/workflows')
     then
       on_dir(parent)
     end
   end,
   handlers = {
-    ["textDocument/publishDiagnostics"] = function(err, result, ctx)
-      --
-      result.diagnostics = vim.tbl_filter(function(diagnostic)
-        -- silence annoying context warnings https://github.com/github/vscode-github-actions/issues/222
-        if diagnostic.message:match("Context access might be invalid:") then
-          return false
-        end
-
-        return true
-      end, result.diagnostics)
-
-      vim.lsp.handlers[ctx.method](err, result, ctx)
+    ['actions/readFile'] = function(_, result)
+      if type(result.path) ~= 'string' then
+        return nil, { code = -32602, message = 'Invalid path parameter' }
+      end
+      local file_path = vim.uri_to_fname(result.path)
+      if vim.fn.filereadable(file_path) == 1 then
+        local f = assert(io.open(file_path, 'r'))
+        local text = f:read('*a')
+        f:close()
+        return text, nil
+      else
+        return nil, { code = -32603, message = 'File not found: ' .. file_path }
+      end
     end,
   },
 
