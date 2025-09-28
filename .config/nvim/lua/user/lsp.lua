@@ -55,4 +55,4 @@ end
 
 
 vim.diagnostic.config(config)
-vim.lsp.enable({ "typescript", "lua_ls", "yaml", "python", "gh_actions" })
+vim.lsp.enable({ "typescript", "lua_ls", "yaml", "python", "go", "zig" })
