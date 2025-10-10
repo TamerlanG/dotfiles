@@ -1,6 +1,6 @@
 return {
   "mfussenegger/nvim-dap",
-  event = "VeryLazy",
+  cmd = { "DapContinue", "DapToggleBreakpoint", "DapStepOver", "DapStepInto", "DapStepOut", "DapTerminate" },
   config = function()
     local dap = require("dap")
     local ui = require("dapui")
@@ -30,7 +30,6 @@ return {
   dependencies = {
     "rcarriga/nvim-dap-ui",
     "nvim-neotest/nvim-nio",
-    "jay-babu/mason-nvim-dap.nvim",
     "theHamsta/nvim-dap-virtual-text",
     "leoluz/nvim-dap-go",
   },
