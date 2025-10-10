@@ -5,8 +5,9 @@ _.file = '~/.config/mise/.env'
 [tools]
 bun = "latest"
 dotnet = "9"
+go = "1.24.6"
 java = "17"
-node = "20"
+node = "latest"
 python = "3.12"
 rust = "latest"
 zig = "latest"
