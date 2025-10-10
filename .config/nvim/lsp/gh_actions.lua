@@ -37,7 +37,7 @@ local function fetch_github_repo(repo_name, token, org, workspace_path)
 end
 
 local get_gh_actions_init_options = function(org, workspace_path, session_token)
-  org = org or "volvo-cars"
+  org = org
   workspace_path = workspace_path or vim.fn.getcwd()
   session_token = session_token or os.getenv("GHCRIO")
 
