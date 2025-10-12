@@ -1,11 +1,13 @@
 local dap = require("dap")
-if not dap.adapters["pwa-node"] then
-  local mason = vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter"
-  local debugger_path = mason .. "/js-debug/src/dapDebugServer.js"
-  dap.adapters["pwa-node"] = {
+
+for _, adapter in pairs({ "pwa-node", "pwa-chrome" }) do
+  dap.adapters[adapter] = {
     type = "server",
-    host = "127.0.0.1",
+    host = "localhost",
     port = "${port}",
-    executable = { command = "node", args = { debugger_path, "${port}" } },
+    executable = {
+      command = "js-debug-adapter",
+      args = { "${port}" },
+    },
   }
 end
