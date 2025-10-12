@@ -2,7 +2,7 @@ return {
   "mfussenegger/nvim-dap",
   cmd = { "DapContinue", "DapToggleBreakpoint", "DapStepOver", "DapStepInto", "DapStepOut" },
   dependencies = {
-    "rcarriga/nvim-dap-ui",
+    "igorlfs/nvim-dap-view",
     "nvim-neotest/nvim-nio",
     "theHamsta/nvim-dap-virtual-text",
     "leoluz/nvim-dap-go",
@@ -44,7 +44,6 @@ return {
     },
 
     -- UI integration
-    { "<leader>dd", function() require("dapui").toggle() end,        desc = "Toggle DAP UI" },
-    { "<leader>df", function() require("dapui").float_element() end, desc = "Float DAP Element" },
+    { "<leader>dd", function() require("dap-view").toggle() end, desc = "Toggle DAP UI" },
   },
 }

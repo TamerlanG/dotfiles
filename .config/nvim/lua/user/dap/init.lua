@@ -2,10 +2,10 @@ local M = {}
 
 function M.setup()
   local dap = require("dap")
+  local ui = require("dap-view")
 
   vim.fn.sign_define("DapBreakpoint", { text = "🐞" })
 
-  local ui = require("dapui")
   dap.listeners.before.attach.user_dap = function() ui.open() end
   dap.listeners.before.launch.user_dap = function() ui.open() end
   dap.listeners.before.event_terminated.user_dap = function() ui.close() end
