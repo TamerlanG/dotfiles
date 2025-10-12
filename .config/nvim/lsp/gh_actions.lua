@@ -46,6 +46,7 @@ local get_gh_actions_init_options = function(org, workspace_path, session_token)
     if not handle then
       return nil
     end
+
     local result = handle:read("*a")
     handle:close()
     if not result or result == "" then
@@ -58,6 +59,14 @@ local get_gh_actions_init_options = function(org, workspace_path, session_token)
     return repo
   end
   local repo_name = get_repo_name()
+
+  if not repo_name then
+    print("Could not determine repository name from git remote")
+    return {
+      sessionToken = session_token,
+      repos = {},
+    }
+  end
 
   local repo_info = fetch_github_repo(repo_name, session_token, org, workspace_path)
   return {
@@ -72,7 +81,7 @@ end
 return {
   cmd = { 'gh-actions-language-server', '--stdio' },
   filetypes = { 'yaml.github' },
-  init_options = get_gh_actions_init_options(),
+  init_options = get_gh_actions_init_options("volvo-cars"),
   single_file_support = true,
   -- `root_dir` ensures that the LSP does not attach to all yaml files
   root_dir = function(bufnr, on_dir)
