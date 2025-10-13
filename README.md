@@ -11,6 +11,8 @@ These instructions will get you a copy of my dotfiles up and running on your loc
 - A Unix-like operating system: macOS, Linux, or Unix
 - `git` installed to clone the repository
 - `ghostty` terminal I prefer
+- `aerospace` for managing windows.
+  - `brew install aerospace`
 - `GNU Stow` installed to manage the symlinks
 - `mise`
   - `brew install mise`
