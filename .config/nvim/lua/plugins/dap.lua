@@ -2,7 +2,12 @@ return {
   "mfussenegger/nvim-dap",
   cmd = { "DapContinue", "DapToggleBreakpoint", "DapStepOver", "DapStepInto", "DapStepOut" },
   dependencies = {
-    "igorlfs/nvim-dap-view",
+    {
+      "igorlfs/nvim-dap-view",
+      opts = {
+        auto_toggle = true,
+      },
+    },
     "nvim-neotest/nvim-nio",
     "theHamsta/nvim-dap-virtual-text",
     "leoluz/nvim-dap-go",
