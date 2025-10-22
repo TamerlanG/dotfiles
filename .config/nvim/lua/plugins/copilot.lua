@@ -11,5 +11,11 @@ return {
       auto_trigger = true,
     },
     copilot_node_command = "node",
+    filetypes = {
+      javascript = true,
+      typescript = true,
+      lua = true,
+      yaml = true,
+    }
   }
 }
