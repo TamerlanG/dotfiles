@@ -193,5 +193,33 @@ return {
       end,
       desc = "Go to Type Definition",
     },
+    {
+      "<leader>Rs",
+      function()
+        require("kulala").run()
+      end,
+      desc = "Send request",
+    },
+    {
+      "<leader>Ra",
+      function()
+        require("kulala").send_all()
+      end,
+      desc = "Send all requests",
+    },
+    {
+      "<leader>Rr",
+      function()
+        require("kulala").replay()
+      end,
+      desc = "Repeat the last request",
+    },
+    {
+      "<leader>Ro",
+      function()
+        require("kulala").open()
+      end,
+      desc = "Open Kulala",
+    },
   },
 }
