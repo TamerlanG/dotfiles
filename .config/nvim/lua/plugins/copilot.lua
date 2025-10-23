@@ -16,6 +16,7 @@ return {
       typescript = true,
       lua = true,
       yaml = true,
+      markdown = true,
     }
   }
 }
