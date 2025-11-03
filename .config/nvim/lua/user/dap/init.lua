@@ -2,8 +2,8 @@ local M = {}
 
 function M.setup()
   -- Eagerly load all adapters & configs (no autoload)
-  pcall(require, "user.dap.adapters.go")
-  pcall(require, "user.dap.config.go")
+  require("dap-go").setup()
+
   pcall(require, "user.dap.adapters.js")
   pcall(require, "user.dap.config.js")
   pcall(require, "user.dap.adapters.zig")
