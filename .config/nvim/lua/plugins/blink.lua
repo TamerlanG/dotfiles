@@ -18,17 +18,14 @@ return {
             score_offset = 100,
             async = true,
           },
-          avante = {
-            module = "blink-cmp-avante",
-            name = "Avante",
+          lazydev = {
+            name = "LazyDev",
+            module = "lazydev.integrations.blink",
+            -- make lazydev completions top priority (see `:h blink.cmp`)
+            score_offset = 100,
           },
         },
-        default = function()
-          if vim.bo.filetype == "AvanteInput" then
-            return { "avante" }
-          end
-          return { "copilot", "lsp", "path", "buffer" }
-        end,
+        default = { "lazydev", "copilot", "lsp", "path", "buffer" }
       },
       completion = { documentation = { auto_show = true }, ghost_text = { enabled = true } },
       appearance = {
