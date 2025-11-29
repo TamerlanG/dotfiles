@@ -225,5 +225,31 @@ return {
       end,
       desc = "Open Kulala",
     },
+
+    -- Open Code
+    {
+      "<leader>oa",
+      function()
+        require("opencode").ask("@this: ", { submit = true })
+      end,
+      desc = "ask opencode",
+      mode = { "n", "v" },
+    },
+    {
+      "<leader>ox",
+      function()
+        require("opencode").select()
+      end,
+      desc = "execute opencode actions",
+      mode = { "n", "v" },
+    },
+    {
+      "<leader>ox",
+      function()
+        require("opencode").prompt("@this")
+      end,
+      desc = "add to opencode",
+      mode = { "n", "v" },
+    },
   },
 }

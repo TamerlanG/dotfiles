@@ -9,6 +9,7 @@ return {
     dashboard = { enabled = true },
     explorer = { enabled = true },
     indent = { enabled = true },
+    terminal = { enabled = true },
     input = { enabled = true },
     picker = {
       enabled = true,
