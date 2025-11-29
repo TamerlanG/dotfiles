@@ -5,3 +5,4 @@ Library/Application Support/vi-mongo/config.yaml
 .aider.tags.cache.v4
 .aider.chat.history.md
 .aider.input.history
+.config/mise/config.toml
