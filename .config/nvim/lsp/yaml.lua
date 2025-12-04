@@ -22,10 +22,8 @@ return {
         ["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
         ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json"] =
         "azure-pipelines.yml",
-        ["http://json.schemastore.org/ansible-stable-2.9"] = "roles/tasks/*.{yml,yaml}",
         ["http://json.schemastore.org/prettierrc"] = ".prettierrc.{yml,yaml}",
         ["http://json.schemastore.org/kustomization"] = "kustomization.{yml,yaml}",
-        ["http://json.schemastore.org/ansible-playbook"] = "*play*.{yml,yaml}",
         ["http://json.schemastore.org/chart"] = "Chart.{yml,yaml}",
         ["https://json.schemastore.org/dependabot-v2"] = ".github/dependabot.{yml,yaml}",
         ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] =
