@@ -55,4 +55,6 @@ end
 
 
 vim.diagnostic.config(config)
-vim.lsp.enable({ "typescript", "lua_ls", "yaml", "python", "go", "zig", "gh_actions", "terraform", "ansible", "c" })
+vim.lsp.enable(
+  { "typescript", "lua_ls", "yaml", "python", "go", "zig", "gh_actions", "terraform", "ansible", "c",
+    "racket" })
