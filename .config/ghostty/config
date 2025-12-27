@@ -1,6 +1,6 @@
 # Transparency
-background-opacity = 0.8
-background-blur-radius = 20
+background-opacity = 0.85
+background-blur-radius = 10
 
 # Shell 
 shell-integration=fish
