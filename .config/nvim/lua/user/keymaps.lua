@@ -18,4 +18,5 @@ wk.add({
   { "<leader>o", group = "OpenCode" },
   { "<leader>R", group = "Kuala" },
   { "<leader>s", group = "Search" },
+  { "<leader>n", group = "Testing" },
 })

@@ -7,7 +7,7 @@ return {
     lazygit = {},
     git = {},
     dashboard = { enabled = true },
-    explorer = { enabled = true },
+    explorer = { enabled = true, ignored = true },
     indent = { enabled = true },
     terminal = { enabled = true },
     input = { enabled = true },
