@@ -6,3 +6,10 @@ Library/Application Support/vi-mongo/config.yaml
 .aider.chat.history.md
 .aider.input.history
 .config/mise/config.toml
+/.config/btop
+/.config/cagent
+/.config/fish
+/.config/gcloud
+/.config/gh
+/.config/github-copilot
+/.config/bk.yaml
