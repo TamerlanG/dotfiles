@@ -5,9 +5,6 @@ return {
     config = true,
   },
   {
-    "tamerlang/gh-actions-lsp.nvim",
-  },
-  {
     "christoomey/vim-tmux-navigator",
     cmd = {
       "TmuxNavigateLeft",
