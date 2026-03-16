@@ -13,6 +13,18 @@ local configs = {
   },
   {
     type = "pwa-node",
+    request = "launch",
+    name = "Launch File (with args)",
+    program = "${file}",
+    cwd = "${workspaceFolder}",
+    skipFiles = { "<node_internals>/**" },
+    args = function()
+      local input = vim.fn.input("Program arguments: ")
+      return vim.split(input, " ", { trimempty = true })
+    end,
+  },
+  {
+    type = "pwa-node",
     request = "attach",
     name = "Attach (process)",
     processId = require("dap.utils").pick_process,

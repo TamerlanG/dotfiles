@@ -238,18 +238,23 @@ return {
     {
       "<leader>ox",
       function()
-        require("opencode").select()
-      end,
-      desc = "execute opencode actions",
-      mode = { "n", "v" },
-    },
-    {
-      "<leader>ox",
-      function()
         require("opencode").prompt("@this")
       end,
-      desc = "add to opencode",
-      mode = { "n", "v" },
+      desc = "add snippet to opencode",
+      mode = { "v" },
+    },
+    {
+      "<leader>of",
+      function()
+        local path = vim.fn.fnamemodify(vim.fn.expand("%:p"), ":.")
+        if path == "" then
+          vim.notify("No file path for current buffer", vim.log.levels.WARN)
+          return
+        end
+        require("opencode").prompt("@" .. path)
+      end,
+      desc = "add file to opencode",
+      mode = { "n" },
     },
     {
       "<leader>n",
