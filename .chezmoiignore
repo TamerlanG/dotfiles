@@ -1,10 +1,2 @@
 # Repo meta files — not dotfiles
 README.md
-
-# nvim LSP generated file
-.config/nvim/lsp/yaml/service-info.json
-
-# Aider AI runtime files
-.aider.tags.cache.v4
-.aider.chat.history.md
-.aider.input.history

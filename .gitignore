@@ -1,7 +1,0 @@
-# Neovim LSP generated file
-dot_config/nvim/lsp/yaml/service-info.json
-
-# Aider AI runtime files
-.aider.tags.cache.v4
-.aider.chat.history.md
-.aider.input.history
