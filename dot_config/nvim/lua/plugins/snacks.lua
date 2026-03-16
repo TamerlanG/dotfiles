@@ -28,6 +28,11 @@ return {
         explorer = {
           hidden = true,
           ignored = true,
+          layout = {
+            auto_hide = {
+              "input"
+            }
+          },
           win = {
             list = {
               wo = {
