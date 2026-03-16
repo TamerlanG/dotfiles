@@ -1,36 +1,83 @@
 # Dotfiles Repository
 
-This repository contains my personal dotfiles, managed with [GNU Stow](https://www.gnu.org/software/stow/), a symlink farm manager which makes it easy to install and manage dotfiles across multiple systems.
+This repository contains my personal dotfiles, managed with [chezmoi](https://www.chezmoi.io/), a dotfile manager that copies (rather than symlinks) files to their target locations, managing only what you explicitly declare.
 
 ## Getting Started
 
-These instructions will get you a copy of my dotfiles up and running on your local machine for development and testing purposes.
-
 ### Prerequisites
 
-- A Unix-like operating system: macOS, Linux, or Unix
-- `git` installed to clone the repository
-- `ghostty` terminal I prefer
-- `aerospace` for managing windows.
-  - `brew install aerospace`
-- `GNU Stow` installed to manage the symlinks
-- `mise`
-  - `brew install mise`
-- `starship`
-  - `brew install starship`
+- macOS (primary platform)
+- `git`
+- `ghostty` terminal
+- `aerospace` for managing windows — `brew install aerospace`
+- `chezmoi` — `brew install chezmoi`
+- `mise` for runtime version management — `brew install mise`
 
-### Installing GNU Stow
+### Installing
 
-1. Clone this repository to your home directory:
+1. Clone this repository to `~/.dotfiles`:
 
 ```bash
-cd ~
-git clone https://github.com/TamerlanG/dotfiles.git
-cd .dotfiles
+git clone https://github.com/TamerlanG/dotfiles.git ~/.dotfiles
 ```
 
-2. Use GNU Stow to symlink the desired configurations into your home directory:
+2. Point chezmoi at the repo and apply:
 
 ```bash
-stow .
+chezmoi init --source ~/.dotfiles
+chezmoi apply
 ```
+
+### Keeping things in sync
+
+After editing a file directly in `~` (e.g. `~/.tmux.conf`), pull the change back into the source:
+
+```bash
+chezmoi re-add ~/.tmux.conf
+```
+
+After editing a file in `~/.dotfiles` directly, apply it to `~`:
+
+```bash
+chezmoi apply
+```
+
+To preview what would change before applying:
+
+```bash
+chezmoi diff
+```
+
+## Repository Structure
+
+Files follow chezmoi's naming convention:
+
+| Source name | Target path |
+|---|---|
+| `dot_aerospace.toml` | `~/.aerospace.toml` |
+| `dot_tmux.conf` | `~/.tmux.conf` |
+| `dot_p10k.zsh` | `~/.p10k.zsh` |
+| `dot_config/` | `~/.config/` |
+| `Library/` | `~/Library/` |
+
+## What is and isn't managed
+
+**Managed by chezmoi** (tracked in this repo):
+- `dot_aerospace.toml` — AeroSpace window manager
+- `dot_tmux.conf` — tmux
+- `dot_p10k.zsh` — Powerlevel10k prompt
+- `dot_config/ghostty/` — Ghostty terminal
+- `dot_config/nvim/` — Neovim
+- `dot_config/fish/` — Fish shell
+- `dot_config/mise/config.toml` — mise tool versions
+- `dot_config/gh/config.yml` — GitHub CLI settings
+- `dot_config/opencode/` — OpenCode AI assistant
+- `Library/Application Support/k9s/skins/` — k9s color skins
+
+**Not managed** (machine-specific, secrets, or runtime state):
+- `~/.config/gcloud/` — GCloud SDK credentials and cache
+- `~/.config/github-copilot/` — Copilot auth tokens
+- `~/.config/gh/hosts.yml` — GitHub CLI auth tokens
+- `~/.config/mise/.env` — Environment secrets
+- `~/.config/bk.yaml` — Buildkite API token
+- `~/.config/fish/fish_variables` — Fish runtime state
