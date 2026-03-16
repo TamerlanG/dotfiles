@@ -1,16 +1,7 @@
-Library/Application Support/vi-mongo/config.yaml
-.config/nvim/lsp/yaml/service-info.json
-.config/mise/.env
-.config/fish/config.fish
+# Neovim LSP generated file
+dot_config/nvim/lsp/yaml/service-info.json
+
+# Aider AI runtime files
 .aider.tags.cache.v4
 .aider.chat.history.md
 .aider.input.history
-.config/mise/config.toml
-/.config/btop
-/.config/cagent
-/.config/fish
-/.config/gcloud
-/.config/gh
-/.config/github-copilot
-/.config/bk.yaml
-/.config/moon_cli
