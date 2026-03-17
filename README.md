@@ -12,6 +12,7 @@ This repository contains my personal dotfiles, managed with [chezmoi](https://ww
 - `aerospace` for managing windows — `brew install aerospace`
 - `chezmoi` — `brew install chezmoi`
 - `mise` for runtime version management — `brew install mise`
+- For Neovim configs: `rg` (ripgrep) and `fd` (fd) are required — e.g. `brew install ripgrep fd`
 
 ### Installing
 
