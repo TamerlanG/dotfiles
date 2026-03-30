@@ -4,6 +4,22 @@ return {
   opts = {
     preset = "modern",
   },
+  config = function(_, opts)
+    local wk = require("which-key")
+
+    wk.add({
+      { "<leader>d", group = "Debugger" },
+      { "<leader>l", group = "LSP" },
+      { "<leader>f", group = "Find" },
+      { "<leader>g", group = "Git" },
+      { "<leader>o", group = "OpenCode" },
+      { "<leader>R", group = "Kuala" },
+      { "<leader>s", group = "Search" },
+      { "<leader>n", group = "Testing" },
+    })
+
+    wk.setup(opts)
+  end,
   keys = {
     -- General Stuff
     {
