@@ -62,13 +62,32 @@
 ---@type vim.lsp.Config
 return {
   cmd = { 'yaml-language-server', '--stdio' },
-  filetypes = { 'yaml', 'yaml.docker-compose', 'yaml.gitlab', 'yaml.helm-values' },
+  filetypes = { 'yaml', 'yaml.buildkite', 'yaml.docker-compose', 'yaml.gitlab', 'yaml.helm-values' },
   root_markers = { '.git' },
   settings = {
     -- https://github.com/redhat-developer/vscode-redhat-telemetry#how-to-disable-telemetry-reporting
     redhat = { telemetry = { enabled = false } },
     -- formatting disabled by default in yaml-language-server; enable it
-    yaml = { format = { enable = true } },
+    yaml = {
+      format = { enable = true },
+      schemas = {
+        ["https://raw.githubusercontent.com/buildkite/pipeline-schema/main/schema.json"] = {
+          "buildkite.yml",
+          "buildkite.yaml",
+          "buildkite.*.yml",
+          "buildkite.*.yaml",
+          ".buildkite/pipeline.yml",
+          ".buildkite/pipeline.yaml",
+          ".buildkite/pipeline.*.yml",
+          ".buildkite/pipeline.*.yaml",
+          ".buildkite/pipelines/*.yml",
+          ".buildkite/steps/**/*.yml",
+          ".buildkite/pipelines/*.yaml",
+          ".buildkite/pipelines/**/*.yaml",
+          ".buildkite/pipelines/**/*.yml",
+        },
+      },
+    },
   },
   on_init = function(client)
     --- https://github.com/neovim/nvim-lspconfig/pull/4016
