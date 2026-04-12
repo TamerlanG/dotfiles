@@ -55,15 +55,6 @@ end
 
 
 vim.diagnostic.config(config)
-vim.lsp.enable("typescript", { filetype = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" } })
-vim.lsp.enable("lua_ls", { filetype = "lua" })
-vim.lsp.enable("yaml", { filetype = { "yaml", "yaml.buildkite", "yaml.docker-compose", "yaml.gitlab", "yaml.helm-values" } })
-vim.lsp.enable("python", { filetype = "python" })
-vim.lsp.enable("go", { filetype = { "go", "gomod", "gowork", "gotmpl" } })
-vim.lsp.enable("zig", { filetype = { "zig", "zir" } })
-vim.lsp.enable("gh_actions", { filetype = "yaml.ghactions" })
-vim.lsp.enable("terraform", { filetype = { "terraform", "terraform-vars", "tf" } })
-vim.lsp.enable("ansible", { filetype = "yaml.ansible" })
-vim.lsp.enable("c", { filetype = { "c", "cpp", "objc", "objcpp", "cuda" } })
-vim.lsp.enable("racket", { filetype = "racket" })
-vim.lsp.enable("bash", { filetype = { "bash", "sh" } })
+vim.lsp.enable(
+  { "typescript", "lua_ls", "yaml", "python", "go", "zig", "gh_actions", "terraform", "ansible", "c",
+    "racket", "bash" })
