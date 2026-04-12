@@ -78,10 +78,10 @@ return {
   cmd = { "actions-languageserver", "--stdio" },
   filetypes = { "yaml.ghactions" },
   root_markers = { ".git" },
-  init_options = {
-    -- Optional: provide a GitHub token and repo context for added functionality
-    -- (e.g., repository-specific completions)
-    sessionToken = get_github_token(),
-    repos = get_repos_config(),
-  },
+  before_init = function(params)
+    params.initializationOptions = {
+      sessionToken = get_github_token(),
+      repos = get_repos_config(),
+    }
+  end,
 }
