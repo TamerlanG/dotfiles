@@ -14,7 +14,7 @@ return {
     picker = {
       enabled = true,
       hidden = true,
-      exclude = { "node_modules", ".git" },
+      exclude = { "node_modules", ".git", ".claude/worktrees" },
       layout = {
         preset = "default",
         preview = false,
