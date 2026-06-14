@@ -1,5 +1,10 @@
 return {
-  "mason-org/mason.nvim",
-  cmd = 'Mason',
-  opts = {}
+  "mason-org/mason-lspconfig.nvim",
+  opts = {
+    automatic_enable = true
+  },
+  dependencies = {
+    { "mason-org/mason.nvim", opts = {} },
+    "neovim/nvim-lspconfig",
+  },
 }
