@@ -27,6 +27,12 @@ return {
       desc = "Diffview File History (current file)",
     },
     {
+      "<leader>gp",
+      "<cmd>DiffviewOpen origin/HEAD...HEAD --imply-local<cr>",
+      desc = "Review Current PR",
+    },
+
+    {
       "<leader>gH",
       "<cmd>DiffviewFileHistory<cr>",
       desc = "Diffview File History (repo)",
