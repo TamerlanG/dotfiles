@@ -12,7 +12,6 @@ return {
       { "<leader>l", group = "LSP" },
       { "<leader>f", group = "Find" },
       { "<leader>g", group = "Git" },
-      { "<leader>o", group = "OpenCode" },
       { "<leader>R", group = "Kuala" },
       { "<leader>s", group = "Search" },
       { "<leader>n", group = "Testing" },
@@ -237,36 +236,6 @@ return {
       desc = "Open Kulala",
     },
 
-    -- Open Code
-    {
-      "<leader>oa",
-      function()
-        require("opencode").ask("@this: ", { submit = true })
-      end,
-      desc = "ask opencode",
-      mode = { "n", "v" },
-    },
-    {
-      "<leader>ox",
-      function()
-        require("opencode").prompt("@this")
-      end,
-      desc = "add snippet to opencode",
-      mode = { "v" },
-    },
-    {
-      "<leader>of",
-      function()
-        local path = vim.fn.fnamemodify(vim.fn.expand("%:p"), ":.")
-        if path == "" then
-          vim.notify("No file path for current buffer", vim.log.levels.WARN)
-          return
-        end
-        require("opencode").prompt("@" .. path)
-      end,
-      desc = "add file to opencode",
-      mode = { "n" },
-    },
     {
       "<leader>n",
       group = "🧪 Test",
