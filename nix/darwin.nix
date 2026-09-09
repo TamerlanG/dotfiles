@@ -1,10 +1,16 @@
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   environment.systemPackages = with pkgs; [
     tmux
     aerospace
     fish
+    betterdisplay
   ];
 
   environment.systemPath = [
@@ -27,6 +33,11 @@
   system.primaryUser = "tamerlan";
 
   nixpkgs.hostPlatform = "aarch64-darwin";
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "betterdisplay"
+    ];
 
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
@@ -42,6 +53,7 @@
 
     brews = [
       "omp"
+      "mole"
     ];
 
     taps = [

@@ -23,7 +23,7 @@ This applies both system config from `nix/darwin.nix` and user config from `nix/
 - `flake.nix` — nix-darwin entrypoint; defines the `mac` configuration.
 - `nix/darwin.nix` — system packages, shell, fonts, Homebrew, and macOS-level settings.
 - `nix/home.nix` — Home Manager packages, shell integrations, and user dotfile links.
-- `fish/config.fish` — fish shell abbreviations, aliases, PATH, OrbStack, and zoxide init.
+- `fish/config.fish` — fish shell abbreviations, aliases, and zoxide init.
 - `nvim/` — Neovim config.
 - `ghostty/config` — Ghostty terminal config.
 - `aerospace/aerospace.toml` — AeroSpace window manager config.

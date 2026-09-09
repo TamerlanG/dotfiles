@@ -7,17 +7,19 @@
 
   programs.home-manager.enable = true;
 
+  programs.git = {
+    enable = true;
+    settings.user.email = "tamerlan@gudabayev.com";
+  };
+
   home.packages = with pkgs; [
     bat
+    ripgrep
     lsd
     zoxide
     kubectl
     gh
     lazygit
-  ];
-
-  home.sessionPath = [
-    "${config.home.homeDirectory}/.local/bin"
   ];
 
   programs.neovim = {

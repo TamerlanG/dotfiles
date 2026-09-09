@@ -36,10 +36,5 @@ abbr grv 'git remote -v'
 abbr ghpr 'gh pr checkout'
 abbr ghsync 'gh repo sync'
 
-source ~/.orbstack/shell/init2.fish 2>/dev/null || :
-
-# uv
-fish_add_path "/Users/tamerlan/.local/bin"
-
 # starship init fish | source
 zoxide init fish --cmd cd | source
