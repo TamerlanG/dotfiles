@@ -55,3 +55,23 @@ end
 
 
 vim.diagnostic.config(config)
+
+vim.lsp.config("nil_ls", {
+  cmd = { "nil" },
+  filetypes = { "nix" },
+  root_markers = { "flake.nix", ".git" },
+  settings = {
+    ["nil"] = {
+      formatting = {
+        command = { "nixfmt" },
+      },
+      nix = {
+        flake = {
+          autoArchive = true,
+          autoEvalInputs = true,
+        },
+      },
+    },
+  },
+})
+vim.lsp.enable("nil_ls")

@@ -1,50 +1,50 @@
-# Dotfiles Repository
+# Dotfiles
 
-This repository contains my personal dotfiles, managed with [chezmoi](https://www.chezmoi.io/), a dotfile manager that copies (rather than symlinks) files to their target locations, managing only what you explicitly declare.
+Personal macOS dotfiles managed with nix-darwin and Home Manager.
 
-## Getting Started
+## Rebuild
 
-### Prerequisites
+From this repository:
 
-- macOS (primary platform)
-- `git`
-- `ghostty` terminal
-- `aerospace` for managing windows — `brew install aerospace`
-- `chezmoi` — `brew install chezmoi`
-- `mise` for runtime version management — `brew install mise`
-- For Neovim configs: `rg` (ripgrep) and `fd` (fd) are required — e.g. `brew install ripgrep fd`
-
-### Installing
-
-1. Clone this repository to `~/.dotfiles`:
-
-```bash
-git clone https://github.com/TamerlanG/dotfiles.git ~/.dotfiles
+```sh
+sudo darwin-rebuild switch --flake .#mac
 ```
 
-2. Point chezmoi at the repo and apply:
+From anywhere:
 
-```bash
-chezmoi init --source ~/.dotfiles
-chezmoi apply
+```sh
+sudo darwin-rebuild switch --flake ~/.dotfiles#mac
 ```
 
-### Keeping things in sync
+This applies both system config from `nix/darwin.nix` and user config from `nix/home.nix`.
 
-After editing a file directly in `~` (e.g. `~/.tmux.conf`), pull the change back into the source:
+## Layout
 
-```bash
-chezmoi re-add ~/.tmux.conf
+- `flake.nix` — nix-darwin entrypoint; defines the `mac` configuration.
+- `nix/darwin.nix` — system packages, shell, fonts, Homebrew, and macOS-level settings.
+- `nix/home.nix` — Home Manager packages, shell integrations, and user dotfile links.
+- `fish/config.fish` — fish shell abbreviations, aliases, PATH, OrbStack, and zoxide init.
+- `nvim/` — Neovim config.
+- `ghostty/config` — Ghostty terminal config.
+- `aerospace/aerospace.toml` — AeroSpace window manager config.
+- `tmux/tmux.conf` — tmux config.
+
+## Common commands
+
+Preview the build target without switching:
+
+```sh
+nix eval --raw .#darwinConfigurations.mac.config.system.build.toplevel.drvPath
 ```
 
-After editing a file in `~/.dotfiles` directly, apply it to `~`:
+Update flake inputs:
 
-```bash
-chezmoi apply
+```sh
+nix flake update
 ```
 
-To preview what would change before applying:
+Rebuild after updating inputs:
 
-```bash
-chezmoi diff
+```sh
+sudo darwin-rebuild switch --flake .#mac
 ```

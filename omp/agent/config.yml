@@ -1,0 +1,37 @@
+modelRoles:
+  smol: github-copilot/gpt-5.3:low
+  slow: github-copilot/gpt-5.5:medium
+  plan: github-copilot/gpt-5.5:medium
+  advisor: github-copilot/claude-opus-5:high
+  default: anthropic/claude-fable-5-1
+advisor:
+  enabled: true
+modelProviderOrder:
+  - github-copilot
+  - openrouter
+  - anthropic
+  - openai
+defaultThinkingLevel: medium
+memory:
+  backend: "off"
+autolearn:
+  enabled: false
+  autoContinue: false
+dev:
+  autoqaConsent: granted
+skills:
+  enabled: true
+  enableSkillCommands: true
+task:
+  isolation:
+    enabled: true
+  enableEffort: true
+  enableLsp: true
+  maxRecursionDepth: 2
+retry:
+  enabled: true
+  maxRetries: 5
+setupVersion: 2
+hideThinkingBlock: true
+isolation:
+  backend: auto

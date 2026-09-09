@@ -15,6 +15,7 @@ return {
       yaml = { "prettierd" },
       markdown = { "prettierd" },
       graphql = { "prettierd" },
+      nix = { "nixfmt" },
       lua = {
         args = {
           "--search-parent-directories",

@@ -3,7 +3,7 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   opts = {
     automatic_enable = {
-      exclude = { "ts_ls" },
+      exclude = { "ts_ls", "nil_ls" },
     },
   },
   dependencies = {

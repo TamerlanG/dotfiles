@@ -29,6 +29,7 @@ return {
       svelte = { "eslint_d" },
       python = { "pylint" },
       markdown = { "vale" },
+      nix = { "statix", "deadnix" },
     }
 
     -- helper: check if eslint config exists in project root
