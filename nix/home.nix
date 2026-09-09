@@ -60,25 +60,22 @@
       {
         plugin = catppuccin;
         extraConfig = ''
-          set -g @catppuccin_flavor 'mocha'
+          set -g @catppuccin_flavor "mocha"
+          set -g @catppuccin_status_background "none"
+
+          set -g @catppuccin_window_status_style "custom"
           set -g @catppuccin_window_left_separator ""
           set -g @catppuccin_window_right_separator " "
           set -g @catppuccin_window_middle_separator " █"
           set -g @catppuccin_window_number_position "right"
-
-          set -g @catppuccin_window_default_fill "number"
-          set -g @catppuccin_window_default_text "#W"
-
-          set -g @catppuccin_window_current_fill "number"
+          set -g @catppuccin_window_text "#W"
+          set -g @catppuccin_window_number "#I"
           set -g @catppuccin_window_current_text "#W"
+          set -g @catppuccin_window_current_number "#I"
 
-          set -g @catppuccin_status_modules_right "user host session"
-          set -g @catppuccin_status_left_separator  " "
+          set -g @catppuccin_status_left_separator " "
           set -g @catppuccin_status_right_separator ""
-          set -g @catppuccin_status_right_separator_inverse "no"
-          set -g @catppuccin_status_fill "icon"
           set -g @catppuccin_status_connect_separator "no"
-          set -g @catppuccin_status_background "default"
 
           set -g @catppuccin_directory_text "#{pane_current_path}"
         '';
@@ -105,7 +102,16 @@
       }
     ];
 
-    extraConfig = builtins.readFile ../tmux/tmux.conf;
+    extraConfig = ''
+      ${builtins.readFile ../tmux/tmux.conf}
+
+      set -g status-right-length 100
+      set -g status-left ""
+      set -g status-right "#{E:@catppuccin_status_user}"
+      set -ag status-right "#{E:@catppuccin_status_host}"
+      set -ag status-right "#{E:@catppuccin_status_session}"
+    '';
+
   };
   home.file.".aerospace.toml".source = ../aerospace/aerospace.toml;
 
