@@ -17,6 +17,7 @@
     ripgrep
     lsd
     zoxide
+    fzf
     kubectl
     gh
     lazygit
@@ -45,7 +46,67 @@
     interactiveShellInit = builtins.readFile ../fish/config.fish;
   };
 
-  home.file.".tmux.conf".source = ../tmux/tmux.conf;
+  programs.tmux = {
+    enable = true;
+    prefix = "C-a";
+    mouse = true;
+    terminal = "screen-256color";
+    shell = "${pkgs.fish}/bin/fish";
+    keyMode = "vi";
+    escapeTime = 10;
+    historyLimit = 10000;
+
+    plugins = with pkgs.tmuxPlugins; [
+      {
+        plugin = catppuccin;
+        extraConfig = ''
+          set -g @catppuccin_flavor 'mocha'
+          set -g @catppuccin_window_left_separator ""
+          set -g @catppuccin_window_right_separator " "
+          set -g @catppuccin_window_middle_separator " █"
+          set -g @catppuccin_window_number_position "right"
+
+          set -g @catppuccin_window_default_fill "number"
+          set -g @catppuccin_window_default_text "#W"
+
+          set -g @catppuccin_window_current_fill "number"
+          set -g @catppuccin_window_current_text "#W"
+
+          set -g @catppuccin_status_modules_right "user host session"
+          set -g @catppuccin_status_left_separator  " "
+          set -g @catppuccin_status_right_separator ""
+          set -g @catppuccin_status_right_separator_inverse "no"
+          set -g @catppuccin_status_fill "icon"
+          set -g @catppuccin_status_connect_separator "no"
+          set -g @catppuccin_status_background "default"
+
+          set -g @catppuccin_directory_text "#{pane_current_path}"
+        '';
+      }
+      vim-tmux-navigator
+      {
+        plugin = resurrect;
+        extraConfig = "set -g @resurrect-capture-pane-contents 'on'";
+      }
+      {
+        plugin = continuum;
+        extraConfig = "set -g @continuum-restore 'on'";
+      }
+      {
+        plugin = session-wizard;
+        extraConfig = "set -g @session-wizard 't'";
+      }
+      {
+        plugin = tmux-fzf;
+        extraConfig = ''
+          TMUX_FZF_LAUNCH_KEY="C-o"
+          bind-key "l" run-shell -b "TMUX_FZF_CLIENT='#{client_tty}' ${tmux-fzf}/share/tmux-plugins/tmux-fzf/scripts/session.sh switch"
+        '';
+      }
+    ];
+
+    extraConfig = builtins.readFile ../tmux/tmux.conf;
+  };
   home.file.".aerospace.toml".source = ../aerospace/aerospace.toml;
 
   xdg.configFile."ghostty/config".source = ../ghostty/config;
