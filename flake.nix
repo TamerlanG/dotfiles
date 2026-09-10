@@ -11,26 +11,33 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nix-darwin, home-manager, ... }: {
-    darwinConfigurations."mac" = nix-darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
+  outputs =
+    inputs@{
+      self,
+      nix-darwin,
+      home-manager,
+      ...
+    }:
+    {
+      darwinConfigurations."mac" = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
 
-      specialArgs = {
-        inherit inputs;
+        specialArgs = {
+          inherit inputs;
+        };
+
+        modules = [
+          ./nix/darwin.nix
+
+          home-manager.darwinModules.home-manager
+
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "hm-backup";
+            home-manager.users.tamerlan = import ./nix/home.nix;
+          }
+        ];
       };
-
-      modules = [
-        ./nix/darwin.nix
-
-        home-manager.darwinModules.home-manager
-
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.backupFileExtension = "hm-backup";
-          home-manager.users.tamerlan = import ./nix/home.nix;
-        }
-      ];
     };
-  };
 }
