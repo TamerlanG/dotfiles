@@ -65,6 +65,7 @@
 
     casks = [
       "ghostty"
+      "arc"
     ];
   };
 }

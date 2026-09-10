@@ -121,6 +121,8 @@
 
   };
   home.file.".aerospace.toml".source = ../aerospace/aerospace.toml;
+  home.file.".omp/agent/config.yml".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/omp/agent/config.yml";
 
   xdg.configFile."ghostty/config".source = ../ghostty/config;
   xdg.configFile."nvim".source = ../nvim;
