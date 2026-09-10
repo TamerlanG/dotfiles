@@ -138,6 +138,7 @@
     casks = [
       "ghostty"
       "arc"
+      "okta-verify"
     ];
   };
 }

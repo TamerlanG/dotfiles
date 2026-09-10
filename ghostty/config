@@ -21,5 +21,8 @@ theme = Github Dark
 # Keymaps
 macos-option-as-alt = left
 
+# macOS
+macos-auto-secure-input = true
+
 command = /run/current-system/sw/bin/fish
 
