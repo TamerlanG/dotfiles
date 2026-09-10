@@ -28,6 +28,9 @@
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
+    # HM's generated init.lua (provider toggles) goes via the wrapper instead of
+    # ~/.config/nvim/init.lua, which is ours and lives out of the store.
+    sideloadInitLua = true;
 
     plugins = with pkgs.vimPlugins; [
       lazy-nvim
@@ -125,5 +128,6 @@
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/omp/agent/config.yml";
 
   xdg.configFile."ghostty/config".source = ../ghostty/config;
-  xdg.configFile."nvim".source = ../nvim;
+  xdg.configFile."nvim".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/nvim";
 }
