@@ -61,9 +61,17 @@
         plugin = catppuccin;
         extraConfig = ''
           set -g @catppuccin_flavor "mocha"
-          set -g @catppuccin_status_background "default"
+          set -g @catppuccin_status_background "none"
 
-          set -g @catppuccin_window_status_style "rounded"
+          # "rounded" draws the caps with fg=#{@_ctp_status_bg},reverse which breaks
+          # on a transparent (none) bar; hand-roll the same caps with bg=default.
+          set -g @catppuccin_window_status_style "custom"
+          set -g @catppuccin_window_left_separator "#[fg=#{@thm_surface_0},bg=default]"
+          set -g @catppuccin_window_middle_separator " "
+          set -g @catppuccin_window_right_separator "#[fg=#{@thm_overlay_2},bg=default]"
+          set -g @catppuccin_window_current_left_separator "#[fg=#{@thm_surface_1},bg=default]"
+          set -g @catppuccin_window_current_middle_separator " "
+          set -g @catppuccin_window_current_right_separator "#[fg=#{@thm_mauve},bg=default]"
           set -g @catppuccin_window_number_position "right"
           set -g @catppuccin_window_text "#W"
           set -g @catppuccin_window_number "#I"
@@ -84,7 +92,12 @@
       }
       {
         plugin = continuum;
-        extraConfig = "set -g @continuum-restore 'on'";
+        extraConfig = ''
+          set -g @continuum-restore 'on'
+          set -g status-right "#{E:@catppuccin_status_user}"
+          set -ag status-right "#{E:@catppuccin_status_host}"
+          set -ag status-right "#{E:@catppuccin_status_session}"
+        '';
       }
       {
         plugin = session-wizard;
@@ -93,7 +106,7 @@
       {
         plugin = tmux-fzf;
         extraConfig = ''
-          TMUX_FZF_LAUNCH_KEY="C-o"
+          TMUX_FZF_LAUNCH_KEY="o"
           bind-key "l" run-shell -b "TMUX_FZF_CLIENT='#{client_tty}' ${tmux-fzf}/share/tmux-plugins/tmux-fzf/scripts/session.sh switch"
         '';
       }
@@ -104,9 +117,6 @@
 
       set -g status-right-length 100
       set -g status-left ""
-      set -g status-right "#{E:@catppuccin_status_user}"
-      set -ag status-right "#{E:@catppuccin_status_host}"
-      set -ag status-right "#{E:@catppuccin_status_session}"
     '';
 
   };
