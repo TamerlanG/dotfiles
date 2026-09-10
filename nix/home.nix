@@ -23,6 +23,8 @@
     lazygit
   ];
 
+  programs.mise.enable = true;
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -130,4 +132,6 @@
   xdg.configFile."ghostty/config".source = ../ghostty/config;
   xdg.configFile."nvim".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/nvim";
+  xdg.configFile."mise/config.toml".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/mise/config.toml";
 }
