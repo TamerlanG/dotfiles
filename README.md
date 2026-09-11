@@ -1,50 +1,27 @@
 # Dotfiles
 
-Personal macOS dotfiles managed with nix-darwin and Home Manager.
+Personal macOS dotfiles managed with nix-darwin and Home Manager. The repo must live at `~/.dotfiles`.
 
-## Rebuild
-
-From this repository:
+## Usage
 
 ```sh
-sudo darwin-rebuild switch --flake .#mac
+make switch      # apply system + user config (sudo darwin-rebuild switch --flake .#mac)
+make build       # build without switching
+make eval        # print toplevel derivation path (quick eval check)
+make update      # update flake inputs
+make fmt         # format Nix files with nixfmt
+make tmux-conf   # print the generated tmux.conf
 ```
 
-From anywhere:
-
-```sh
-sudo darwin-rebuild switch --flake ~/.dotfiles#mac
-```
-
-This applies both system config from `nix/darwin.nix` and user config from `nix/home.nix`.
+`make help` lists all targets. `CONFIG=<name>` selects the flake configuration (default `mac`).
 
 ## Layout
 
-- `flake.nix` — nix-darwin entrypoint; defines the `mac` configuration.
-- `nix/darwin.nix` — system packages, shell, fonts, Homebrew, and macOS-level settings.
-- `nix/home.nix` — Home Manager packages, shell integrations, and user dotfile links.
-- `fish/config.fish` — fish shell abbreviations, aliases, and zoxide init.
-- `nvim/` — Neovim config.
-- `ghostty/config` — Ghostty terminal config.
-- `aerospace/aerospace.toml` — AeroSpace window manager config.
-- `tmux/tmux.conf` — tmux config.
+- `flake.nix` — entrypoint; defines the `mac` configuration.
+- `nix/darwin.nix` — system packages, macOS defaults, fonts, Homebrew, wallpaper activation.
+- `nix/home.nix` — Home Manager packages, `programs.*`, and dotfile links.
+- `fish/`, `tmux/`, `ghostty/`, `aerospace/` — app configs; embedded or symlinked at `make switch`.
+- `nvim/`, `mise/`, `omp/agent/` — live-symlinked into `$HOME`; edits apply without a rebuild.
+- `wallpapers/` — desktop image applied by the activation script.
 
-## Common commands
-
-Preview the build target without switching:
-
-```sh
-nix eval --raw .#darwinConfigurations.mac.config.system.build.toplevel.drvPath
-```
-
-Update flake inputs:
-
-```sh
-nix flake update
-```
-
-Rebuild after updating inputs:
-
-```sh
-sudo darwin-rebuild switch --flake .#mac
-```
+See `AGENTS.md` for architecture, conventions, and editing guidelines.

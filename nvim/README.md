@@ -1,74 +1,18 @@
-# Neovim Configs
+# Neovim
 
-## Installing Config
+Managed by Home Manager: `~/.config/nvim` is an out-of-store symlink to this directory (`nix/home.nix`), so edits apply immediately. Neovim, `lazy.nvim`, and external tools (`extraPackages`) are provisioned by Nix; do not clone or install this config manually.
 
-Make sure to remove or move your current `nvim` directory
+## Layout
 
-```
-git clone git@github.com:TamerlanG/nvim-configs.git ~/.config/nvim
-```
+- `init.lua` — loads `config.lazy`, then `user.options`, `user.lsp`, `user.keymaps`, `user.autocommands`.
+- `lua/plugins/` — lazy.nvim specs, one plugin per file, auto-imported.
+- `lua/user/` — options, LSP (`vim.lsp.config`/`vim.lsp.enable`), keymaps, autocommands.
+- `lua/user/dap/` — `adapters/<lang>.lua` + `config/<lang>.lua`, wired in `init.lua`.
+- `ftdetect/` — custom filetypes (e.g. `yaml.buildkite`).
 
-Run `nvim` and wait for the plugins to be installed 
-
-**NOTE** (You will notice treesitter pulling in a bunch of parsers the next time you open Neovim) 
-
-## If you have an M1 Chip 
-
-There seems to be a problem with the npm package tree sitter that it fails to install. 
-
-To fix it, check out this github [thread](https://github.com/claytonrcarter/tree-sitter-phpdoc/issues/15). 
-
-## Get healthy
-
-Open `nvim` and enter the following:
+## Health
 
 ```
 :checkhealth
-```
-
-You'll probably notice you don't have support for copy/paste also that python and node haven't been setup
-
-So let's fix that
-
-First we'll fix copy/paste
-
-- On mac `pbcopy` should be builtin
-
-- On Ubuntu
-
-  ```
-  sudo apt install xsel
-  ```
-
-- On Arch Linux
-
-  ```
-  sudo pacman -S xsel
-  ```
-
-Next we need to install python support (node is optional)
-
-- Neovim python support
-
-  ```
-  pip install pynvim
-  ```
-
-- Neovim node support
-
-  ```
-  npm i -g neovim
-  ```
----
-
-**NOTE** make sure you have [node](https://nodejs.org/en/) installed, I recommend a node manager like [fnm](https://github.com/Schniz/fnm).
-
-### Upgrade to latest release
-
-Assuming you [built from source](https://github.com/neovim/neovim/wiki/Building-Neovim#quick-start), `cd` into the folder where you cloned `neovim` and run the following commands. 
-```
-git pull
-make distclean && make CMAKE_BUILD_TYPE=Release
-sudo make install
-nvim -v
+:Lazy
 ```
