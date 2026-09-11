@@ -23,7 +23,7 @@ switch rebuild apply:
 	sudo darwin-rebuild switch --flake "$(FLAKE)"
 
 build:
-	nix build "$(DARWIN_SYSTEM)"
+	nix build --no-link "$(DARWIN_SYSTEM)"
 
 eval:
 	nix eval --raw '$(TOPLEVEL_DRV)'
