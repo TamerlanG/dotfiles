@@ -11,6 +11,7 @@
     aerospace
     fish
     betterdisplay
+    desktoppr
   ];
 
   environment.systemPath = [
@@ -34,6 +35,11 @@
 
   system.activationScripts.postActivation.text = ''
     sudo --user=tamerlan -- mkdir -p /Users/tamerlan/Pictures/Screenshots
+    # Activation runs as root outside the Aqua session; asuser targets the user's GUI session.
+    # Non-fatal: no GUI session (SSH, pre-login) must not abort the generation switch.
+    launchctl asuser "$(id -u tamerlan)" sudo --user=tamerlan -- \
+      ${pkgs.desktoppr}/bin/desktoppr all /Users/tamerlan/.dotfiles/wallpapers/main.jpg \
+      || echo "warning: wallpaper not applied (no GUI session?)" >&2
   '';
 
   security.pam.services.sudo_local.touchIdAuth = true;
