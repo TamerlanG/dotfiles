@@ -13,17 +13,23 @@
 
   outputs =
     inputs@{
-      self,
+      nixpkgs,
       nix-darwin,
       home-manager,
       ...
     }:
+    let
+      system = "aarch64-darwin";
+      user = "tamerlan";
+    in
     {
+      formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt;
+
       darwinConfigurations."mac" = nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
+        inherit system;
 
         specialArgs = {
-          inherit inputs;
+          inherit inputs user;
         };
 
         modules = [
@@ -35,7 +41,10 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "hm-backup";
-            home-manager.users.tamerlan = import ./nix/home.nix;
+            home-manager.extraSpecialArgs = {
+              inherit user;
+            };
+            home-manager.users.${user} = import ./nix/home.nix;
           }
         ];
       };

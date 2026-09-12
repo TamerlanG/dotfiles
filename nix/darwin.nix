@@ -1,8 +1,13 @@
 {
   inputs,
   pkgs,
+  user,
   ...
 }:
+
+let
+  home = "/Users/${user}";
+in
 
 {
   environment.systemPackages = with pkgs; [
@@ -19,26 +24,36 @@
   ];
 
   nix.settings.experimental-features = "nix-command flakes";
+  nix.gc = {
+    automatic = true;
+    interval = {
+      Weekday = 0;
+      Hour = 3;
+      Minute = 0;
+    };
+    options = "--delete-older-than 14d";
+  };
+  nix.optimise.automatic = true;
 
   programs.zsh.enable = true;
   programs.fish.enable = true;
 
-  users.users.tamerlan = {
-    home = "/Users/tamerlan";
+  users.users.${user} = {
+    inherit home;
     shell = pkgs.fish;
   };
 
   system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
 
   system.stateVersion = 6;
-  system.primaryUser = "tamerlan";
+  system.primaryUser = user;
 
   system.activationScripts.postActivation.text = ''
-    sudo --user=tamerlan -- mkdir -p /Users/tamerlan/Pictures/Screenshots
+    sudo --user=${user} -- mkdir -p ${home}/Pictures/Screenshots
     # Activation runs as root outside the Aqua session; asuser targets the user's GUI session.
     # Non-fatal: no GUI session (SSH, pre-login) must not abort the generation switch.
-    launchctl asuser "$(id -u tamerlan)" sudo --user=tamerlan -- \
-      ${pkgs.desktoppr}/bin/desktoppr all /Users/tamerlan/.dotfiles/wallpapers/main.jpg \
+    launchctl asuser "$(id -u ${user})" sudo --user=${user} -- \
+      ${pkgs.desktoppr}/bin/desktoppr all ${home}/.dotfiles/wallpapers/main.jpg \
       || echo "warning: wallpaper not applied (no GUI session?)" >&2
   '';
 
@@ -96,7 +111,7 @@
     loginwindow.GuestEnabled = false;
 
     screencapture = {
-      location = "/Users/tamerlan/Pictures/Screenshots";
+      location = "${home}/Pictures/Screenshots";
       type = "png";
       disable-shadow = true;
     };
@@ -120,8 +135,10 @@
   homebrew = {
     enable = true;
 
+    # Deterministic switches: brew update/upgrade only via `make update-brew`.
     onActivation = {
-      autoUpdate = true;
+      autoUpdate = false;
+      upgrade = false;
       cleanup = "zap";
     };
 

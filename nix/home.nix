@@ -1,8 +1,17 @@
-{ config, pkgs, ... }:
-
 {
-  home.username = "tamerlan";
-  home.homeDirectory = "/Users/tamerlan";
+  config,
+  pkgs,
+  user,
+  ...
+}:
+
+let
+  # Out-of-store symlink into the checkout: edits apply without a rebuild.
+  live = path: config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/${path}";
+in
+{
+  home.username = user;
+  home.homeDirectory = "/Users/${user}";
   home.stateVersion = "26.05";
 
   programs.home-manager.enable = true;
@@ -136,17 +145,17 @@
       set -g status-right-length 100
       set -g status-left ""
     '';
-
   };
-  home.file.".aerospace.toml".source = ../aerospace/aerospace.toml;
-  home.file.".omp/agent/config.yml".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/omp/agent/config.yml";
 
-  xdg.configFile."ghostty/config".source = ../ghostty/config;
-  xdg.configFile."nvim".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/nvim";
-  xdg.configFile."mise/config.toml".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/mise/config.toml";
-  xdg.configFile."herdr/config.toml".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/herdr/config.toml";
+  home.file = {
+    ".aerospace.toml".source = ../aerospace/aerospace.toml;
+    ".omp/agent/config.yml".source = live "omp/agent/config.yml";
+  };
+
+  xdg.configFile = {
+    "ghostty/config".source = ../ghostty/config;
+    "nvim".source = live "nvim";
+    "mise/config.toml".source = live "mise/config.toml";
+    "herdr/config.toml".source = live "herdr/config.toml";
+  };
 }

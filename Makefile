@@ -4,7 +4,7 @@ FLAKE ?= .$(HASH)$(CONFIG)
 DARWIN_SYSTEM ?= .$(HASH)darwinConfigurations.$(CONFIG).system
 TOPLEVEL_DRV ?= .$(HASH)darwinConfigurations.$(CONFIG).config.system.build.toplevel.drvPath
 
-.PHONY: help switch rebuild apply build eval update fmt tmux-conf
+.PHONY: help switch rebuild apply build eval check update update-brew fmt tmux-conf
 
 help:
 	@printf '%s\n' \
@@ -12,7 +12,9 @@ help:
 	  '  make switch      Apply nix-darwin + Home Manager config' \
 	  '  make build       Build the nix-darwin system without switching' \
 	  '  make eval        Print the system toplevel derivation path' \
+	  '  make check       Lint Nix files (statix, deadnix) and check formatting' \
 	  '  make update      Update flake inputs' \
+	  '  make update-brew Update and upgrade Homebrew formulae/casks' \
 	  '  make fmt         Format Nix files' \
 	  '  make tmux-conf   Print generated Home Manager tmux.conf' \
 	  '' \
@@ -28,11 +30,19 @@ build:
 eval:
 	nix eval --raw '$(TOPLEVEL_DRV)'
 
+check:
+	nix run nixpkgs#statix -- check .
+	nix run nixpkgs#deadnix -- --fail flake.nix nix
+	nix fmt -- --check flake.nix nix/*.nix
+
 update:
 	nix flake update
 
+update-brew:
+	brew update && brew upgrade
+
 fmt:
-	nix run nixpkgs#nixfmt -- flake.nix nix/*.nix
+	nix fmt -- flake.nix nix/*.nix
 
 tmux-conf:
 	nix eval --raw '.$(HASH)darwinConfigurations.$(CONFIG).config.home-manager.users.tamerlan.xdg.configFile."tmux/tmux.conf".text'

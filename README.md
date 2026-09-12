@@ -8,8 +8,10 @@ Personal macOS dotfiles managed with nix-darwin and Home Manager. The repo must 
 make switch      # apply system + user config (sudo darwin-rebuild switch --flake .#mac)
 make build       # build without switching
 make eval        # print toplevel derivation path (quick eval check)
+make check       # statix + deadnix + nixfmt --check
 make update      # update flake inputs
-make fmt         # format Nix files with nixfmt
+make update-brew # brew update && brew upgrade
+make fmt         # format Nix files (nix fmt)
 make tmux-conf   # print the generated tmux.conf
 ```
 

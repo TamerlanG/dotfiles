@@ -1,0 +1,2 @@
+# Flat `a.b = ...;` module options are idiomatic in nix-darwin/HM configs.
+disabled = ["repeated_keys"]

@@ -19,7 +19,7 @@ Three distinct linking strategies in `nix/home.nix`; know which one a file uses 
 
 | Strategy | Files | Edit propagates |
 |---|---|---|
-| `mkOutOfStoreSymlink` to `~/.dotfiles/...` | `nvim/`, `mise/config.toml`, `omp/agent/config.yml` | Immediately, no rebuild |
+| `live "<path>"` (`mkOutOfStoreSymlink` to `~/.dotfiles/<path>`) | `nvim/`, `mise/config.toml`, `herdr/config.toml`, `omp/agent/config.yml` | Immediately, no rebuild |
 | Store symlink (`source = ../x`) | `aerospace/aerospace.toml`, `ghostty/config` | After `make switch` |
 | Embedded via `builtins.readFile` | `fish/config.fish` (`programs.fish.interactiveShellInit`), `tmux/tmux.conf` (`programs.tmux.extraConfig`) | After `make switch` |
 
@@ -40,8 +40,10 @@ Neovim flow: `nvim/init.lua` -> `lua/config/lazy.lua` (leader keys, `require("la
 make switch        # = rebuild/apply: sudo darwin-rebuild switch --flake .#mac
 make build         # nix build --no-link .#darwinConfigurations.mac.system (no activation)
 make eval          # print toplevel drvPath; cheap syntax/eval check
+make check         # statix + deadnix + nixfmt --check on flake.nix, nix/
 make update        # nix flake update
-make fmt           # nix run nixpkgs#nixfmt -- flake.nix nix/*.nix
+make update-brew   # brew update && brew upgrade (switch never auto-updates Homebrew)
+make fmt           # nix fmt (flake `formatter` = nixfmt from the pinned nixpkgs)
 make tmux-conf     # print HM-generated tmux.conf
 CONFIG=other make build   # override flake attr (only "mac" exists today)
 ```
@@ -51,9 +53,10 @@ Prefer `make eval` or `make build` to validate Nix edits; `make switch` needs su
 ## Code Conventions & Common Patterns
 
 **Nix**
-- Formatted with `nixfmt` (`make fmt`). Inputs follow `nixpkgs` via `inputs.<x>.inputs.nixpkgs.follows`.
+- Formatted with `nixfmt` (`make fmt`), linted with statix/deadnix (`make check`; `statix.toml` disables `repeated_keys`). Inputs follow `nixpkgs` via `inputs.<x>.inputs.nixpkgs.follows`.
+- Username is bound once (`user` in `flake.nix`, passed via `specialArgs`/`extraSpecialArgs`); `nix/darwin.nix` derives `home`, `nix/home.nix` derives `home.homeDirectory`. Never write `tamerlan` or `/Users/tamerlan` in `nix/`.
 - Add a CLI tool for the user: `home.packages` in `nix/home.nix`. System-wide/daemon-ish: `environment.systemPackages` in `nix/darwin.nix`. GUI app: `homebrew.casks` in `nix/darwin.nix` (`cleanup = "zap"` removes anything not listed).
-- Add a new `~/.config/<app>` file: `xdg.configFile."<app>/<file>".source = ../<app>/<file>;` — use `mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/<app>"` if the config should be live-editable.
+- Add a new `~/.config/<app>` file: `xdg.configFile."<app>/<file>".source = ../<app>/<file>;` — use `live "<app>/<file>"` if the config should be live-editable.
 - tmux prefix (`C-a`) and plugins (catppuccin, vim-tmux-navigator, resurrect, continuum, session-wizard, tmux-fzf) are set in `programs.tmux` in `nix/home.nix`, not in `tmux/tmux.conf`. `tmux/tmux.conf` holds only keybind/style overrides.
 
 **Neovim (Lua)**
@@ -87,14 +90,14 @@ Prefer `make eval` or `make build` to validate Nix edits; `make switch` needs su
 ## Runtime/Tooling Preferences
 
 - Nix with flakes, nix-darwin, Home Manager (all on `nixpkgs-unstable`/master, pinned in `flake.lock`). No Node/Bun/Python project tooling.
-- Homebrew only for casks and the two brews above; everything else via Nix.
+- Homebrew only for casks and the brews above; everything else via Nix. `onActivation.autoUpdate`/`upgrade` are off; `make update-brew` is the only path that touches Homebrew versions. `nix.gc` (weekly, 14d) and `nix.optimise` run via launchd.
 - Language toolchains (Go, Rust) via mise, not Nix.
-- Hardcoded paths: `/Users/tamerlan/.dotfiles` in `nix/home.nix` and `nix/darwin.nix`; repo must live at `~/.dotfiles`. `Makefile` hardcodes only the username (`users.tamerlan` in `tmux-conf`), no absolute paths.
+- Repo must live at `~/.dotfiles` (`live` helper and wallpaper activation resolve there). `Makefile` hardcodes only the username (`users.tamerlan` in `tmux-conf`).
 - No CI. `.gitignore` covers only `.DS_Store` and `result`.
 
 ## Testing & QA
 
 No test suite. Validation is:
-- Nix: `make eval` (fast eval), `make build` (full build, no activation), `make fmt` before committing Nix.
-- Neovim: config is live-symlinked; open `nvim` and run `:checkhealth` / `:Lazy` after plugin changes. No `lazy-lock.json` is committed.
+- Nix: `make eval` (fast eval), `make build` (full build, no activation), `make check` + `make fmt` before committing Nix.
+- Neovim: config is live-symlinked; open `nvim` and run `:checkhealth` / `:Lazy` after plugin changes. `nvim/lazy-lock.json` is committed; run `:Lazy update` deliberately and commit the lockfile.
 - Shell/tmux/ghostty/aerospace: require `make switch`, then reload (`prefix+r` for tmux; `aerospace reload-config`).
