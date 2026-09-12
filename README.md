@@ -23,7 +23,7 @@ make tmux-conf   # print the generated tmux.conf
 - `nix/darwin.nix` — system packages, macOS defaults, fonts, Homebrew, wallpaper activation.
 - `nix/home.nix` — Home Manager packages, `programs.*`, and dotfile links.
 - `fish/`, `tmux/`, `ghostty/`, `aerospace/` — app configs; embedded or symlinked at `make switch`.
-- `nvim/`, `mise/`, `omp/agent/` — live-symlinked into `$HOME`; edits apply without a rebuild.
+- `nvim/`, `mise/`, `herdr/`, `omp/agent/` — live-symlinked into `$HOME`; edits apply without a rebuild.
 - `wallpapers/` — desktop image applied by the activation script.
 
 See `AGENTS.md` for architecture, conventions, and editing guidelines.
