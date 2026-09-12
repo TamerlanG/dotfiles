@@ -17,6 +17,7 @@ in
     betterdisplay
     desktoppr
     orbstack
+    btop
   ];
 
   environment.systemPath = [
