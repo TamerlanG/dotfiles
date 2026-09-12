@@ -88,6 +88,7 @@ in
       deadnix
       eslint_d
       pylint
+      prettierd
     ];
   };
 
