@@ -1,3 +1,4 @@
+onboarding = false
 [terminal]
 default_shell = "fish"
 
