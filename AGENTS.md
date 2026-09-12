@@ -79,7 +79,7 @@ Prefer `make eval` or `make build` to validate Nix edits; `make switch` needs su
 
 ## Important Files
 
-- `flake.nix` — single output `darwinConfigurations."mac"`; HM wired inline (`useGlobalPkgs`, `useUserPackages`, `users.tamerlan = import ./nix/home.nix`).
+- `flake.nix` — single output `darwinConfigurations."mac"`; binds `user`, exposes `formatter`; HM wired inline (`useGlobalPkgs`, `useUserPackages`, `extraSpecialArgs = { inherit user; }`, `users.${user} = import ./nix/home.nix`).
 - `nix/darwin.nix` — `system.defaults` (dock/finder/trackpad/screencapture), fonts, Touch ID sudo, `nix.gc`/`nix.optimise`, Homebrew (`brews`: omp, mole, herdr; `casks`: ghostty, arc, okta-verify; tap `can1357/tap`), wallpaper activation.
 - `nix/home.nix` — packages, `programs.{git,delta,zoxide,fzf,bat,lsd,gh,lazygit,fish,tmux,neovim,mise}`, all dotfile links.
 - `Makefile` — the operator interface; `CONFIG ?= mac`.
