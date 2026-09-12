@@ -33,5 +33,7 @@ retry:
   maxRetries: 5
 setupVersion: 2
 hideThinkingBlock: true
+display:
+  hideToolActivity: true
 isolation:
   backend: auto

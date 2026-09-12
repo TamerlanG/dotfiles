@@ -1,6 +1,5 @@
 {
   inputs,
-  lib,
   pkgs,
   ...
 }:
@@ -12,6 +11,7 @@
     fish
     betterdisplay
     desktoppr
+    orbstack
   ];
 
   environment.systemPath = [
@@ -111,11 +111,7 @@
   };
 
   nixpkgs.hostPlatform = "aarch64-darwin";
-  nixpkgs.config.allowUnfreePredicate =
-    pkg:
-    builtins.elem (lib.getName pkg) [
-      "betterdisplay"
-    ];
+  nixpkgs.config.allowUnfree = true;
 
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
