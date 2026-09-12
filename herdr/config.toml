@@ -4,3 +4,26 @@ default_shell = "fish"
 
 [keys]
 prefix = "ctrl+a"
+
+# tmux.conf equivalents
+split_vertical = "prefix+|"        # bind |  split-window -h
+split_horizontal = "prefix+minus"  # bind -  split-window -v
+new_tab = "prefix+c"               # bind c  new-window
+reload_config = "prefix+r"         # bind r  source-file
+zoom = "prefix+m"                  # bind -r m resize-pane -Z
+resize_pane_down = "prefix+j"      # bind -r j resize-pane -D
+resize_pane_up = "prefix+k"        # bind -r k resize-pane -U
+resize_pane_right = "prefix+shift+l" # bind -r L resize-pane -R
+resize_pane_left = "prefix+h"      # bind -r h resize-pane -L
+resize_mode = ""                   # default prefix+r; freed for reload
+
+# h/j/k are taken by resize, so pane focus uses tmux's default arrows
+focus_pane_left = "prefix+left"
+focus_pane_down = "prefix+down"
+focus_pane_up = "prefix+up"
+focus_pane_right = "prefix+right"
+
+# tmux defaults
+detach = "prefix+d"
+close_tab = "prefix+ampersand"
+rename_tab = "prefix+comma"
