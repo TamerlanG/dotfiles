@@ -69,7 +69,7 @@ Prefer `make eval` or `make build` to validate Nix edits; `make switch` needs su
 - New DAP language: add `user/dap/adapters/<lang>.lua` and `user/dap/config/<lang>.lua`, require both in `user/dap/init.lua`. Go is the exception (uses `dap-go` directly in `init.lua`; `config/go.lua` is empty).
 
 **Shell**
-- `fish/config.fish`: `abbr` for shortcuts (`ls`->`lsd`, `cat`->`bat`, git aliases), `alias k=kubectl`, `zoxide init fish --cmd cd`. Any tool referenced must be provisioned in `home.packages`.
+- `fish/config.fish`: `abbr` for shortcuts (`cat`->`bat`, git aliases), `alias k=kubectl`. Shell integrations (zoxide `--cmd cd`, fzf keybinds, lsd `ls`/`ll`/`la`/`lt` aliases) come from `programs.*` in `nix/home.nix`, not from this file. Any tool referenced must be provisioned in `home.packages` or a `programs.*` module.
 
 **Commits**
 - Short imperative subjects with scope prefix: `darwin: ...`, `flake: ...`, `tmux: ...`, `nvim: ...`.
@@ -80,8 +80,8 @@ Prefer `make eval` or `make build` to validate Nix edits; `make switch` needs su
 ## Important Files
 
 - `flake.nix` — single output `darwinConfigurations."mac"`; HM wired inline (`useGlobalPkgs`, `useUserPackages`, `users.tamerlan = import ./nix/home.nix`).
-- `nix/darwin.nix` — `system.defaults` (dock/finder/trackpad/screencapture), fonts, Touch ID sudo, Homebrew (`brews`: omp, mole; `casks`: ghostty, arc, okta-verify; tap `can1357/tap`), wallpaper activation.
-- `nix/home.nix` — packages, `programs.{git,fish,tmux,neovim,mise}`, all dotfile links.
+- `nix/darwin.nix` — `system.defaults` (dock/finder/trackpad/screencapture), fonts, Touch ID sudo, `nix.gc`/`nix.optimise`, Homebrew (`brews`: omp, mole, herdr; `casks`: ghostty, arc, okta-verify; tap `can1357/tap`), wallpaper activation.
+- `nix/home.nix` — packages, `programs.{git,delta,zoxide,fzf,bat,lsd,gh,lazygit,fish,tmux,neovim,mise}`, all dotfile links.
 - `Makefile` — the operator interface; `CONFIG ?= mac`.
 - `nvim/init.lua`, `nvim/lua/config/lazy.lua`, `nvim/lua/user/dap/init.lua`.
 - `omp/agent/config.yml` — OMP agent model roles/provider order; live-symlinked.

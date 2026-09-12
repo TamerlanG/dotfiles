@@ -18,19 +18,42 @@ in
 
   programs.git = {
     enable = true;
-    settings.user.email = "tamerlan@gudabayev.com";
+    settings = {
+      user = {
+        name = "Tamerlan Gudabayev";
+        email = "tamerlan@gudabayev.com";
+      };
+      init.defaultBranch = "main";
+      pull.rebase = true;
+      push.autoSetupRemote = true;
+      url."git@github.com:".insteadOf = "https://github.com/";
+    };
+  };
+
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options.navigate = true;
   };
 
   home.packages = with pkgs; [
-    bat
     ripgrep
-    lsd
-    zoxide
-    fzf
     kubectl
-    gh
-    lazygit
   ];
+
+  # Shell integrations are on by default for fish.
+  programs.zoxide = {
+    enable = true;
+    options = [
+      "--cmd"
+      "cd"
+    ];
+  };
+  programs.fzf.enable = true;
+  programs.bat.enable = true;
+  programs.lsd.enable = true;
+  programs.gh.enable = true;
+  programs.lazygit.enable = true;
 
   programs.mise.enable = true;
 
@@ -77,7 +100,7 @@ in
     enable = true;
     prefix = "C-a";
     mouse = true;
-    terminal = "screen-256color";
+    terminal = "tmux-256color";
     shell = "${pkgs.fish}/bin/fish";
     keyMode = "vi";
     escapeTime = 10;

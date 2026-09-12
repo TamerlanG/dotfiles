@@ -26,9 +26,7 @@ vim.opt.relativenumber = true
 vim.opt.signcolumn = "yes"
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
-vim.opt.guifont = "monospace:h17"
 vim.opt.spelllang = "en_us"
-vim.opt.spell = true
 vim.opt.textwidth = 80
 vim.opt.laststatus = 3
 

@@ -6,7 +6,6 @@ background-blur-radius = 10
 shell-integration=fish
 
 # Terminal
-gtk-tabs-location = hidden
 font-family = "JetBrainsMono Nerd Font"
 font-size = 12
 scrollback-limit = 10_000
@@ -23,6 +22,4 @@ macos-option-as-alt = left
 
 # macOS
 macos-auto-secure-input = true
-
-command = /run/current-system/sw/bin/fish
 

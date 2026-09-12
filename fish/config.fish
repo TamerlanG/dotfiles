@@ -1,6 +1,5 @@
 set fish_greeting
 
-abbr ls 'lsd'
 abbr cat 'bat'
 alias k='kubectl'
 
@@ -36,5 +35,3 @@ abbr grv 'git remote -v'
 abbr ghpr 'gh pr checkout'
 abbr ghsync 'gh repo sync'
 
-# starship init fish | source
-zoxide init fish --cmd cd | source
