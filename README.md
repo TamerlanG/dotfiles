@@ -12,7 +12,6 @@ make check       # statix + deadnix + nixfmt --check
 make update      # update flake inputs
 make update-brew # brew update && brew upgrade
 make fmt         # format Nix files (nix fmt)
-make tmux-conf   # print the generated tmux.conf
 ```
 
 `make help` lists all targets. `CONFIG=<name>` selects the flake configuration (default `mac`).
@@ -22,7 +21,7 @@ make tmux-conf   # print the generated tmux.conf
 - `flake.nix` — entrypoint; defines the `mac` configuration.
 - `nix/darwin.nix` — system packages, macOS defaults, fonts, Homebrew, wallpaper activation.
 - `nix/home.nix` — Home Manager packages, `programs.*`, and dotfile links.
-- `fish/`, `tmux/`, `ghostty/`, `aerospace/` — app configs; embedded or symlinked at `make switch`.
+- `fish/`, `ghostty/`, `aerospace/` — app configs; embedded or symlinked at `make switch`.
 - `nvim/`, `mise/`, `herdr/`, `omp/agent/` — live-symlinked into `$HOME`; edits apply without a rebuild.
 - `wallpapers/` — desktop image applied by the activation script.
 

@@ -4,7 +4,7 @@ FLAKE ?= .$(HASH)$(CONFIG)
 DARWIN_SYSTEM ?= .$(HASH)darwinConfigurations.$(CONFIG).system
 TOPLEVEL_DRV ?= .$(HASH)darwinConfigurations.$(CONFIG).config.system.build.toplevel.drvPath
 
-.PHONY: help switch rebuild apply build eval check update update-brew fmt tmux-conf
+.PHONY: help switch rebuild apply build eval check update update-brew fmt
 
 help:
 	@printf '%s\n' \
@@ -16,7 +16,6 @@ help:
 	  '  make update      Update flake inputs' \
 	  '  make update-brew Update and upgrade Homebrew formulae/casks' \
 	  '  make fmt         Format Nix files' \
-	  '  make tmux-conf   Print generated Home Manager tmux.conf' \
 	  '' \
 	  'Variables:' \
 	  '  CONFIG=mac       nix-darwin configuration name'
@@ -43,6 +42,3 @@ update-brew:
 
 fmt:
 	nix fmt -- flake.nix nix/*.nix
-
-tmux-conf:
-	nix eval --raw '.$(HASH)darwinConfigurations.$(CONFIG).config.home-manager.users.tamerlan.xdg.configFile."tmux/tmux.conf".text'

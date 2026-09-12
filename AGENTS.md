@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Personal macOS dotfiles for a single machine (`aarch64-darwin`, user `tamerlan`, home `/Users/tamerlan`), managed declaratively with a Nix flake, nix-darwin, and Home Manager. App configs (nvim, fish, tmux, ghostty, aerospace, mise, omp) live as plain files in this repo; Nix wires them into `$HOME` and provisions the binaries they depend on.
+Personal macOS dotfiles for a single machine (`aarch64-darwin`, user `tamerlan`, home `/Users/tamerlan`), managed declaratively with a Nix flake, nix-darwin, and Home Manager. App configs (nvim, fish, ghostty, aerospace, mise, herdr, omp) live as plain files in this repo; Nix wires them into `$HOME` and provisions the binaries they depend on.
 
 ## Architecture & Data Flow
 
@@ -21,7 +21,7 @@ Three distinct linking strategies in `nix/home.nix`; know which one a file uses 
 |---|---|---|
 | `live "<path>"` (`mkOutOfStoreSymlink` to `~/.dotfiles/<path>`) | `nvim/`, `mise/config.toml`, `herdr/config.toml`, `omp/agent/config.yml` | Immediately, no rebuild |
 | Store symlink (`source = ../x`) | `aerospace/aerospace.toml`, `ghostty/config` | After `make switch` |
-| Embedded via `builtins.readFile` | `fish/config.fish` (`programs.fish.interactiveShellInit`), `tmux/tmux.conf` (`programs.tmux.extraConfig`) | After `make switch` |
+| Embedded via `builtins.readFile` | `fish/config.fish` (`programs.fish.interactiveShellInit`) | After `make switch` |
 
 `wallpapers/main.jpg` is not linked; `nix/darwin.nix` activation runs `desktoppr all /Users/tamerlan/.dotfiles/wallpapers/main.jpg`.
 
@@ -31,7 +31,7 @@ Neovim flow: `nvim/init.lua` -> `lua/config/lazy.lua` (leader keys, `require("la
 
 - `nix/` — `darwin.nix` (system), `home.nix` (user). All Nix logic outside `flake.nix`.
 - `nvim/` — Neovim config. `lua/plugins/` lazy.nvim specs (auto-imported), `lua/user/` core setup, `lua/user/dap/{adapters,config}/` per-language DAP split, `ftdetect/` custom filetypes.
-- `fish/`, `tmux/`, `ghostty/`, `aerospace/`, `mise/`, `omp/agent/` — one app per dir, single config file each.
+- `fish/`, `ghostty/`, `aerospace/`, `mise/`, `herdr/`, `omp/agent/` — one app per dir, single config file each (`herdr/` also has `focus-tab.sh`).
 - `wallpapers/` — desktop image applied at activation.
 
 ## Development Commands
@@ -44,7 +44,6 @@ make check         # statix + deadnix + nixfmt --check on flake.nix, nix/
 make update        # nix flake update
 make update-brew   # brew update && brew upgrade (switch never auto-updates Homebrew)
 make fmt           # nix fmt (flake `formatter` = nixfmt from the pinned nixpkgs)
-make tmux-conf     # print HM-generated tmux.conf
 CONFIG=other make build   # override flake attr (only "mac" exists today)
 ```
 
@@ -57,7 +56,6 @@ Prefer `make eval` or `make build` to validate Nix edits; `make switch` needs su
 - Username is bound once (`user` in `flake.nix`, passed via `specialArgs`/`extraSpecialArgs`); `nix/darwin.nix` derives `home`, `nix/home.nix` derives `home.homeDirectory`. Never write `tamerlan` or `/Users/tamerlan` in `nix/`.
 - Add a CLI tool for the user: `home.packages` in `nix/home.nix`. System-wide/daemon-ish: `environment.systemPackages` in `nix/darwin.nix`. GUI app: `homebrew.casks` in `nix/darwin.nix` (`cleanup = "zap"` removes anything not listed).
 - Add a new `~/.config/<app>` file: `xdg.configFile."<app>/<file>".source = ../<app>/<file>;` — use `live "<app>/<file>"` if the config should be live-editable.
-- tmux prefix (`C-a`) and plugins (catppuccin, vim-tmux-navigator, resurrect, continuum, session-wizard, tmux-fzf) are set in `programs.tmux` in `nix/home.nix`, not in `tmux/tmux.conf`. `tmux/tmux.conf` holds only keybind/style overrides.
 
 **Neovim (Lua)**
 - One plugin per file in `lua/plugins/`, lowercase names (`whichkey.lua`, `typescript-tools.lua`). Files may return a single spec table or a list of specs (`general.lua`).
@@ -72,7 +70,7 @@ Prefer `make eval` or `make build` to validate Nix edits; `make switch` needs su
 - `fish/config.fish`: `abbr` for shortcuts (`cat`->`bat`, git aliases), `alias k=kubectl`. Shell integrations (zoxide `--cmd cd`, fzf keybinds, lsd `ls`/`ll`/`la`/`lt` aliases) come from `programs.*` in `nix/home.nix`, not from this file. Any tool referenced must be provisioned in `home.packages` or a `programs.*` module.
 
 **Commits**
-- Short imperative subjects with scope prefix: `darwin: ...`, `flake: ...`, `tmux: ...`, `nvim: ...`.
+- Short imperative subjects with scope prefix: `darwin: ...`, `flake: ...`, `herdr: ...`, `nvim: ...`.
 
 **Documentation**
 - After a change, update `AGENTS.md`, `README.md`, or `nvim/README.md` only if the change alters something they state (commands, layout, link strategy, conventions). Keep docs lean: fix or remove the affected line, do not add narrative or duplicate what the code shows.
@@ -80,8 +78,8 @@ Prefer `make eval` or `make build` to validate Nix edits; `make switch` needs su
 ## Important Files
 
 - `flake.nix` — single output `darwinConfigurations."mac"`; binds `user`, exposes `formatter`; HM wired inline (`useGlobalPkgs`, `useUserPackages`, `extraSpecialArgs = { inherit user; }`, `users.${user} = import ./nix/home.nix`).
-- `nix/darwin.nix` — `system.defaults` (dock/finder/trackpad/screencapture), fonts, Touch ID sudo, `nix.gc`/`nix.optimise`, Homebrew (`brews`: omp, mole, herdr; `casks`: ghostty, arc, okta-verify; tap `can1357/tap`), wallpaper activation.
-- `nix/home.nix` — packages, `programs.{git,delta,zoxide,fzf,bat,lsd,gh,lazygit,fish,tmux,neovim,mise}`, all dotfile links.
+- `nix/darwin.nix` — `system.defaults` (dock/finder/trackpad/screencapture), fonts, Touch ID sudo, `nix.gc`/`nix.optimise`, Homebrew (`brews`: omp, mole, herdr; `casks`: ghostty, arc, okta-verify, handy; tap `can1357/tap`), wallpaper activation.
+- `nix/home.nix` — packages, `programs.{git,delta,zoxide,fzf,bat,lsd,gh,lazygit,fish,neovim,mise}`, all dotfile links.
 - `Makefile` — the operator interface; `CONFIG ?= mac`.
 - `nvim/init.lua`, `nvim/lua/config/lazy.lua`, `nvim/lua/user/dap/init.lua`.
 - `omp/agent/config.yml` — OMP agent model roles/provider order; live-symlinked.
@@ -92,7 +90,7 @@ Prefer `make eval` or `make build` to validate Nix edits; `make switch` needs su
 - Nix with flakes, nix-darwin, Home Manager (all on `nixpkgs-unstable`/master, pinned in `flake.lock`). No Node/Bun/Python project tooling.
 - Homebrew only for casks and the brews above; everything else via Nix. `onActivation.autoUpdate`/`upgrade` are off; `make update-brew` is the only path that touches Homebrew versions. `nix.gc` (weekly, 14d) and `nix.optimise` run via launchd.
 - Language toolchains (Go, Rust) via mise, not Nix.
-- Repo must live at `~/.dotfiles` (`live` helper and wallpaper activation resolve there). `Makefile` hardcodes only the username (`users.tamerlan` in `tmux-conf`).
+- Repo must live at `~/.dotfiles` (`live` helper and wallpaper activation resolve there).
 - No CI. `.gitignore` covers only `.DS_Store` and `result`.
 
 ## Testing & QA
@@ -100,4 +98,4 @@ Prefer `make eval` or `make build` to validate Nix edits; `make switch` needs su
 No test suite. Validation is:
 - Nix: `make eval` (fast eval), `make build` (full build, no activation), `make check` + `make fmt` before committing Nix.
 - Neovim: config is live-symlinked; open `nvim` and run `:checkhealth` / `:Lazy` after plugin changes. `nvim/lazy-lock.json` is committed; run `:Lazy update` deliberately and commit the lockfile.
-- Shell/tmux/ghostty/aerospace: require `make switch`, then reload (`prefix+r` for tmux; `aerospace reload-config`).
+- Shell/ghostty/aerospace: require `make switch`, then reload (`aerospace reload-config`). herdr: live-symlinked; `herdr config check` then `herdr server reload-config`.
