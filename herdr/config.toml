@@ -1,9 +1,16 @@
 onboarding = false
+
+[theme.custom]
+panel_bg = "reset"   # transparent goto/picker overlays
+
 [terminal]
 default_shell = "fish"
 
 [keys]
 prefix = "ctrl+a"
+goto = "prefix+l"                  # pane/workspace tree picker (default prefix+g); l is free since focus_pane_right uses arrows
+toggle_sidebar = "prefix+e"        # default prefix+b
+edit_scrollback = ""               # default prefix+e; freed for toggle_sidebar
 
 # tmux.conf equivalents
 split_vertical = "prefix+|"        # bind |  split-window -h
@@ -27,3 +34,57 @@ focus_pane_right = "prefix+right"
 detach = "prefix+d"
 close_tab = "prefix+ampersand"
 rename_tab = "prefix+comma"
+
+# prefix+0..9 switches to the Nth tab (0-indexed, tmux-window style);
+# the built-in switch_tab is 1-indexed only, so it is disabled in favour of commands.
+switch_tab = ""                    # default prefix+1..9
+
+[[keys.command]]
+key = "prefix+0"
+type = "shell"
+command = "sh ~/.config/herdr/focus-tab.sh 0"
+
+[[keys.command]]
+key = "prefix+1"
+type = "shell"
+command = "sh ~/.config/herdr/focus-tab.sh 1"
+
+[[keys.command]]
+key = "prefix+2"
+type = "shell"
+command = "sh ~/.config/herdr/focus-tab.sh 2"
+
+[[keys.command]]
+key = "prefix+3"
+type = "shell"
+command = "sh ~/.config/herdr/focus-tab.sh 3"
+
+[[keys.command]]
+key = "prefix+4"
+type = "shell"
+command = "sh ~/.config/herdr/focus-tab.sh 4"
+
+[[keys.command]]
+key = "prefix+5"
+type = "shell"
+command = "sh ~/.config/herdr/focus-tab.sh 5"
+
+[[keys.command]]
+key = "prefix+6"
+type = "shell"
+command = "sh ~/.config/herdr/focus-tab.sh 6"
+
+[[keys.command]]
+key = "prefix+7"
+type = "shell"
+command = "sh ~/.config/herdr/focus-tab.sh 7"
+
+[[keys.command]]
+key = "prefix+8"
+type = "shell"
+command = "sh ~/.config/herdr/focus-tab.sh 8"
+
+[[keys.command]]
+key = "prefix+9"
+type = "shell"
+command = "sh ~/.config/herdr/focus-tab.sh 9"

@@ -181,5 +181,6 @@ in
     "nvim".source = live "nvim";
     "mise/config.toml".source = live "mise/config.toml";
     "herdr/config.toml".source = live "herdr/config.toml";
+    "herdr/focus-tab.sh".source = live "herdr/focus-tab.sh";
   };
 }
