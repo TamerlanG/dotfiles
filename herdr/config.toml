@@ -5,6 +5,8 @@ panel_bg = "reset"   # transparent goto/picker overlays
 
 [ui]
 pane_gaps = false          # shared dividers instead of spaced-out panes (default true)
+pane_outer_borders = false # no frame around the pane area; split dividers stay (pane_borders = "auto")
+hide_tab_bar_when_single_tab = true # tab row height is fixed; hiding it is the only way to shrink the header
 sidebar_start_collapsed = true      # takes effect on next launch; prefix+e toggles it back
 sidebar_collapsed_mode = "hidden"   # zero width instead of the compact status rail
 
