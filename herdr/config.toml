@@ -1,0 +1,5 @@
+[terminal]
+default_shell = "fish"
+
+[keys]
+prefix = "ctrl+a"

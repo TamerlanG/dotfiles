@@ -128,6 +128,7 @@
     brews = [
       "omp"
       "mole"
+      "herdr"
     ];
 
     taps = [
