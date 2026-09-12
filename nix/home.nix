@@ -38,11 +38,24 @@
       lazy-nvim
     ];
 
+    # Everything user/lsp.lua, plugins/conform.lua, plugins/lint.lua reference.
     extraPackages = with pkgs; [
+      # LSP
       nil
+      lua-language-server
+      gopls
+      rust-analyzer
+      # formatters
       nixfmt
+      stylua
+      prettierd
+      black
+      isort
+      # linters
       statix
       deadnix
+      eslint_d
+      pylint
     ];
   };
 

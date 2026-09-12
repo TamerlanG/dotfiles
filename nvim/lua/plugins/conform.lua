@@ -16,17 +16,13 @@ return {
       markdown = { "prettierd" },
       graphql = { "prettierd" },
       nix = { "nixfmt" },
-      lua = {
-        args = {
-          "--search-parent-directories",
-          "--indent-type Spaces",
-          "--stdin-filepath",
-          "$FILENAME",
-          "-",
-        },
-
-      },
+      lua = { "stylua" },
       python = { "isort", "black" },
+    },
+    formatters = {
+      stylua = {
+        prepend_args = { "--indent-type", "Spaces" },
+      },
     },
     format_on_save = {
       lsp_fallback = true,

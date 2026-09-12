@@ -61,7 +61,7 @@ Prefer `make eval` or `make build` to validate Nix edits; `make switch` needs su
 - Prefer `opts = {}`; use `config = function()` only when hooks/autocmds are needed (`lint.lua`, `dap.lua`).
 - Dominant style: 2-space indent, double quotes. Some files drift (tabs/single quotes); match the file you are in, do not reformat.
 - `<leader>` mappings go in `plugins/whichkey.lua` under existing groups (`<leader>d` debug, `<leader>l` LSP, etc.). `user/keymaps.lua` holds non-leader/legacy maps.
-- LSP: `user/lsp.lua` uses `vim.lsp.config` + `vim.lsp.enable`; `plugins/mason.lua` `ensure_installed` mirrors it. TypeScript uses `typescript-tools.nvim`, not lspconfig.
+- LSP: `user/lsp.lua` uses `vim.lsp.config` + `vim.lsp.enable`; server defaults come from `nvim-lspconfig` (`plugins/lspconfig.lua`, loaded eagerly). No Mason: every LSP/formatter/linter binary is in `programs.neovim.extraPackages` in `nix/home.nix`. TypeScript uses `typescript-tools.nvim`, not lspconfig.
 - Formatting: `plugins/conform.lua` `formatters_by_ft` (format on save, `lsp_fallback = true`). Linting: `plugins/lint.lua` `linters_by_ft` (eslint_d only when an ESLint config exists in cwd).
 - New DAP language: add `user/dap/adapters/<lang>.lua` and `user/dap/config/<lang>.lua`, require both in `user/dap/init.lua`. Go is the exception (uses `dap-go` directly in `init.lua`; `config/go.lua` is empty).
 

@@ -56,10 +56,8 @@ end
 
 vim.diagnostic.config(config)
 
+-- Server defaults (cmd, filetypes, root markers) come from nvim-lspconfig's lsp/ dir.
 vim.lsp.config("nil_ls", {
-  cmd = { "nil" },
-  filetypes = { "nix" },
-  root_markers = { "flake.nix", ".git" },
   settings = {
     ["nil"] = {
       formatting = {
@@ -74,4 +72,5 @@ vim.lsp.config("nil_ls", {
     },
   },
 })
-vim.lsp.enable("nil_ls")
+
+vim.lsp.enable({ "nil_ls", "lua_ls", "gopls", "rust_analyzer" })

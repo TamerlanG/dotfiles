@@ -1,26 +1,20 @@
 return {
   "mfussenegger/nvim-lint",
   event = { "BufReadPre", "BufNewFile" },
-  opts = {
-    linters = {
-      eslint_d = {
-        args = {
-          "--no-warn-ignored",
-          "--format",
-          "json",
-          "--stdin",
-          "--stdin-filename",
-          function()
-            return vim.api.nvim_buf_get_name(0)
-          end,
-        },
-      },
-    },
-  },
   config = function()
     local lint = require("lint")
 
-    -- normal setup
+    lint.linters.eslint_d.args = {
+      "--no-warn-ignored",
+      "--format",
+      "json",
+      "--stdin",
+      "--stdin-filename",
+      function()
+        return vim.api.nvim_buf_get_name(0)
+      end,
+    }
+
     lint.linters_by_ft = {
       javascript = { "eslint_d" },
       typescript = { "eslint_d" },
@@ -28,7 +22,6 @@ return {
       typescriptreact = { "eslint_d" },
       svelte = { "eslint_d" },
       python = { "pylint" },
-      markdown = { "vale" },
       nix = { "statix", "deadnix" },
     }
 
