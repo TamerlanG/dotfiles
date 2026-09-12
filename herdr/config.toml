@@ -3,6 +3,11 @@ onboarding = false
 [theme.custom]
 panel_bg = "reset"   # transparent goto/picker overlays
 
+[ui]
+pane_gaps = false          # shared dividers instead of spaced-out panes (default true)
+sidebar_start_collapsed = true      # takes effect on next launch; prefix+e toggles it back
+sidebar_collapsed_mode = "hidden"   # zero width instead of the compact status rail
+
 [terminal]
 default_shell = "fish"
 
@@ -24,11 +29,12 @@ resize_pane_right = "prefix+shift+l" # bind -r L resize-pane -R
 resize_pane_left = "prefix+h"      # bind -r h resize-pane -L
 resize_mode = ""                   # default prefix+r; freed for reload
 
-# h/j/k are taken by resize, so pane focus uses tmux's default arrows
-focus_pane_left = "prefix+left"
-focus_pane_down = "prefix+down"
-focus_pane_up = "prefix+up"
-focus_pane_right = "prefix+right"
+# direct (no prefix) ctrl+hjkl, mirroring vim-tmux-navigator in tmux; prefix+arrows kept as fallback.
+# Herdr has no nvim passthrough: ctrl+hjkl is swallowed before pane apps (nvim splits) see it.
+focus_pane_left = ["ctrl+h", "prefix+left"]
+focus_pane_down = ["ctrl+j", "prefix+down"]
+focus_pane_up = ["ctrl+k", "prefix+up"]
+focus_pane_right = ["ctrl+l", "prefix+right"]
 
 # tmux defaults
 detach = "prefix+d"

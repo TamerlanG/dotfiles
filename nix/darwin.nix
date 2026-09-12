@@ -160,6 +160,7 @@ in
       "ghostty"
       "arc"
       "okta-verify"
+      "handy"
     ];
   };
 }
