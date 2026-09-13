@@ -10,6 +10,17 @@ if not ok then
   error("lazy.nvim is unavailable; run Neovim from the Nix/Home Manager profile")
 end
 
+-- lazy.nvim itself lives in the read-only Nix store (nixpkgs already ships
+-- doc/tags). Skip the helptags step for it, otherwise :Lazy update fails with
+-- E152 trying to write doc/tags. Private API, so never let it break startup.
+pcall(function()
+  local docs = require("lazy.manage.task.plugin").docs
+  local docs_skip = docs.skip
+  docs.skip = function(plugin)
+    return docs_skip(plugin) or not vim.uv.fs_access(plugin.dir .. "/doc", "W")
+  end
+end)
+
 -- Setup lazy.nvim
 lazy.setup({
   spec = {
