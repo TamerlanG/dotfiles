@@ -160,6 +160,7 @@ in
       "arc"
       "okta-verify"
       "handy"
+      "hiddenbar"
     ];
   };
 }
