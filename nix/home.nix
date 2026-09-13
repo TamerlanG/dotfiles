@@ -19,10 +19,6 @@ in
   programs.git = {
     enable = true;
     settings = {
-      user = {
-        name = "Tamerlan Gudabayev";
-        email = "tamerlan@gudabayev.com";
-      };
       init.defaultBranch = "main";
       pull.rebase = true;
       push.autoSetupRemote = true;

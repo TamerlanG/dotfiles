@@ -20,33 +20,47 @@
     }:
     let
       system = "aarch64-darwin";
-      user = "tamerlan";
+
+      # Shared system + user layers plus one per-host module (nix/hosts/*.nix).
+      mkHost =
+        { user, host }:
+        nix-darwin.lib.darwinSystem {
+          inherit system;
+
+          specialArgs = {
+            inherit inputs user;
+          };
+
+          modules = [
+            ./nix/darwin.nix
+            host
+
+            home-manager.darwinModules.home-manager
+
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "hm-backup";
+              home-manager.extraSpecialArgs = {
+                inherit user;
+              };
+              home-manager.users.${user} = import ./nix/home.nix;
+            }
+          ];
+        };
     in
     {
       formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt;
 
-      darwinConfigurations."mac" = nix-darwin.lib.darwinSystem {
-        inherit system;
-
-        specialArgs = {
-          inherit inputs user;
+      darwinConfigurations = {
+        mac = mkHost {
+          user = "tamerlan";
+          host = ./nix/hosts/personal.nix;
         };
-
-        modules = [
-          ./nix/darwin.nix
-
-          home-manager.darwinModules.home-manager
-
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "hm-backup";
-            home-manager.extraSpecialArgs = {
-              inherit user;
-            };
-            home-manager.users.${user} = import ./nix/home.nix;
-          }
-        ];
+        work = mkHost {
+          user = "tamerlan";
+          host = ./nix/hosts/work.nix;
+        };
       };
     };
 }

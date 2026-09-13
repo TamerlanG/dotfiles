@@ -39,6 +39,8 @@ in
 
   programs.zsh.enable = true;
   programs.fish.enable = true;
+  # Puts fish in /etc/shells so `chsh -s /run/current-system/sw/bin/fish` is accepted.
+  environment.shells = [ pkgs.fish ];
 
   users.users.${user} = {
     inherit home;

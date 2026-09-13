@@ -14,12 +14,13 @@ make update-brew # brew update && brew upgrade
 make fmt         # format Nix files (nix fmt)
 ```
 
-`make help` lists all targets. `CONFIG=<name>` selects the flake configuration (default `mac`).
+`make help` lists all targets. `CONFIG=<name>` selects the flake configuration: `mac` (personal, default) or `work` (`CONFIG=work make switch`).
 
 ## Layout
 
-- `flake.nix` — entrypoint; defines the `mac` configuration.
-- `nix/darwin.nix` — system packages, macOS defaults, fonts, Homebrew, wallpaper activation.
+- `flake.nix` — entrypoint; `mkHost` builds the `mac` and `work` configurations from the shared layers plus one host module.
+- `nix/darwin.nix` — shared system config: packages, macOS defaults, fonts, Homebrew.
+- `nix/hosts/personal.nix`, `nix/hosts/work.nix` — per-host deltas: git identity; work also pins `CONFIG=work`.
 - `nix/home.nix` — Home Manager packages, `programs.*`, and dotfile links.
 - `fish/`, `ghostty/`, `aerospace/` — app configs; embedded or symlinked at `make switch`.
 - `nvim/`, `mise/`, `herdr/`, `omp/agent/` — live-symlinked into `$HOME`; edits apply without a rebuild.

@@ -32,7 +32,7 @@ eval:
 check:
 	nix run nixpkgs#statix -- check .
 	nix run nixpkgs#deadnix -- --fail flake.nix nix
-	nix fmt -- --check flake.nix nix/*.nix
+	nix fmt -- --check flake.nix nix/*.nix nix/hosts/*.nix
 
 update:
 	nix flake update
@@ -41,4 +41,4 @@ update-brew:
 	brew update && brew upgrade
 
 fmt:
-	nix fmt -- flake.nix nix/*.nix
+	nix fmt -- flake.nix nix/*.nix nix/hosts/*.nix
