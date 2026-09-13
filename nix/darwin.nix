@@ -17,6 +17,7 @@ in
     desktoppr
     orbstack
     btop
+    shottr
   ];
 
   environment.systemPath = [
