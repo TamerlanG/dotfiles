@@ -18,6 +18,7 @@ in
     orbstack
     btop
     shottr
+    raycast
   ];
 
   environment.systemPath = [
