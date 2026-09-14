@@ -20,6 +20,9 @@ in
     enable = true;
     settings = {
       init.defaultBranch = "main";
+      # git >= 2.54 defaults new repos to reftable; lazy.nvim parses .git/HEAD
+      # as text and reads reftable's stub "refs/heads/.invalid" as the branch.
+      init.defaultRefFormat = "files";
       pull.rebase = true;
       push.autoSetupRemote = true;
       url."git@github.com:".insteadOf = "https://github.com/";
