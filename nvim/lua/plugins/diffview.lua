@@ -27,42 +27,16 @@ return {
             desc = "Diffview File History (current file)",
         },
         {
-            "<leader>gp",
+            "<leader>gP",
             function()
-                local function git(...)
-                    local out = vim.fn.systemlist({ "git", ... })
-                    if vim.v.shell_error == 0 and out[1] and out[1] ~= "" then
-                        return out[1]
-                    end
-                end
-                local candidates = { "main", "master", "develop" }
-                local function base()
-                    for _, remote in ipairs({ "upstream", "origin" }) do
-                        -- remote HEAD (set by clone or `git remote set-head <remote> -a`)
-                        local ref = git("symbolic-ref", "-q", "--short", "refs/remotes/" .. remote .. "/HEAD")
-                        if ref then
-                            return ref
-                        end
-                        for _, b in ipairs(candidates) do
-                            if git("rev-parse", "--verify", "-q", remote .. "/" .. b) then
-                                return remote .. "/" .. b
-                            end
-                        end
-                    end
-                    for _, b in ipairs(candidates) do
-                        if git("rev-parse", "--verify", "-q", b) then
-                            return b
-                        end
-                    end
-                end
-                local ref = base()
+                local ref = require("user.git").base_branch()
                 if not ref then
                     vim.notify("diffview: could not resolve PR base branch", vim.log.levels.ERROR)
                     return
                 end
                 vim.cmd("DiffviewOpen " .. ref .. "...HEAD --imply-local")
             end,
-            desc = "Review Current PR (vs base branch)",
+            desc = "Review Current PR (side-by-side)",
         },
 
         {
