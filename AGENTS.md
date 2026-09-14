@@ -56,7 +56,7 @@ Prefer `make eval` or `make build` to validate Nix edits; `make switch` needs su
 - Formatted with `nixfmt` (`make fmt`), linted with statix/deadnix (`make check`; `statix.toml` disables `repeated_keys`). Inputs follow `nixpkgs` via `inputs.<x>.inputs.nixpkgs.follows`.
 - Username is bound per host in `flake.nix` (`mkHost { user; host; }`) and passed via `specialArgs`/`extraSpecialArgs`; `nix/darwin.nix` derives `home`, `nix/home.nix` derives `home.homeDirectory`. Never write `tamerlan` or `/Users/tamerlan` in `nix/`.
 - Host-specific settings go in `nix/hosts/<host>.nix`, which is a nix-darwin module and may set `home-manager.users.${user}.*` directly (git identity does this). Anything not host-specific stays in the shared layers.
-- Add a CLI tool for the user: `home.packages` in `nix/home.nix`. System-wide/daemon-ish: `environment.systemPackages` in `nix/darwin.nix`. GUI app: `homebrew.casks` in `nix/darwin.nix`, or in a host module if only one machine needs it (`cleanup = "zap"` removes anything not listed; the work host overrides to `"none"`).
+- Add a CLI tool for the user: `home.packages` in `nix/home.nix`. System-wide/daemon-ish: `environment.systemPackages` in `nix/darwin.nix`. GUI app: prefer nixpkgs (`environment.systemPackages`) when it ships an `aarch64-darwin` build (`allowUnfree` is on), else `homebrew.casks` in `nix/darwin.nix`. Put it in a host module instead if only one machine needs it (`cleanup = "zap"` removes any cask not listed).
 - Add a new `~/.config/<app>` file: `xdg.configFile."<app>/<file>".source = ../<app>/<file>;` — use `live "<app>/<file>"` if the config should be live-editable.
 
 **Neovim (Lua)**
@@ -81,7 +81,7 @@ Prefer `make eval` or `make build` to validate Nix edits; `make switch` needs su
 
 - `flake.nix` — `mkHost { user; host; }` -> `darwinConfigurations.{mac,work}`; exposes `formatter`; HM wired inline (`useGlobalPkgs`, `useUserPackages`, `extraSpecialArgs = { inherit user; }`, `users.${user} = import ./nix/home.nix`).
 - `nix/darwin.nix` — `system.defaults` (dock/finder/trackpad/screencapture), fonts, Touch ID sudo, `environment.shells` (fish), `nix.gc`/`nix.optimise`, Homebrew (`brews`: omp, mole, herdr; `casks`: ghostty, arc, okta-verify, handy, hiddenbar; tap `can1357/tap`), Screenshots dir + wallpaper activation.
-- `nix/hosts/personal.nix` — personal git email. `nix/hosts/work.nix` — Elastic git email, `home.sessionVariables.CONFIG = "work"`.
+- `nix/hosts/personal.nix` — personal git email. `nix/hosts/work.nix` — Elastic git email, `home.sessionVariables.CONFIG = "work"`, work-only apps (`pkgs.slack`).
 - `nix/home.nix` — packages, `programs.{git,delta,zoxide,fzf,bat,lsd,gh,lazygit,fish,neovim,mise}`, all dotfile links.
 - `Makefile` — the operator interface; `CONFIG ?= mac`.
 - `nvim/init.lua`, `nvim/lua/config/lazy.lua`, `nvim/lua/user/dap/init.lua`.

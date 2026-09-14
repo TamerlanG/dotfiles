@@ -1,6 +1,9 @@
-{ user, ... }:
+{ pkgs, user, ... }:
 
 {
+  # Work-only GUI apps.
+  environment.systemPackages = [ pkgs.slack ];
+
   home-manager.users.${user} = {
     programs.git.settings.user = {
       name = "Tamerlan Gudabayev";
