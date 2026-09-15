@@ -13,14 +13,14 @@ make switch                      (CONFIG=work make switch on the work laptop)
        |- nix/darwin.nix          shared system layer: systemPackages, macOS defaults, fonts, Homebrew
        |- nix/hosts/<host>.nix    per-host: git identity; work also pins CONFIG=work
        '- nix/home.nix            shared user layer (home-manager.users.${user}): packages, programs.*, file links
-          -> ~/.config/*, ~/.aerospace.toml, ~/.omp/agent/config.yml, ~/.agents/skills
+          -> ~/.config/*, ~/.aerospace.toml, ~/.omp/agent/{config.yml,APPEND_SYSTEM.md}, ~/.agents/skills
 ```
 
 Three distinct linking strategies in `nix/home.nix`; know which one a file uses before editing:
 
 | Strategy | Files | Edit propagates |
 |---|---|---|
-| `live "<path>"` (`mkOutOfStoreSymlink` to `~/.dotfiles/<path>`) | `nvim/`, `mise/config.toml`, `herdr/config.toml`, `omp/agent/config.yml`, `agents/skills/` | Immediately, no rebuild |
+| `live "<path>"` (`mkOutOfStoreSymlink` to `~/.dotfiles/<path>`) | `nvim/`, `mise/config.toml`, `herdr/config.toml`, `omp/agent/*`, `agents/skills/` | Immediately, no rebuild |
 | Store symlink (`source = ../x`) | `aerospace/aerospace.toml`, `ghostty/config` | After `make switch` |
 | Embedded via `builtins.readFile` | `fish/config.fish` (`programs.fish.interactiveShellInit`) | After `make switch` |
 
@@ -87,6 +87,7 @@ Prefer `make eval` or `make build` to validate Nix edits; `make switch` needs su
 - `Makefile` — the operator interface; `CONFIG ?= mac`.
 - `nvim/init.lua`, `nvim/lua/config/lazy.lua`, `nvim/lua/user/dap/init.lua`.
 - `omp/agent/config.yml` — OMP agent model roles/provider order; live-symlinked.
+- `omp/agent/APPEND_SYSTEM.md` — text appended to OMP's default system prompt in every session (global agent instructions); live-symlinked.
 - `mise/config.toml` — global `go = latest`, `rust = latest`.
 
 ## Runtime/Tooling Preferences

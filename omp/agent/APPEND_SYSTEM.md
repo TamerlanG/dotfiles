@@ -1,0 +1,1 @@
+The tool runner exports `CI=true`. The Buildkite CLI `bk` treats that as a CI environment and skips the macOS keychain, so it never finds the OAuth token from `bk auth login`. Always invoke it as `env -u CI bk …`.
