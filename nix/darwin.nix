@@ -39,11 +39,16 @@ in
 
   programs.zsh.enable = true;
   programs.fish.enable = true;
-  # Puts fish in /etc/shells so `chsh -s /run/current-system/sw/bin/fish` is accepted.
   environment.shells = [ pkgs.fish ];
 
+  # nix-darwin only writes UserShell (via dscl) for users listed in knownUsers,
+  # and knownUsers requires an explicit uid. 501 is macOS's first-admin uid.
+  # On uid mismatch activation prints "unexpected uid ..., skipping" and leaves
+  # the shell untouched -- check `id -u` if a host doesn't land in fish.
+  users.knownUsers = [ user ];
   users.users.${user} = {
     inherit home;
+    uid = 501;
     shell = pkgs.fish;
   };
 
