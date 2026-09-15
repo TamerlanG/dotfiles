@@ -100,6 +100,8 @@ in
   home.file = {
     ".aerospace.toml".source = ../aerospace/aerospace.toml;
     ".omp/agent/config.yml".source = live "omp/agent/config.yml";
+    # omp `agents` provider: ~/.agents/skills/<name>/SKILL.md (also read by Codex).
+    ".agents/skills".source = live "agents/skills";
   };
 
   xdg.configFile = {

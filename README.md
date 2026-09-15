@@ -23,7 +23,7 @@ make fmt         # format Nix files (nix fmt)
 - `nix/hosts/personal.nix`, `nix/hosts/work.nix` — per-host deltas: git identity; work also pins `CONFIG=work`.
 - `nix/home.nix` — Home Manager packages, `programs.*`, and dotfile links.
 - `fish/`, `ghostty/`, `aerospace/` — app configs; embedded or symlinked at `make switch`.
-- `nvim/`, `mise/`, `herdr/`, `omp/agent/` — live-symlinked into `$HOME`; edits apply without a rebuild.
+- `nvim/`, `mise/`, `herdr/`, `omp/agent/`, `agents/skills/` — live-symlinked into `$HOME`; edits apply without a rebuild.
 - `wallpapers/` — desktop image applied by the activation script.
 
 See `AGENTS.md` for architecture, conventions, and editing guidelines.
