@@ -1,8 +1,11 @@
 { pkgs, user, ... }:
 
 {
-  # Work-only GUI apps.
-  environment.systemPackages = [ pkgs.slack ];
+  # Work-only apps and tools.
+  environment.systemPackages = with pkgs; [
+    slack
+    buildkite-cli
+  ];
 
   home-manager.users.${user} = {
     programs.git.settings.user = {
