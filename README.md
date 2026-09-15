@@ -5,13 +5,14 @@ Personal macOS dotfiles managed with nix-darwin and Home Manager. The repo must 
 ## Usage
 
 ```sh
-make switch      # apply system + user config (sudo darwin-rebuild switch --flake .#mac)
-make build       # build without switching
-make eval        # print toplevel derivation path (quick eval check)
-make check       # statix + deadnix + nixfmt --check
-make update      # update flake inputs
-make update-brew # brew update && brew upgrade
-make fmt         # format Nix files (nix fmt)
+make switch        # apply system + user config (sudo darwin-rebuild switch --flake .#mac)
+make build         # build without switching
+make eval          # print toplevel derivation path (quick eval check)
+make check         # statix + deadnix + nixfmt --check
+make update        # update flake inputs
+make update-brew   # brew update && brew upgrade
+make herdr-plugins # install/refresh Herdr plugins (imperative, per machine)
+make fmt           # format Nix files (nix fmt)
 ```
 
 `make help` lists all targets. `CONFIG=<name>` selects the flake configuration: `mac` (personal, default) or `work` (`CONFIG=work make switch`).

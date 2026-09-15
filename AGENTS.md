@@ -102,4 +102,4 @@ Prefer `make eval` or `make build` to validate Nix edits; `make switch` needs su
 No test suite. Validation is:
 - Nix: `make eval` (fast eval), `make build` (full build, no activation), `make check` + `make fmt` before committing Nix.
 - Neovim: config is live-symlinked; open `nvim` and run `:checkhealth` / `:Lazy` after plugin changes. `nvim/lazy-lock.json` is committed; run `:Lazy update` deliberately and commit the lockfile.
-- Shell/ghostty/aerospace: require `make switch`, then reload (`aerospace reload-config`). herdr: live-symlinked; `herdr config check` then `herdr server reload-config`.
+- Shell/ghostty/aerospace: require `make switch`, then reload (`aerospace reload-config`). herdr: live-symlinked; `herdr config check` then `herdr server reload-config`. Herdr plugins are not declarative: `make herdr-plugins` installs/refreshes them per machine; their keybindings live in `herdr/config.toml`.

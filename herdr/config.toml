@@ -46,6 +46,7 @@ rename_tab = "prefix+comma"
 # prefix+0..9 switches to the Nth tab (0-indexed, tmux-window style);
 # the built-in switch_tab is 1-indexed only, so it is disabled in favour of commands.
 switch_tab = ""                    # default prefix+1..9
+open_notification_target = ""      # default prefix+o; freed for annotate.open
 
 [[keys.command]]
 key = "prefix+0"
@@ -96,3 +97,41 @@ command = "sh ~/.config/herdr/focus-tab.sh 8"
 key = "prefix+9"
 type = "shell"
 command = "sh ~/.config/herdr/focus-tab.sh 9"
+
+# herdr-annotate (plannotator/herdr-annotate, Full). Install: make herdr-plugins
+# upstream prefix+m -> shift+m (m is zoom); prefix+ctrl+a -> shift+c (ctrl+a is the prefix)
+[[keys.command]]
+key = "prefix+a"
+type = "plugin_action"
+command = "annotate.capture"
+description = "annotate text"
+
+[[keys.command]]
+key = "prefix+shift+a"
+type = "plugin_action"
+command = "annotate.copy-context"
+description = "copy annotations as context"
+
+[[keys.command]]
+key = "prefix+shift+c"
+type = "plugin_action"
+command = "annotate.copy-archive"
+description = "copy annotations as context and archive them"
+
+[[keys.command]]
+key = "prefix+shift+m"
+type = "plugin_action"
+command = "annotate.manage"
+description = "manage annotations"
+
+[[keys.command]]
+key = "prefix+o"
+type = "plugin_action"
+command = "annotate.open"
+description = "review documents in this folder"
+
+[[keys.command]]
+key = "prefix+shift+o"
+type = "plugin_action"
+command = "annotate.last"
+description = "review the agent's last reply"

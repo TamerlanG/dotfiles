@@ -4,21 +4,22 @@ FLAKE ?= .$(HASH)$(CONFIG)
 DARWIN_SYSTEM ?= .$(HASH)darwinConfigurations.$(CONFIG).system
 TOPLEVEL_DRV ?= .$(HASH)darwinConfigurations.$(CONFIG).config.system.build.toplevel.drvPath
 
-.PHONY: help switch rebuild apply build eval check update update-brew fmt
+.PHONY: help switch rebuild apply build eval check update update-brew herdr-plugins fmt
 
 help:
 	@printf '%s\n' \
 	  'Targets:' \
-	  '  make switch      Apply nix-darwin + Home Manager config' \
-	  '  make build       Build the nix-darwin system without switching' \
-	  '  make eval        Print the system toplevel derivation path' \
-	  '  make check       Lint Nix files (statix, deadnix) and check formatting' \
-	  '  make update      Update flake inputs' \
-	  '  make update-brew Update and upgrade Homebrew formulae/casks' \
-	  '  make fmt         Format Nix files' \
+	  '  make switch        Apply nix-darwin + Home Manager config' \
+	  '  make build         Build the nix-darwin system without switching' \
+	  '  make eval          Print the system toplevel derivation path' \
+	  '  make check         Lint Nix files (statix, deadnix) and check formatting' \
+	  '  make update        Update flake inputs' \
+	  '  make update-brew   Update and upgrade Homebrew formulae/casks' \
+	  '  make herdr-plugins Install/refresh Herdr plugins (imperative; per machine)' \
+	  '  make fmt           Format Nix files' \
 	  '' \
 	  'Variables:' \
-	  '  CONFIG=mac       nix-darwin configuration name'
+	  '  CONFIG=mac         nix-darwin configuration name'
 
 switch rebuild apply:
 	sudo darwin-rebuild switch --flake "$(FLAKE)"
@@ -39,6 +40,10 @@ update:
 
 update-brew:
 	brew update && brew upgrade
+
+herdr-plugins:
+	herdr plugin install plannotator/herdr-annotate --yes
+	herdr config check
 
 fmt:
 	nix fmt -- flake.nix nix/*.nix nix/hosts/*.nix
