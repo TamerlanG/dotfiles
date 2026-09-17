@@ -5,6 +5,7 @@
   environment.systemPackages = with pkgs; [
     slack
     buildkite-cli
+    vault
   ];
 
   home-manager.users.${user} = {
