@@ -12,6 +12,7 @@ return {
       { "<leader>l", group = "LSP" },
       { "<leader>f", group = "Find" },
       { "<leader>g", group = "Git" },
+      { "<leader>m", group = "Markdown" },
       { "<leader>R", group = "Kuala" },
       { "<leader>s", group = "Search" },
       { "<leader>n", group = "Testing" },
