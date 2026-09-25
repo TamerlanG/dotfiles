@@ -1,16 +1,12 @@
 modelRoles:
-  smol: github-copilot/gpt-5.3:low
-  slow: github-copilot/gpt-5.5:medium
-  plan: github-copilot/gpt-5.5:medium
-  advisor: github-copilot/claude-opus-5:high
-  default: anthropic/claude-fable-5-1
+  default: anthropic/claude-opus-5-5
 advisor:
-  enabled: true
+  enabled: false
 modelProviderOrder:
-  - github-copilot
-  - openrouter
   - anthropic
+  - github-copilot
   - openai
+  - openrouter
 defaultThinkingLevel: medium
 memory:
   backend: "off"
