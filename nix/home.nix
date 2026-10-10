@@ -101,6 +101,8 @@ in
     ".aerospace.toml".source = ../aerospace/aerospace.toml;
     ".omp/agent/config.yml".source = live "omp/agent/config.yml";
     ".omp/agent/APPEND_SYSTEM.md".source = live "omp/agent/APPEND_SYSTEM.md";
+    # omp-only skills (native provider): ~/.omp/agent/skills/<name>/SKILL.md.
+    ".omp/agent/skills".source = live "omp/agent/skills";
     # omp `agents` provider: ~/.agents/skills/<name>/SKILL.md (also read by Codex).
     ".agents/skills".source = live "agents/skills";
   };
