@@ -1,7 +1,8 @@
 modelRoles:
   default: anthropic/claude-opus-5-5
+  advisor: anthropic/claude-fable-5-1
 advisor:
-  enabled: false
+  enabled: true
 modelProviderOrder:
   - anthropic
   - github-copilot
@@ -33,3 +34,4 @@ display:
   hideToolActivity: true
 isolation:
   backend: auto
+extendedContext: true
