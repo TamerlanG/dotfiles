@@ -13,14 +13,14 @@ make switch                      (CONFIG=work make switch on the work laptop)
        |- nix/darwin.nix          shared system layer: systemPackages, macOS defaults, fonts, Homebrew
        |- nix/hosts/<host>.nix    per-host: git identity; work also pins CONFIG=work
        '- nix/home.nix            shared user layer (home-manager.users.${user}): packages, programs.*, file links
-          -> ~/.config/*, ~/.aerospace.toml, ~/.omp/agent/{config.yml,APPEND_SYSTEM.md}, ~/.agents/skills
+          -> ~/.config/*, ~/.aerospace.toml, ~/.omp/agent/{config.yml,APPEND_SYSTEM.md,skills}, ~/.agents/skills
 ```
 
 Three distinct linking strategies in `nix/home.nix`; know which one a file uses before editing:
 
 | Strategy | Files | Edit propagates |
 |---|---|---|
-| `live "<path>"` (`mkOutOfStoreSymlink` to `~/.dotfiles/<path>`) | `nvim/`, `mise/config.toml`, `herdr/config.toml`, `omp/agent/*`, `agents/skills/` | Immediately, no rebuild |
+| `live "<path>"` (`mkOutOfStoreSymlink` to `~/.dotfiles/<path>`) | `nvim/`, `mise/config.toml`, `herdr/config.toml`, `omp/agent/*` (incl. `omp/agent/skills/`), `agents/skills/` | Immediately, no rebuild |
 | Store symlink (`source = ../x`) | `aerospace/aerospace.toml`, `ghostty/config` | After `make switch` |
 | Embedded via `builtins.readFile` | `fish/config.fish` (`programs.fish.interactiveShellInit`) | After `make switch` |
 
@@ -34,6 +34,7 @@ Neovim flow: `nvim/init.lua` -> `lua/config/lazy.lua` (leader keys, `require("la
 - `nvim/` — Neovim config. `lua/plugins/` lazy.nvim specs (auto-imported), `lua/user/` core setup, `lua/user/dap/{adapters,config}/` per-language DAP split, `ftdetect/` custom filetypes.
 - `fish/`, `ghostty/`, `aerospace/`, `mise/`, `herdr/`, `omp/agent/` — one app per dir, single config file each (`herdr/` also has `focus-tab.sh`).
 - `agents/skills/` — agent skills, one `<name>/SKILL.md` per subdir (flat, non-recursive). Linked to `~/.agents/skills`, which omp's `agents` provider scans (also read by Codex).
+- `omp/agent/skills/` — OMP-only skills, same layout. Linked to `~/.omp/agent/skills` (omp `native` provider; Codex doesn't read it).
 - `wallpapers/` — desktop image applied at activation.
 
 ## Development Commands
