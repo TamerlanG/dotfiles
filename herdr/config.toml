@@ -10,6 +10,12 @@ hide_tab_bar_when_single_tab = true # tab row height is fixed; hiding it is the 
 sidebar_start_collapsed = true      # takes effect on next launch; prefix+e toggles it back
 sidebar_collapsed_mode = "hidden"   # zero width instead of the compact status rail
 
+# herdr has no volume knob; these are the built-in done/request sounds at -12 dB
+# (global_gain lowered by 8 steps, lossless). Relative to ~/.config/herdr.
+[ui.sound]
+done_path = "sounds/done.mp3"
+request_path = "sounds/request.mp3"
+
 [terminal]
 default_shell = "fish"
 

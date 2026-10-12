@@ -20,7 +20,7 @@ Three distinct linking strategies in `nix/home.nix`; know which one a file uses 
 
 | Strategy | Files | Edit propagates |
 |---|---|---|
-| `live "<path>"` (`mkOutOfStoreSymlink` to `~/.dotfiles/<path>`) | `nvim/`, `mise/config.toml`, `herdr/config.toml`, `omp/agent/*` (incl. `omp/agent/skills/`), `agents/skills/` | Immediately, no rebuild |
+| `live "<path>"` (`mkOutOfStoreSymlink` to `~/.dotfiles/<path>`) | `nvim/`, `mise/config.toml`, `herdr/config.toml`, `herdr/sounds/`, `omp/agent/*` (incl. `omp/agent/skills/`), `agents/skills/` | Immediately, no rebuild |
 | Store symlink (`source = ../x`) | `aerospace/aerospace.toml`, `ghostty/config` | After `make switch` |
 | Embedded via `builtins.readFile` | `fish/config.fish` (`programs.fish.interactiveShellInit`) | After `make switch` |
 
@@ -32,7 +32,7 @@ Neovim flow: `nvim/init.lua` -> `lua/config/lazy.lua` (leader keys, `require("la
 
 - `nix/` — `darwin.nix` (shared system), `home.nix` (shared user), `hosts/{personal,work}.nix` (per-host deltas). All Nix logic outside `flake.nix`.
 - `nvim/` — Neovim config. `lua/plugins/` lazy.nvim specs (auto-imported), `lua/user/` core setup, `lua/user/dap/{adapters,config}/` per-language DAP split, `ftdetect/` custom filetypes.
-- `fish/`, `ghostty/`, `aerospace/`, `mise/`, `herdr/`, `omp/agent/` — one app per dir, single config file each (`herdr/` also has `focus-tab.sh`).
+- `fish/`, `ghostty/`, `aerospace/`, `mise/`, `herdr/`, `omp/agent/` — one app per dir, single config file each (`herdr/` also has `focus-tab.sh` and `sounds/`, quieter copies of the built-in notification mp3s).
 - `agents/skills/` — agent skills, one `<name>/SKILL.md` per subdir (flat, non-recursive). Linked to `~/.agents/skills`, which omp's `agents` provider scans (also read by Codex).
 - `omp/agent/skills/` — OMP-only skills, same layout. Linked to `~/.omp/agent/skills` (omp `native` provider; Codex doesn't read it).
 - `wallpapers/` — desktop image applied at activation.
