@@ -32,5 +32,9 @@ vim.opt.laststatus = 3
 
 vim.opt.shortmess:append("c")
 
+-- Defaults already include linematch + inline:char; histogram aligns moved
+-- blocks and refactors better than myers.
+vim.opt.diffopt:append("algorithm:histogram")
+
 -- Snacks Disable Animations
 vim.g.snacks_animate = false

@@ -37,8 +37,7 @@ return {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" },
     keys = {
-        { "<leader>gp", toggle_pr_review, desc = "Review Current PR (inline, toggle)" },
-        { "<leader>gP", pr_files, desc = "PR changed files" },
+        { "<leader>gp", toggle_pr_review, desc = "Review PR (inline, toggle)" },
     },
     opts = {
         on_attach = function(bufnr)
