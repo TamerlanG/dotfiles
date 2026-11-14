@@ -1,6 +1,6 @@
 modelRoles:
   default: anthropic/claude-opus-5-5
-  advisor: anthropic/claude-fable-5-1
+  advisor: anthropic/claude-fable-5-2
 advisor:
   enabled: true
 modelProviderOrder:
@@ -28,10 +28,12 @@ task:
 retry:
   enabled: true
   maxRetries: 5
-setupVersion: 2
+setupVersion: 3
 hideThinkingBlock: true
 display:
   hideToolActivity: true
 isolation:
   backend: auto
 extendedContext: true
+update:
+  auto: true
