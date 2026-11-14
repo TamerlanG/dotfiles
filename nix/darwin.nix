@@ -19,6 +19,7 @@ in
     btop
     shottr
     raycast
+    vlc-bin
   ];
 
   environment.systemPath = [
