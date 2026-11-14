@@ -6,6 +6,14 @@
     slack
     buildkite-cli
     vault
+    google-chrome
+  ];
+
+  # Merged with the shared lists in darwin.nix; cleanup = "zap" removes anything undeclared.
+  homebrew.brews = [ "lima" ];
+  homebrew.casks = [
+    "gcloud-cli"
+    "pgadmin4"
   ];
 
   home-manager.users.${user} = {

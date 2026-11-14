@@ -83,7 +83,7 @@ Prefer `make eval` or `make build` to validate Nix edits; `make switch` needs su
 
 - `flake.nix` — `mkHost { user; host; }` -> `darwinConfigurations.{mac,work}`; exposes `formatter`; HM wired inline (`useGlobalPkgs`, `useUserPackages`, `extraSpecialArgs = { inherit user; }`, `users.${user} = import ./nix/home.nix`).
 - `nix/darwin.nix` — `system.defaults` (dock/finder/trackpad/screencapture), fonts, Touch ID sudo, `environment.shells` (fish), `nix.gc`/`nix.optimise`, Homebrew (`brews`: omp, mole, herdr; `casks`: ghostty, arc, okta-verify, handy, hiddenbar; tap `can1357/tap`), Screenshots dir + wallpaper activation.
-- `nix/hosts/personal.nix` — personal git email. `nix/hosts/work.nix` — Elastic git email, `home.sessionVariables.CONFIG = "work"`, work-only apps (`pkgs.slack`).
+- `nix/hosts/personal.nix` — personal git email. `nix/hosts/work.nix` — Elastic git email, `home.sessionVariables.CONFIG = "work"`, work-only apps (`pkgs.slack`, `buildkite-cli`, `vault`, `google-chrome`; Homebrew `brews`: lima, `casks`: gcloud-cli, merged into the shared lists).
 - `nix/home.nix` — packages, `programs.{git,delta,zoxide,fzf,bat,lsd,gh,lazygit,fish,neovim,mise}`, all dotfile links.
 - `Makefile` — the operator interface; `CONFIG ?= mac`.
 - `nvim/init.lua`, `nvim/lua/config/lazy.lua`, `nvim/lua/user/dap/init.lua`.
