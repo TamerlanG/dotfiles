@@ -101,6 +101,10 @@ in
     ".aerospace.toml".source = ../aerospace/aerospace.toml;
     ".omp/agent/config.yml".source = live "omp/agent/config.yml";
     ".omp/agent/APPEND_SYSTEM.md".source = live "omp/agent/APPEND_SYSTEM.md";
+    # Sticky user rules, carried on every request (subagents included).
+    ".omp/agent/RULES.md".source = live "omp/agent/RULES.md";
+    # File slash commands: ~/.omp/agent/commands/<name>.md -> /<name>.
+    ".omp/agent/commands".source = live "omp/agent/commands";
     # omp-only skills (native provider): ~/.omp/agent/skills/<name>/SKILL.md.
     ".omp/agent/skills".source = live "omp/agent/skills";
     # omp `agents` provider: ~/.agents/skills/<name>/SKILL.md (also read by Codex).
